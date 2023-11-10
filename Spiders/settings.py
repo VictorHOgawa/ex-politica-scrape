@@ -102,6 +102,7 @@ EXTENSIONS = {
 DOWNLOADER_MIDDLEWARES = {
     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    "scrapy.downloadermiddlewares.cookies.CookiesMiddleware": 700,
  }
 
 BUCKET="nightapp"
