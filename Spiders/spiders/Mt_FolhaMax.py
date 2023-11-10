@@ -51,7 +51,7 @@ class MtFolhamaxSpider(scrapy.Spider):
     
     def start_requests(self):
         for i, url in enumerate(self.start_urls):
-            yield scrapy.Request(url, meta={'cookiejar': i}, callback=self.parse_page)
+            yield scrapy.Request(url, meta={'cookiejar': i}, callback=self.parse)
     
     def parse(self, response):
         for article in response.css(search_terms['article']):
