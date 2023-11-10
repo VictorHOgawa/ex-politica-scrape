@@ -1,8 +1,7 @@
 import requests
-from requests_html import HTML
 
-session = requests.Session()
-source = session.get('https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728')
-html = HTML(html=source.text)
-print(source.status_code)
-print(html.text)
+s = requests.Session()
+r = s.get('https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728',verify=False)
+r = s.post('https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728', auth=('user', 'pass'),verify=False)
+print(r.status_code)
+print(r.text)
