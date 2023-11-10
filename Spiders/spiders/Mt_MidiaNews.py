@@ -47,7 +47,6 @@ class MODELSpider(scrapy.Spider):
                 "indent": 4,
             }
         },
-        "SCRAPEOPS_PROXY_SETTINGS": {"country": "br", "bypass": "cloudflare"}
     }
     
     def parse(self, response):
