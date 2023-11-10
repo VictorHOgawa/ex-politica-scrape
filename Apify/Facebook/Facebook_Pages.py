@@ -70,4 +70,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open(f"Facebook_Page.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")
+# upload_file(f"Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")
