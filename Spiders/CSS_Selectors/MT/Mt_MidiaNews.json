@@ -1,0 +1,8 @@
+{
+  "article": "div.mes-noticia div.row",
+  "link": "p.titulo-secao a::attr(href)",
+  "next_page": "a[rel=`nofollow`] img[src=`/images/__btnNext.gif`]",
+  "updated": "div.container-midianews div.row.espaco-conteudo span::text",
+  "title": "div.conteudo h1::text",
+  "content": "div#texto.texto p::text"
+}

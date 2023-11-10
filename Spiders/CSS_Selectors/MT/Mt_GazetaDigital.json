@@ -1,0 +1,8 @@
+{
+  "article": "div.col-xs-12.col-sm-12.col-md-12.col-lg-12 div.col-xs-10.col-sm-10.col-md-10.col-lg-10",
+  "link": "a::attr(href)",
+  "next_page": "div.Pagination a.next::attr(href)",
+  "updated": "p.interna-data span.hidden-xs::text",
+  "title": "h1.interna-title::text",
+  "content": "div#text-content p::text"
+}

@@ -1,0 +1,8 @@
+{
+  "article": "div#conteudo ul.lista-noticias li",
+  "link": "a::attr(href)",
+  "next_page": "div#paginacao ul li a::attr(href)",
+  "updated": "p.datahora::text",
+  "title": "h3.item::text",
+  "content": "div#conteudo div.html.texto::text"
+}
