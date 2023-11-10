@@ -58,7 +58,7 @@ class MtFolhamaxSpider(scrapy.Spider):
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
-            yield Request(link, callback=self.parse_article, priority=1, meta={'cookiejar': response.meta['cookiejar']})
+            yield Request(link, callback=self.parse_article, priority=1)
         next_page = response.css(search_terms['next_page']).get()
         next_page = urljoin(main_url, next_page)
         if next_page is not None:
