@@ -51,7 +51,7 @@ class MtFolhamaxSpider(scrapy.Spider):
         'SCRAPEOPS_API_KEY': '0beda8b5-3c2a-4c06-b838-c29285e22fdb',
         'SCRAPEOPS_FAKE_USER_AGENT_ENABLED': True,
         'DOWNLOADER_MIDDLEWARES': {
-            'YOUR_PROJECT_NAME.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
+            'Spiders.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
         }
     }
         
