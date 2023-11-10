@@ -35,15 +35,10 @@ search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social
 
 main_url = "https://www.folhamax.com/"
 
-def get_scrapeops_url(url):
-    payload = {'api_key': "0beda8b5-3c2a-4c06-b838-c29285e22fdb", 'url': url, 'bypass': 'cloudflare'}
-    proxy_url = 'https://proxy.scrapeops.io/v1/?' + urllib.parse.urlencode(payload)
-    return proxy_url
-
 class MtFolhamaxSpider(scrapy.Spider):
     name = "Mt_FolhaMax"
     allowed_domains = ["folhamax.com"]
-    start_urls = [get_scrapeops_url("https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728")]
+    start_urls = ["https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728"]
     custom_settings = {
         "FEEDS": {
             f"s3://nightapp/MT/News/{name}_{timestamp}.json": {
@@ -53,6 +48,11 @@ class MtFolhamaxSpider(scrapy.Spider):
                 "indent": 4,
             }
         },
+        'SCRAPEOPS_API_KEY': '0beda8b5-3c2a-4c06-b838-c29285e22fdb',
+        'SCRAPEOPS_FAKE_USER_AGENT_ENABLED': True,
+        'DOWNLOADER_MIDDLEWARES': {
+            'YOUR_PROJECT_NAME.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
+        }
     }
         
     def parse(self, response):
