@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta
 from scrapy.item import Item, Field
 from urllib.parse import urljoin
 from scrapy.http import Request
+from random import randint
 import urllib
 import requests
 import locale
@@ -35,6 +36,20 @@ search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social
 
 main_url = "https://www.folhamax.com/"
 
+SCRAPEOPS_API_KEY = '0beda8b5-3c2a-4c06-b838-c29285e22fdb'
+
+def get_headers_list():
+  response = requests.get('http://headers.scrapeops.io/v1/browser-headers?api_key=' + SCRAPEOPS_API_KEY)
+  json_response = response.json()
+  return json_response.get('result', [])
+
+def get_random_header(header_list):
+  random_index = randint(0, len(header_list) - 1)
+  return header_list[random_index]
+
+
+header_list = get_headers_list()
+
 class MtFolhamaxSpider(scrapy.Spider):
     name = "Mt_FolhaMax"
     allowed_domains = ["folhamax.com"]
@@ -48,13 +63,12 @@ class MtFolhamaxSpider(scrapy.Spider):
                 "indent": 4,
             }
         },
-        'SCRAPEOPS_API_KEY': '0beda8b5-3c2a-4c06-b838-c29285e22fdb',
-        'SCRAPEOPS_FAKE_USER_AGENT_ENABLED': True,
-        'DOWNLOADER_MIDDLEWARES': {
-            'Spiders.middlewares.ScrapeOpsFakeUserAgentMiddleware': 400,
-        }
     }
-        
+
+    def start_requests(self):
+        for url in self.start_urls:
+            yield Request(url, headers=get_random_header(header_list), callback=self.parse)
+
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
