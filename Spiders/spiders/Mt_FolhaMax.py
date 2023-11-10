@@ -70,7 +70,7 @@ class MtFolhamaxSpider(scrapy.Spider):
     }
 
     def start_requests(self):
-        yield Request(self.start_urls[0], callback=self.parse, json=payload, headers=headers)
+        yield Request(self.start_urls[0], callback=self.parse, headers=headers)
 
     def parse(self, response):
         for article in response.css(search_terms['article']):
