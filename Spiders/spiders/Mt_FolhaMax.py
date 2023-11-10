@@ -36,6 +36,24 @@ search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social
 
 main_url = "https://www.folhamax.com/"
 
+# 
+# 
+
+url = "https://dripcrawler.p.rapidapi.com/"
+
+payload = {
+	"url": "https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728",
+	"javascript_rendering": "False"
+}
+headers = {
+	"content-type": "application/json",
+	"X-RapidAPI-Key": "941a69a26dmshfef948a2824884cp1b23eajsn68e4d5b09e8b",
+	"X-RapidAPI-Host": "dripcrawler.p.rapidapi.com"
+}
+
+# 
+# 
+
 class MtFolhamaxSpider(scrapy.Spider):
     name = "Mt_FolhaMax"
     allowed_domains = ["folhamax.com"]
@@ -50,6 +68,9 @@ class MtFolhamaxSpider(scrapy.Spider):
             }
         },
     }
+
+    def start_requests(self):
+        yield Request(self.start_urls[0], callback=self.parse, json=payload, headers=headers)
 
     def parse(self, response):
         for article in response.css(search_terms['article']):
