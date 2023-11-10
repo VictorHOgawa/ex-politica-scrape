@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta
 from scrapy.item import Item, Field
 from urllib.parse import urljoin
 from scrapy.http import Request
+import urllib
 import requests
 import locale
 import scrapy
@@ -25,7 +26,7 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=10)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://192.168.10.10:3333/user/website/21c35dba-7f00-4a71-94bb-ff80952aacbf")
@@ -34,10 +35,15 @@ search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social
 
 main_url = "https://www.folhamax.com/"
 
+def get_scrapeops_url(url):
+    payload = {'api_key': "0beda8b5-3c2a-4c06-b838-c29285e22fdb", 'url': url, 'bypass': 'cloudflare'}
+    proxy_url = 'https://proxy.scrapeops.io/v1/?' + urllib.parse.urlencode(payload)
+    return proxy_url
+
 class MtFolhamaxSpider(scrapy.Spider):
     name = "Mt_FolhaMax"
     allowed_domains = ["folhamax.com"]
-    start_urls = ["https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728"]
+    start_urls = [get_scrapeops_url("https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728")]
     custom_settings = {
         "FEEDS": {
             f"s3://nightapp/MT/News/{name}_{timestamp}.json": {
@@ -48,11 +54,7 @@ class MtFolhamaxSpider(scrapy.Spider):
             }
         },
     }
-    
-    def start_requests(self):
-        for i, url in enumerate(self.start_urls):
-            yield scrapy.Request(url, meta={'cookiejar': i}, callback=self.parse)
-    
+        
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
