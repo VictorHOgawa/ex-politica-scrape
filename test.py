@@ -4,8 +4,13 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from time import sleep
 import re
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-driver = webdriver.Firefox()
+options = ChromeOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
+
+driver = webdriver.Chrome()  
 driver.get("https://www.jornalopcao.com.br/categoria/politica/?pg=1")
 
 page_source = driver.page_source
