@@ -34,7 +34,7 @@ search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social
 
 main_url = "https://midianews.com.br"
 
-class MODELSpider(scrapy.Spider):
+class MtMidiaNewsSpider(scrapy.Spider):
     name = "Mt_MidiaNews"
     allowed_domains = ["midianews.com.br"]
     start_urls = ["https://www.midianews.com.br/index_secao.php?query_string=/&pageNum_Pagina=0&sid=1&totalRows_Pagina=55461"]
