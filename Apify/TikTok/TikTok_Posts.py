@@ -33,11 +33,11 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+# input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
 
-input = input.json()
+# input = input.json()
 
-input = input["tiktok"]
+# input = input["tiktok"]
 
 # tiktok_names = [item["tiktok"] for item in input]
 tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]

@@ -49,12 +49,14 @@ facebook_ids = ["12", "34", "56", "78"]
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
 
 # Prepare the Actor input
-run_input = { "startUrls": [
+run_input = {
+    "resultsLimit": 20,
+    "startUrls": [
         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
     ] }
 
 # Run the Actor and wait for it to finish
-run = client.actor("4Hv5RhChiaDk6iwad").call(run_input=run_input)
+run = client.actor("KoJrdxJCTtpon81KY").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
@@ -69,7 +71,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open(f"Facebook_Page.json", "w") as f:
+with open(f"Facebook_Posts.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")
+upload_file(f"Facebook_Posts.json", "nightapp", f"MT/Apify/Facebook/Facebook_Posts_{timestamp}.json")
