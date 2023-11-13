@@ -1,7 +1,7 @@
 {
   "article": "div.template-part-component-feed-item",
   "link": "a.main_link::attr(href)",
-  "next_page": "ul.wp-js-paginate li a.page-numbers.next::attr(id)",
+  "next_page": "ul.wp-js-paginate li a.page-numbers.next",
   "updated": "p.post-date::text",
   "title": "h1::text",
   "content": "article p::text"
