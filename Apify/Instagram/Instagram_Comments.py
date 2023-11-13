@@ -40,9 +40,11 @@ input = input.json()
 
 input = input["instagram"]
 
-instagram_names = [item["instagram"] for item in input]
+# instagram_names = [item["instagram"] for item in input]
+instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
 
-instagram_ids = [item["id"] for item in input]
+# instagram_ids = [item["id"] for item in input]
+instagram_ids = ["12", "34", "56", "78"]
 
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
 
@@ -77,4 +79,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("posts.json", "w") as f:
     f.write(json_str)
     
-# upload_file(f"Instagram_Comments.json", "nightapp", f"MT/Apify/Instagram/Instagram_Comments_{timestamp}.json")
+upload_file(f"Instagram_Comments.json", "nightapp", f"MT/Apify/Instagram/Instagram_Comments_{timestamp}.json")

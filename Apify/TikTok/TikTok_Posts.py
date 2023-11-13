@@ -39,9 +39,11 @@ input = input.json()
 
 input = input["tiktok"]
 
-tiktok_names = [item["tiktok"] for item in input]
+# tiktok_names = [item["tiktok"] for item in input]
+tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
 
-tiktok_ids = [item["id"] for item in input]
+# tiktok_ids = [item["id"] for item in input]
+tiktok_ids = ["12", "34", "56"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")

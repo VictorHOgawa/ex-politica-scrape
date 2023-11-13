@@ -23,7 +23,7 @@ today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
 # days=100 => last 10 days
-search_limit = date.today() - timedelta(days=10)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://192.168.10.38:3333/user/website/21c35dba-7f00-4a71-94bb-ff80952aacbf")

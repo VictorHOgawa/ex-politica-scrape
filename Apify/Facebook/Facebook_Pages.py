@@ -39,9 +39,11 @@ input = input.json()
 
 input = input["facebook"]
 
-facebook_names = [item["facebook"] for item in input]
+# facebook_names = [item["facebook"] for item in input]
+facebook_names = ["mauromendesoficial", "lula", "robertodornersinop", "emanuelpinheiromt"]
 
-facebook_ids = [item["id"] for item in input]
+# facebook_ids = [item["id"] for item in input]
+facebook_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
@@ -70,4 +72,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open(f"Facebook_Page.json", "w") as f:
     f.write(json_str)
     
-# upload_file(f"Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")
+upload_file(f"Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")

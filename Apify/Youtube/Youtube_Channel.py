@@ -40,9 +40,11 @@ input = input.json()
 
 input = input["channel"]
 
-channel_names = [item["youtube"] for item in input]
+# channel_names = [item["youtube"] for item in input]
+channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
 
-channel_ids = [item["id"] for item in input]
+# channel_ids = [item["id"] for item in input]
+channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")

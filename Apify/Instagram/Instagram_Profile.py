@@ -40,9 +40,11 @@ input = input.json()
 
 input = input["instagram"]
 
-instagram_names = [item["instagram"] for item in input]
+# instagram_names = [item["instagram"] for item in input]
+instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
 
-instagram_ids = [item["id"] for item in input]
+# instagram_ids = [item["id"] for item in input]
+instagram_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
@@ -51,8 +53,8 @@ profile_name = ["mauromendesoficial", "nightapp_"]
 
 # Prepare the Actor input
 run_input = {
-    # "directUrls": [f"https://www.instagram.com/{instagram_name}" for instagram_name in instagram_names],
-    "directUrls": ["https://instagram.com/lulaoficial"],
+    "directUrls": [f"https://www.instagram.com/{instagram_name}" for instagram_name in instagram_names],
+    # "directUrls": ["https://instagram.com/lulaoficial"],
     "resultsType": "details",
     "resultsLimit": 2,
     "addParentData": False,
