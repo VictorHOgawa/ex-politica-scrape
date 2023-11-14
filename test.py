@@ -28,22 +28,24 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
- 
+from selenium.webdriver.common.proxy import *
+
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
+
+
+myProxy = "https://dripcrawler.p.rapidapi.com/"
+proxy = Proxy({
+    'proxyType': ProxyType.MANUAL,
+    'httpProxy': myProxy,
+    'sslProxy': myProxy,
+    'noProxy': ''})
+
+options = Options()
+options.proxy = proxy
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-
-PROXY = "https://dripcrawler.p.rapidapi.com/"
-webdriver.DesiredCapabilities.CHROME['proxy'] = {
-"httpProxy": PROXY,
-"ftpProxy": PROXY,
-"sslProxy": PROXY,
-"proxyType": "MANUAL",
-
-}
  
 driver.get("https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728")
 
