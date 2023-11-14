@@ -75,7 +75,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("YouTube_Channels.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channels.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"YouTube_Channels.json", "nightapp", f"MT/Apify/YouTube/YouTube_Channels_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channels.json", "nightapp", f"MT/Apify/YouTube/YouTube_Channels_{timestamp}.json")
