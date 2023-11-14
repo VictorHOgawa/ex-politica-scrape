@@ -34,6 +34,16 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+
+PROXY = "https://dripcrawler.p.rapidapi.com/"
+webdriver.DesiredCapabilities.CHROME['proxy'] = {
+"httpProxy": PROXY,
+"ftpProxy": PROXY,
+"sslProxy": PROXY,
+"proxyType": "MANUAL",
+
+}
  
 driver.get("https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728")
 
