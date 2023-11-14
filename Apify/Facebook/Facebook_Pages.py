@@ -69,7 +69,10 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open(f"/home/scrapeops/Axioon/Apify/Facebook_Page.json", "w") as f:
+path = r"home/scrapeops/Axioon/Apify/Facebook_Page.json"
+assert os.path.isfile(path)
+    
+with open(path, "w") as f:
     f.write(json_str)
     
 upload_file(f"/home/scrapeops/Axioon/Apify/Facebook_Page.json", "nightapp", f"MT/Apify/Facebook/Facebook_Page_{timestamp}.json")
