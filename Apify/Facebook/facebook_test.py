@@ -5,5 +5,5 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") a
 
 print("data: ", data)
 
-with open("/home/scrapeops/Axioon/copy.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Facebook/Facebook_Page.json", "w") as f:
     json.dump(data, f)
