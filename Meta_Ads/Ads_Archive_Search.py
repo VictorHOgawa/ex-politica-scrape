@@ -35,7 +35,7 @@ timestamp = datetime.timestamp(now)
 
 search_amount = [
     {"name": "Mauro Mendes Ferreira", "delivery_by_region": "Mato Grosso", "bylines": "ELEICAO 2022 MAURO MENDES FERREIRA GOVERNADOR, Mauro Mendes Ferreira", "ad_delivery_date_min": "2023-09-01"}, 
-    {"name": "Roberto Dorner", "delivery_by_region": "Mato Grosso", "bylines": "ELEICAO 2020 ROBERTO DORNER PREFEITO - CNPJ DO CANDIDATO 38.551.189/0001-83, Roberto Dorner", "ad_delivery_date_min": "2023-09-01"},
+    # {"name": "Roberto Dorner", "delivery_by_region": "Mato Grosso", "bylines": "ELEICAO 2020 ROBERTO DORNER PREFEITO - CNPJ DO CANDIDATO 38.551.189/0001-83, Roberto Dorner", "ad_delivery_date_min": "2023-09-01"},
 ]
 
 search_queries = {"ad_reached_countries": "BR", "search_terms": "", "delivery_by_region": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BOzhZB2ncAYDjgwtgRdVwzkVVUD9ZAE4v46EhwBgajFChBeZBDMpmYeUg7mkAD6G5UC6ovaynnpW5GSDRz8pN7Mecu7uKnZB4RkBrS8Evuj3MSpwZCJZAZAXtsrOjw1sFOHjAZCYYorHDeFsZB7mrBcXucQFsUHzpodBTm7igBohdzSHk7ubIx4mZB6l4kSUOsuJOEqZBNYscitK"}
