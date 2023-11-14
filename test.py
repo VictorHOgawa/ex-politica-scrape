@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 options = ChromeOptions()
 options.add_argument("--headless=new")
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome("operadriver", options=options)
 
 driver = webdriver.Chrome()  
 driver.get("https://www.jornalopcao.com.br/categoria/politica/?pg=1")
