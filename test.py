@@ -35,7 +35,7 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
  
-driver.get("https://www.jornalopcao.com.br/categoria/politica/?pg=1")
+driver.get("https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728")
 
 page_source = driver.page_source
 
