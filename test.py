@@ -41,8 +41,10 @@ page_source = driver.page_source
 
 soup = BeautifulSoup(page_source)
 
-article = soup.find("div", class_="template-part-component-feed-item")
+print(soup.prettify())
 
-article_link = article.find("a", class_="main_link").get("href")
+# article = soup.find("div", class_="template-part-component-feed-item")
 
-print("article_link: ", article_link)
+# article_link = article.find("a", class_="main_link").get("href")
+
+# print("article_link: ", article_link)
