@@ -11,7 +11,7 @@ options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(options=options)
 
-driver = webdriver.Chrome()  
+driver = webdriver.Chrome("/usr/bin/chromedriver")  
 driver.get("https://www.jornalopcao.com.br/categoria/politica/?pg=1")
 
 page_source = driver.page_source
