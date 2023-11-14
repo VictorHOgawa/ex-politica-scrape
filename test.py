@@ -7,8 +7,9 @@ import re
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 options = ChromeOptions()
-options.add_argument("--headless=new")
-driver = webdriver.Chrome("operadriver", options=options)
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=options)
 
 driver = webdriver.Chrome()  
 driver.get("https://www.jornalopcao.com.br/categoria/politica/?pg=1")
