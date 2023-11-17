@@ -1,4 +1,6 @@
+from bs4 import BeautifulSoup
 import requests
+import json
 
 url = "https://dripcrawler.p.rapidapi.com/"
 
@@ -14,4 +16,15 @@ headers = {
 
 response = requests.post(url, json=payload, headers=headers)
 
-print(response.json())
+html = response.json()['extracted_html']
+
+bs = BeautifulSoup(html, 'html.parser')
+
+article_banner = bs.find_all("a", {"class": "w-100"})
+
+links = []
+
+for link in article_banner:
+	links.append(link['href'])
+
+print(links)
