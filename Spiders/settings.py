@@ -95,7 +95,7 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 # SCRAPEOPS_API_KEY = 'b4d91964-2a5f-41cf-90a5-62de6faf0dfa'
 SCRAPEOPS_API_KEY = '0beda8b5-3c2a-4c06-b838-c29285e22fdb'
-SCRAPEOPS_PROXY_ENABLED = True
+# SCRAPEOPS_PROXY_ENABLED = True
 
 DOWNLOADER_MIDDLEWARES = {
 }
@@ -106,7 +106,7 @@ EXTENSIONS = {
 DOWNLOADER_MIDDLEWARES = {
     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
-    'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
+    # 'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
  }
 
 BUCKET="nightapp"
