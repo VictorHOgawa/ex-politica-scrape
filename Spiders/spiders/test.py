@@ -1,9 +1,24 @@
+from datetime import date, datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
+import locale
 import json
+
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 start_url_extension = "/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728"
 next_page = None
+
+now = datetime.now()
+timestamp = datetime.timestamp(now)
+
+today = date.today().strftime("%d/%m/%Y")
+today = datetime.strptime(today, "%d/%m/%Y")
+
+search_limit = date.today() - timedelta(days=1)
+search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
+
+item = []
 
 while True:
 	url = "https://dripcrawler.p.rapidapi.com/"
@@ -58,9 +73,34 @@ while True:
 		article_bs = BeautifulSoup(article_html, 'html.parser')
 
 		article_updated = article_bs.find("span").text
-  
-		print("article_updated: ", article_updated)
+		article_updated = article_updated.split(",")[1].strip()
+		article_updated = article_updated.replace("de", "").strip()
+		article_updated = datetime.strptime(article_updated, "%d  %B  %Y").strftime("%d/%m/%Y")
+		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
+		
+		article_title = article_bs.find("h3", {"class": "folha-titulo"}).text
 
+		article_paragraphs = []
+
+		article_content = article_bs.find("div", {"id": "text-content"})
+		for paragraph in article_content:
+			text = paragraph.text.replace("\n", "")
+			article_paragraphs.append(text)
+			article_paragraphs = [string for string in article_paragraphs if string != ""]
+		print("article_paragraphs: ", article_paragraphs)
+   
+		# if search_limit <= article_updated <= today:
+		# 	item.append({
+		# 		"updated": article_updated.strftime("%d/%m/%Y"),
+		# 		"title": article_title,
+		# 		"content": article_paragraphs,
+		# 	})
+		# 	print("item: ", type(item))
+		# else:
+		# 	with open("test_with_bs4.json", "w") as outfile:
+		# 		json.dump(item, outfile)
+    
 	next_page = bs.find("a", {"class": "next"}).get("href")
  
 	start_url_extension = next_page
+ 

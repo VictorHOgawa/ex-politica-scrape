@@ -34,29 +34,27 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-# input = requests.get("http://192.168.10.10:3333/scrape/instagram")
+input = requests.get("http://192.168.10.10:3333/scrape/instagram")
 
-# input = input.json()
+input = input.json()
 
-# input = input["instagram"]
+input = input["instagram"]
 
-# instagram_names = [item["instagram"] for item in input]
-instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
+instagram_names = [item["instagram"] for item in input]
+# instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
 
-# instagram_ids = [item["id"] for item in input]
-instagram_ids = ["12", "34", "56", "78"]
+instagram_ids = [item["id"] for item in input]
+# instagram_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
-
-profile_name = ["mauromendesoficial", "nightapp_"]
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
     "directUrls": [f"https://www.instagram.com/{instagram_name}" for instagram_name in instagram_names],
     # "directUrls": ["https://instagram.com/lulaoficial"],
     "resultsType": "details",
-    "resultsLimit": 2,
+    "resultsLimit": 20,
     "addParentData": False,
     "searchType": "hashtag",
     "searchLimit": 1,
@@ -79,7 +77,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "w") as f:
+with open("Instagram_Profiles.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "nightapp", f"MT/Apify/Instagram/Instagram_Profiles_{timestamp}.json")
+upload_file("Instagram_Profiles.json", "nightapp", f"MT/Apify/Instagram/Instagram_Profiles_{timestamp}.json")

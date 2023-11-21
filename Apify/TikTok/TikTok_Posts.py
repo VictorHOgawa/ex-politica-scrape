@@ -33,20 +33,20 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
 
-# input = input.json()
+input = input.json()
 
-# input = input["tiktok"]
+input = input["tiktok"]
 
-# tiktok_names = [item["tiktok"] for item in input]
-tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
+tiktok_names = [item["tiktok"] for item in input]
+# tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
 
-# tiktok_ids = [item["id"] for item in input]
-tiktok_ids = ["12", "34", "56"]
+tiktok_ids = [item["id"] for item in input]
+# tiktok_ids = ["12", "34", "56"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
@@ -73,7 +73,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+with open("TikTok_Posts.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"MT/Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("TikTok_Posts.json", "nightapp", f"MT/Apify/TikTok/TikTok_Posts_{timestamp}.json")

@@ -34,20 +34,22 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-# input = requests.get("http://192.168.10.10:3333/scrape/youtube")
+input = requests.get("http://192.168.10.10:3333/scrape/youtube")
 
-# input = input.json()
+input = input.json()
 
-# input = input["channel"]
+input = input["youtube"]
 
-# channel_names = [item["youtube"] for item in input]
-channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
+print("input: ", input)
 
-# channel_ids = [item["id"] for item in input]
-channel_ids = ["12", "34", "56", "78"]
+channel_names = [item["youtube"] for item in input]
+# channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
+
+channel_ids = [item["id"] for item in input]
+# channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
@@ -75,7 +77,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channels.json", "w") as f:
+with open("Youtube_Channels.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channels.json", "nightapp", f"MT/Apify/YouTube/YouTube_Channels_{timestamp}.json")
+upload_file("Youtube_Channels.json", "nightapp", f"MT/Apify/YouTube/YouTube_Channels_{timestamp}.json")
