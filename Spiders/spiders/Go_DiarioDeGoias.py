@@ -9,7 +9,7 @@ import json
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_JornalOpcao.json") as f:
+with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDeGoias.json") as f:
     search_terms = json.load(f)
     
 now = datetime.now()
@@ -23,17 +23,17 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://192.168.10.10:3333/user/website/21c35dba-7f00-4a71-94bb-ff80952aacbf")
 # search_words = request.json()
-search_words = {'users': [{'id': '123123', 'social_name': 'Ronaldo Caiado'}]}
+search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
-main_url = ""
+main_url = "https://diariodegoias.com.br/politica/"
 
-class GoJornalOpcaoSpider(scrapy.Spider):
-    name = "Go_JornalOpcao"
-    allowed_domains = ["jornalopcao.com.br"]
-    start_urls = ["https://jornalopcao.com.br/categoria/politica/?pg=1"]
+class GoDiarioDeGoiasSpider(scrapy.Spider):
+    name = "Go_DiarioDeGoias"
+    allowed_domains = ["diariodegoias.com.br"]
+    start_urls = ["https://diariodegoias.com.br/politica/"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/GO/{name}_{timestamp}.json": {
+            f"s3://nightapp/Go/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,
@@ -54,9 +54,9 @@ class GoJornalOpcaoSpider(scrapy.Spider):
             
     def parse_article(self, response):
         updated = response.css(search_terms['updated']).get()
-        updated = "13 novembro 2023 às 14h12"
-        updated = datetime.strptime(updated, "%d %B %Y às %Hh%M")
-        updated = updated.strftime("%d/%m/%Y")
+        updated = updated.split(" ")[0]
+        updated = datetime.strptime(updated, "%d/%m/%Y").strftime("%d/%m/%Y")
+        updated = datetime.strptime(updated, "%d/%m/%Y")
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:

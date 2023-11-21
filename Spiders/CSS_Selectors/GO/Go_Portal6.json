@@ -1,0 +1,8 @@
+{
+  "article": "article.type-post",
+  "link": "a::attr(href)",
+  "next_page": "ul.pagination li a::attr(href)",
+  "updated": "div.autor time::text",
+  "title": "article h1.titulo::text",
+  "content": "div.p__single--content p::text"
+}
