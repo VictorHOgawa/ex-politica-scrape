@@ -76,4 +76,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("TikTok_Posts.json", "w") as f:
     f.write(json_str)
     
-upload_file("TikTok_Posts.json", "nightapp", f"MT/Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")

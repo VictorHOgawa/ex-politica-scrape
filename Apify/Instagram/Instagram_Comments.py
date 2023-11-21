@@ -79,4 +79,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("Instagram_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("Instagram_Comments.json", "nightapp", f"MT/Apify/Instagram/Instagram_Comments_{timestamp}.json")
+upload_file("Instagram_Comments.json", "nightapp", f"Apify/Instagram/Instagram_Comments_{timestamp}.json")

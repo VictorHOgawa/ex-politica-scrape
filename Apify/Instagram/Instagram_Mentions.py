@@ -74,4 +74,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open ("Instagram_Mentions.json", "w") as f:
     f.write(json_str)
 
-upload_file("Instagram_Mentions.json", "nightapp", f"MT/Apify/Instagram/Instagram_Mentions_{timestamp}.json")
+upload_file("Instagram_Mentions.json", "nightapp", f"Apify/Instagram/Instagram_Mentions_{timestamp}.json")

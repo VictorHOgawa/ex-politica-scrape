@@ -80,4 +80,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("Youtube_Channels.json", "w") as f:
     f.write(json_str)
     
-upload_file("Youtube_Channels.json", "nightapp", f"MT/Apify/YouTube/YouTube_Channels_{timestamp}.json")
+upload_file("Youtube_Channels.json", "nightapp", f"Apify/YouTube/YouTube_Channels_{timestamp}.json")
