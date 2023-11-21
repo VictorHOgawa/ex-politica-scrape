@@ -34,7 +34,7 @@ class MtOlhardiretoSpider(scrapy.Spider):
     start_urls = ["https://www.olhardireto.com.br/noticias/index.asp?id=33&editoria=politica-mt&pagina=1"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/MT/News/{name}_{timestamp}.json": {
+            f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,

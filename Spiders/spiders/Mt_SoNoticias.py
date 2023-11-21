@@ -35,7 +35,7 @@ class MtSonoticiasSpider(scrapy.Spider):
     start_urls = ["https://sonoticias.com.br/politica-listagem"]
     custom_settings = { 
     "FEEDS": {
-        f"s3://nightapp/MT/News/{name}_{timestamp}.json": {
+        f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
             "format": "json",
             "encoding": "utf8",
             "store_empty": False,

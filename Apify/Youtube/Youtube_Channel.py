@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.10.10:3333/scrape/youtube")
+input = requests.get("http://172.20.10.2:3333/scrape/youtube")
 
 input = input.json()
 

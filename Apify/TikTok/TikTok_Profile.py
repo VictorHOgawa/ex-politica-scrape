@@ -33,7 +33,7 @@
 # now = datetime.now()
 # timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+# input = requests.get("http://172.20.10.2:3333/scrape/tiktok")
 
 # input = input.json()
 

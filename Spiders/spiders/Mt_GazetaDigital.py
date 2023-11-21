@@ -37,7 +37,7 @@ class MtGazetadigitalSpider(scrapy.Spider):
     start_urls = ["https://www.gazetadigital.com.br/includes/listagem_com_foto.inc.php?page=0&sid=152"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/MT/News/{name}_{timestamp}.json": {
+            f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,
