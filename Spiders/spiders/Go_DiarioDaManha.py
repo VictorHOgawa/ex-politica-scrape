@@ -9,7 +9,7 @@ import json
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
+with open("Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
     search_terms = json.load(f)
     
 now = datetime.now()
@@ -30,7 +30,7 @@ main_url = "https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&a
 class GoDiarioDaManha(scrapy.Spider):
     name = "Go_DiarioDaManha"
     allowed_domains = ["dm.com.br"]
-    start_urls = ["https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=10"]
+    start_urls = ["https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=20"]
     custom_settings = {
         "FEEDS": {
             f"s3://nightapp/GO/{name}_{timestamp}.json": {
@@ -45,9 +45,8 @@ class GoDiarioDaManha(scrapy.Spider):
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
-            yield Request(link, callback=self.parse_article, priority=1)
-        offset = 10
-        next_page = f"https://www.dm.com.br/ajax/noticiasCategory?offset={offset}&categoryId=49&amount=10"
+            yield Request(f"https://dm.com.br{link}", callback=self.parse_article, priority=1)
+        next_page = "https://www.dm.com.br/ajax/noticiasCategory?offset=20&categoryId=49&amount=20"
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         else:
@@ -59,6 +58,7 @@ class GoDiarioDaManha(scrapy.Spider):
         updated = updated.replace("de", "").strip()
         updated = datetime.strptime(updated, "%d  %B  %Y").strftime("%d/%m/%Y")
         updated = datetime.strptime(updated, "%d/%m/%Y")
+        print("updated: ", updated)
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:

@@ -18,7 +18,7 @@ class articleItem(Item):
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
+with open("Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
     search_terms = json.load(f)
     
 now = datetime.now()
