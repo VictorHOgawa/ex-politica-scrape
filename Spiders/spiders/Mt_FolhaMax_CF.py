@@ -52,7 +52,8 @@ item = []
 
 while True:
 	url = "https://dripcrawler.p.rapidapi.com/"
-
+	##
+	## main_url
 	main_url = "https://www.folhamax.com"
 
 	if next_page is not None:
@@ -76,12 +77,20 @@ while True:
 
 	bs = BeautifulSoup(html, 'html.parser')
 
+	##
+	## article_iterable
 	article_banner = bs.find_all("a", {"class": "w-100"})
 
 	links = []
  
 	for link in article_banner:
+		##
+		## href link in each article
 		links.append(link['href'])
+  
+  
+		##
+		## Start parsing each article
 		url = "https://dripcrawler.p.rapidapi.com/"
 
 		article_payload_url = link["href"]
@@ -102,16 +111,22 @@ while True:
 
 		article_bs = BeautifulSoup(article_html, 'html.parser')
 
+		##
+		## article_updated
 		article_updated = article_bs.find("span").text
 		article_updated = article_updated.split(",")[1].strip()
 		article_updated = article_updated.replace("de", "").strip()
 		article_updated = datetime.strptime(article_updated, "%d  %B  %Y").strftime("%d/%m/%Y")
 		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
 		
+		##
+		## article_title
 		article_title = article_bs.find("h3", {"class": "folha-titulo"}).text
 
 		article_paragraphs = []
 
+		##
+		## article_content
 		article_content = article_bs.find("div", {"id": "text-content"})
 		for paragraph in article_content:
 			text = paragraph.text.replace("\n", "")
@@ -139,9 +154,11 @@ while True:
 			unique_item = list({v['link']:v for v in item}.values())
 			with open("/home/scrapeops/Axioon/Spiders/Results/output.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
-			upload_file("/home/scrapeops/Axioon/Spiders/Results/output.json", "nightapp", f"output_{timestamp}.json")
+			upload_file("/home/scrapeops/Axioon/Spiders/Results/output.json", "nightapp", f"MT/News/Mt_FolhaMax_{timestamp}.json")
 			sys.exit()
     
+    ##
+    ## next_page
 	next_page = bs.find("a", {"class": "next"}).get("href")
  
 	start_url_extension = next_page
