@@ -66,10 +66,7 @@ for item in search_amount:
     
     json_str = json.dumps(json_str, ensure_ascii=False, indent=4)
 
-    with open("test_Mauro_Mendes_Ferreira.json", "w") as f:
+    with open(f"{file_name}.json", "w") as f:
         f.write(json_str)
 
-    # with open(f"{file_name}.json", "w") as f:
-    #     f.write(json_str)
-
-    # upload_file(f"{file_name}.json", "nightapp", f"MT/Meta_Ads/{file_name}_{timestamp}.json")
+    upload_file(f"{file_name}.json", "nightapp", f"Meta_Ads/{file_name}_{timestamp}.json")

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import locale
 import json
+import sys
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
@@ -17,6 +18,8 @@ today = datetime.strptime(today, "%d/%m/%Y")
 
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
+
+search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
 
 item = []
 
@@ -49,7 +52,7 @@ while True:
 	article_banner = bs.find_all("a", {"class": "w-100"})
 
 	links = []
-
+ 
 	for link in article_banner:
 		links.append(link['href'])
 		url = "https://dripcrawler.p.rapidapi.com/"
@@ -87,18 +90,29 @@ while True:
 			text = paragraph.text.replace("\n", "")
 			article_paragraphs.append(text)
 			article_paragraphs = [string for string in article_paragraphs if string != ""]
-		print("article_paragraphs: ", article_paragraphs)
    
-		# if search_limit <= article_updated <= today:
-		# 	item.append({
-		# 		"updated": article_updated.strftime("%d/%m/%Y"),
-		# 		"title": article_title,
-		# 		"content": article_paragraphs,
-		# 	})
-		# 	print("item: ", type(item))
-		# else:
-		# 	with open("test_with_bs4.json", "w") as outfile:
-		# 		json.dump(item, outfile)
+		if search_limit <= article_updated <= today:
+
+			updated_str = article_updated.strftime("%d/%m/%Y")
+   
+			found_names = []
+			for paragraph in article_paragraphs:
+				for user in search_words['users']:
+					if user['social_name'] in paragraph:
+						found_names.append({'name': user['social_name'], 'id': user['id']})
+						item.append({
+							"updated": updated_str,
+							"title": article_title,
+							"content": article_paragraphs,
+							"link": article_payload_url,
+							"users": found_names
+						})
+   
+		else:
+			unique_item = list({v['link']:v for v in item}.values())
+			with open("output.json", "w") as f:
+				json.dump(unique_item, f, indent=4, ensure_ascii=False)
+			sys.exit()
     
 	next_page = bs.find("a", {"class": "next"}).get("href")
  
