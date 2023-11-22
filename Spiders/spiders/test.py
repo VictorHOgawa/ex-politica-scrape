@@ -1,9 +1,36 @@
 from datetime import date, datetime, timedelta
+from botocore.exceptions import ClientError
 from bs4 import BeautifulSoup
 import requests
+import logging
 import locale
+import boto3
 import json
 import sys
+import os
+
+def upload_file(file_name, bucket, object_name=None):
+    """Upload a file to an S3 "bucket"
+
+    :param file_name: File to upload
+    :param "bucket": "bucket" to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = os.path.basename(file_name)
+
+    # Upload the file
+    s3_client = boto3.client('s3', aws_access_key_id="AKIA6MOM3OQOF7HA5AOG", aws_secret_access_key="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")
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+        acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
@@ -112,6 +139,7 @@ while True:
 			unique_item = list({v['link']:v for v in item}.values())
 			with open("/home/scrapeops/Axioon/Spiders/Results/output.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
+			upload_file("/home/scrapeops/Axioon/Spiders/Results/output.json", "nightapp", f"output_{timestamp}.json")
 			sys.exit()
     
 	next_page = bs.find("a", {"class": "next"}).get("href")
