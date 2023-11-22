@@ -71,18 +71,26 @@ class MtMidiaNewsSpider(scrapy.Spider):
         content = response.css(search_terms['content']).getall()
         cleaned_list = [p for p in content if p.strip() != ""]
         if search_limit <= updated <= today:
-            found_names = []
-            for paragraph in content:
-                for user in search_words['users']:
-                    if user['social_name'] in paragraph:
-                        found_names.append({'name': user['social_name'], 'id': user['id']})
-                        item = articleItem(
-                            updated=updated,
-                            title=title,
-                            content=cleaned_list,
-                            link=response.url,
-                            users=found_names
-                        )
-                        yield item
+            # found_names = []
+            # for paragraph in content:
+            #     for user in search_words['users']:
+            #         if user['social_name'] in paragraph:
+            #             found_names.append({'name': user['social_name'], 'id': user['id']})
+            #             item = articleItem(
+            #                 updated=updated,
+            #                 title=title,
+            #                 content=cleaned_list,
+            #                 link=response.url,
+            #                 users=found_names
+            #             )
+            #             yield item
+            item = articleItem(
+                updated=updated,
+                title=title,
+                content=cleaned_list,
+                link=response.url,
+                # users=found_names
+            )
+            yield item
         else:
             raise scrapy.exceptions.CloseSpider

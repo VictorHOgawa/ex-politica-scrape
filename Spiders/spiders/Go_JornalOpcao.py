@@ -60,18 +60,26 @@ class GoJornalOpcaoSpider(scrapy.Spider):
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:
-            found_names = []
-            for paragraph in content:
-                for user in search_words['users']:
-                    if user['social_name'] in paragraph:
-                        found_names.append({'name': user['social_name'], 'id': user['id']})
-                        item = articleItem(
-                            updated=updated,
-                            title=title,
-                            content=content,
-                            link=response.url,
-                            users=found_names
-                        )
-                        yield item
+            # found_names = []
+            # for paragraph in content:
+            #     for user in search_words['users']:
+            #         if user['social_name'] in paragraph:
+            #             found_names.append({'name': user['social_name'], 'id': user['id']})
+            #             item = articleItem(
+            #                 updated=updated,
+            #                 title=title,
+            #                 content=content,
+            #                 link=response.url,
+            #                 users=found_names
+            #             )
+            #             yield item
+            item = articleItem(
+                updated=updated,
+                title=title,
+                content=content,
+                link=response.url,
+                # users=found_names
+            )
+            yield item
         else:
             raise scrapy.exceptions.CloseSpider
