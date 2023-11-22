@@ -34,7 +34,7 @@ def upload_file(file_name, bucket, object_name=None):
 
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-start_url_extension = "/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728"
+start_url_extension = "/index_secao.php?query_string=/&pageNum_Pagina=0&sid=1&totalRows_Pagina=55461"
 next_page = None
 
 now = datetime.now()
@@ -54,7 +54,7 @@ while True:
 	url = "https://dripcrawler.p.rapidapi.com/"
 	##
 	## main_url
-	main_url = "https://www.folhamax.com"
+	main_url = "https://www.midianews.com.br"
 
 	if next_page is not None:
 		start_url_extension = next_page
@@ -79,7 +79,9 @@ while True:
 
 	##
 	## article_iterable
-	article_banner = bs.find_all("a", {"class": "w-100"})
+	article_banner = bs.find_all("p", {"class": "titulo-secao"})
+	article_banner = BeautifulSoup(str(article_banner), 'html.parser')
+	article_banner = article_banner.find_all("a")
  
 	links = []
  
@@ -87,8 +89,7 @@ while True:
 		##
 		## href link in each article
 		links.append(link['href'])
-  
-  
+	
 		##
 		## Start parsing each article
 		url = "https://dripcrawler.p.rapidapi.com/"
@@ -96,7 +97,7 @@ while True:
 		article_payload_url = link["href"]
 
 		payload = {
-		"url": f"{article_payload_url}",
+		"url": f"https://www.midianews.com.br{article_payload_url}",
 		"javascript_rendering": "False"
 		}
 		headers = {
@@ -110,33 +111,41 @@ while True:
 		article_html = article_response.json()['extracted_html']
 
 		article_bs = BeautifulSoup(article_html, 'html.parser')
-
+  
 		##
 		## article_updated
-		article_updated = article_bs.find("span").text
-		article_updated = article_updated.split(",")[1].strip()
-		article_updated = article_updated.replace("de", "").strip()
-		article_updated = datetime.strptime(article_updated, "%d  %B  %Y").strftime("%d/%m/%Y")
+		article_updated = article_bs.find("div", {"class": "row espaco-conteudo"})
+		article_updated = BeautifulSoup(str(article_updated), 'html.parser')
+		article_updated = article_updated.find_all("span")
+		article_updated = article_updated[1].text
+		article_updated = article_updated.split("|")[0]
+		article_updated = article_updated.replace(".", "/")
+		article_updated = article_updated.strip()
 		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
+		print("article_updated: ", article_updated)
 		
 		##
 		## article_title
-		article_title = article_bs.find("h3", {"class": "folha-titulo"}).text
+		article_title = article_bs.find("h1").text
 
 		article_paragraphs = []
 
 		##
 		## article_content
-		article_content = article_bs.find("div", {"id": "text-content"})
+		article_content = article_bs.find("div", {"id": "texto", "class": "texto"})
+		article_content = BeautifulSoup(str(article_content), 'html.parser')
+		article_content = article_content.find_all("p")
 		for paragraph in article_content:
 			text = paragraph.text.replace("\n", "")
+			text = text.replace("\xa0", " ")
+			text = text.strip()
 			article_paragraphs.append(text)
 			article_paragraphs = [string for string in article_paragraphs if string != ""]
-   
+
 		if search_limit <= article_updated <= today:
 
 			updated_str = article_updated.strftime("%d/%m/%Y")
-   
+
 			found_names = []
 			for paragraph in article_paragraphs:
 				for user in search_words['users']:
@@ -149,17 +158,17 @@ while True:
 							"link": article_payload_url,
 							"users": found_names
 						})
-   
+
 		else:
 			unique_item = list({v['link']:v for v in item}.values())
-			with open("/home/scrapeops/Axioon/Spiders/Results/output.json", "w") as f:
+			with open("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
-			upload_file("/home/scrapeops/Axioon/Spiders/Results/output.json", "nightapp", f"MT/News/Mt_FolhaMax_{timestamp}.json")
+			upload_file("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "nightapp", f"MT/News/Mt_MidiaNews_{timestamp}.json")
 			sys.exit()
     
-    ##
-    ## next_page
-	next_page = bs.find("a", {"class": "next"}).get("href")
+    #
+    # next_page
+	next_page = bs.find("a", {"rel": "nofollow"}).get("href")
  
 	start_url_extension = next_page
  
