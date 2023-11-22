@@ -22,7 +22,7 @@ today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
 # days=150 => last 10 days
-search_limit = date.today() - timedelta(days=15)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://192.168.10.38:3333/user/website/21c35dba-7f00-4a71-94bb-ff80952aacbf")
@@ -60,26 +60,19 @@ class MtSonoticiasSpider(scrapy.Spider):
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:
-            # found_names = []
-            # for paragraph in content:
-            #     for user in search_words['users']:
-            #         if user['social_name'] in paragraph:
-            #             found_names.append({'name': user['social_name'], 'id': user['id']})
-            #             item = articleItem(
-            #                 updated=updated,
-            #                 title=title,
-            #                 content=content,
-            #                 link=response.url,
-            #                 users=found_names
-            #             )
-            #             yield item
-            item = articleItem(
-                updated=updated,
-                title=title,
-                content=content,
-                link=response.url
-            )
-            yield item
+            found_names = []
+            for paragraph in content:
+                for user in search_words['users']:
+                    if user['social_name'] in paragraph:
+                        found_names.append({'name': user['social_name'], 'id': user['id']})
+                        item = articleItem(
+                            updated=updated,
+                            title=title,
+                            content=content,
+                            link=response.url,
+                            users=found_names
+                        )
+                        yield item
         else:
             raise scrapy.exceptions.CloseSpider
         

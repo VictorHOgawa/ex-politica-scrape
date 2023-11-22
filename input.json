@@ -1,7 +1,7 @@
 [
   { "name": "Roberto Dorner", "role": "MAYOR", "facebook": "Roberto Doner" },
   {
-    "name": "Mauro Mendes Ferreira",
+    "name": "Mauro Mendes Ferreira", // Mauro Mendes
     "role": "MAYOR",
     "facebook": "Mauro Mendes"
   },
@@ -13,17 +13,17 @@
   },
   { "name": "Mr Beast", "role": "MAYOR", "facebook": "None" },
   {
-    "name": "Roberto Naves e Siqueira", // sem "e Siqueira"
+    "name": "Roberto Naves e Siqueira", // Roberto Naves
     "role": "MAYOR",
     "facebook": "Roberto Naves Prefeito"
   },
   {
-    "name": "Antônio Roberto Gomide",
+    "name": "Antônio Roberto Gomide", // Antônio Gomide
     "role": "MAYOR",
     "facebook": "Antônio Gomide"
   },
   {
-    "name": "Márcio Aurélio Corrêa",
+    "name": "Márcio Aurélio Corrêa", // Márcio Corrêa
     "role": "MAYOR",
     "facebook": "Márcio Corrêa"
   }

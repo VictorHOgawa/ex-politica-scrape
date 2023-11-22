@@ -97,8 +97,6 @@ FEED_EXPORT_ENCODING = "utf-8"
 SCRAPEOPS_API_KEY = '0beda8b5-3c2a-4c06-b838-c29285e22fdb'
 # SCRAPEOPS_PROXY_ENABLED = True
 
-DOWNLOADER_MIDDLEWARES = {
-}
 EXTENSIONS = {
     'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
     }

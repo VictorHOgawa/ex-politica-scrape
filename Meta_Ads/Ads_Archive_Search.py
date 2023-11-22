@@ -33,14 +33,14 @@ now = datetime.now()
 now_in_days = now.strftime("%Y-%m-%d")
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://172.20.10.2:3333/scrape/name")
-input = input.json()
+# input = requests.get("http://172.20.10.2:3333/scrape/name")
+# input = input.json()
 
-input = input["list"]
+# input = input["list"]
 
 search_amount = [
     # {"name": f"{name["name"]}", "bylines": f"{name["name"]}, {name["facebook"]}", "ad_delivery_date_min": "2022-09-01"} for name in input
-    {"name": "Roberto Naves", "bylines": "Roberto Naves, Roberto Naves Prefeito", "ad_delivery_date_min": "2022-09-01"}
+    {"name": "Mauro Mendes, Mauro Mendes Ferreira", "bylines": "Mauro Mendes, Mauro Mendes Ferreira", "ad_delivery_date_min": "2022-09-01"}
 ]
 
 search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BOzhZB2ncAYDjgwtgRdVwzkVVUD9ZAE4v46EhwBgajFChBeZBDMpmYeUg7mkAD6G5UC6ovaynnpW5GSDRz8pN7Mecu7uKnZB4RkBrS8Evuj3MSpwZCJZAZAXtsrOjw1sFOHjAZCYYorHDeFsZB7mrBcXucQFsUHzpodBTm7igBohdzSHk7ubIx4mZB6l4kSUOsuJOEqZBNYscitK"}
@@ -56,7 +56,7 @@ for item in search_amount:
     search_queries["bylines"] = item["bylines"]
     search_queries["ad_delivery_date_min"] = item["ad_delivery_date_min"]
 
-    r = requests.get(f"{search_url}ad_reached_countries={search_queries['ad_reached_countries']}&search_terms={search_queries['search_terms']}&ad_delivery_date_min={search_queries['ad_delivery_date_min']}&bylines={search_queries['bylines']}&ad_type={search_queries['ad_type']}&fields={search_queries['fields']}&limit={search_queries['limit']}&access_token={search_queries['access_token']}")
+    r = requests.get(f"{search_url}ad_reached_countries={search_queries['ad_reached_countries']}&search_terms={search_queries['search_terms']}&search_type=KEYWORD_EXACT_PHRASE&ad_delivery_date_min={search_queries['ad_delivery_date_min']}&bylines={search_queries['bylines']}&ad_type={search_queries['ad_type']}&fields={search_queries['fields']}&limit={search_queries['limit']}&access_token={search_queries['access_token']}")
 
     file_name = item["name"].replace("%20","-")
     
@@ -66,7 +66,7 @@ for item in search_amount:
     
     json_str = json.dumps(json_str, ensure_ascii=False, indent=4)
 
-    with open("test_Roberto_Naves_e_Siqueira.json", "w") as f:
+    with open("test_Mauro_Mendes_Ferreira.json", "w") as f:
         f.write(json_str)
 
     # with open(f"{file_name}.json", "w") as f:

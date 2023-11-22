@@ -21,7 +21,7 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=15)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 with open("Spiders/CSS_Selectors/MT/Mt_GazetaDigital.json") as f:
@@ -67,25 +67,18 @@ class MtGazetadigitalSpider(scrapy.Spider):
         content = response.css(search_terms['content']).getall()
         cleaned_list = [line.replace('\xa0', '').strip() for line in content if line.strip()]
         if search_limit <= updated <= today:
-            # found_names = []
-            # for paragraph in content:
-            #     for user in search_words['users']:
-            #         if user['social_name'] in paragraph:
-            #             found_names.append({'name': user['social_name'], 'id': user['id']})
-            #             item = articleItem(
-            #                 updated=updated,
-            #                 title=title,
-            #                 content=cleaned_list,
-            #                 link=response.url,
-            #                 users=found_names
-            #             )
-            #             yield item
-            item = articleItem(
-                updated=updated,
-                title=title,
-                content=content,
-                link=response.url
-            )
-            yield item
+            found_names = []
+            for paragraph in content:
+                for user in search_words['users']:
+                    if user['social_name'] in paragraph:
+                        found_names.append({'name': user['social_name'], 'id': user['id']})
+                        item = articleItem(
+                            updated=updated,
+                            title=title,
+                            content=cleaned_list,
+                            link=response.url,
+                            users=found_names
+                        )
+                        yield item
         else:
             raise scrapy.exceptions.CloseSpider
