@@ -110,7 +110,7 @@ while True:
    
 		else:
 			unique_item = list({v['link']:v for v in item}.values())
-			with open("home/scrapeops/Axioon/Spiders/Results/output.json", "w") as f:
+			with open("/home/scrapeops/Axioon/Spiders/Results/output.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
 			sys.exit()
     
