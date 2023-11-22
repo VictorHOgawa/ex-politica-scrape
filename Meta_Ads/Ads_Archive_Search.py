@@ -33,14 +33,26 @@ now = datetime.now()
 now_in_days = now.strftime("%Y-%m-%d")
 timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://172.20.10.2:3333/scrape/name")
-# input = input.json()
+search_limit = date.today() - timedelta(days=30)
+search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
+search_limit = datetime.strftime(search_limit, "%Y-%m-%d")
 
-# input = input["list"]
+input = requests.get("http://172.20.10.2:3333/scrape/name")
+input = input.json()
+
+input = input["list"]
+
+input_names = [name["social_name"] for name in input]
+
+input_facebook_names = [name["facebook"] for name in input]
+
+
+input_ids = [name["id"] for name in input]
+
 
 search_amount = [
-    # {"name": f"{name["name"]}", "bylines": f"{name["name"]}, {name["facebook"]}", "ad_delivery_date_min": "2022-09-01"} for name in input
-    {"name": "Mauro Mendes, Mauro Mendes Ferreira", "bylines": "Mauro Mendes, Mauro Mendes Ferreira", "ad_delivery_date_min": "2022-09-01"}
+    {"name": f"{name["social_name"]}", "bylines": f"{name["name"]}, {name['social_name']}, {name["facebook"]}", "ad_delivery_date_min": f"{search_limit}"} for name in input
+    # {"name": "Mauro Mendes, Mauro Mendes Ferreira", "bylines": "Mauro Mendes, Mauro Mendes Ferreira", "ad_delivery_date_min": "2022-09-01"}
 ]
 
 search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BOzhZB2ncAYDjgwtgRdVwzkVVUD9ZAE4v46EhwBgajFChBeZBDMpmYeUg7mkAD6G5UC6ovaynnpW5GSDRz8pN7Mecu7uKnZB4RkBrS8Evuj3MSpwZCJZAZAXtsrOjw1sFOHjAZCYYorHDeFsZB7mrBcXucQFsUHzpodBTm7igBohdzSHk7ubIx4mZB6l4kSUOsuJOEqZBNYscitK"}
@@ -48,6 +60,8 @@ search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery
 current_version = "v18.0"
 
 search_url = f"https://graph.facebook.com/{current_version}/ads_archive?"
+
+result = []
 
 for item in search_amount:
     item["name"] = item["name"].replace(" ", "%20")
@@ -62,11 +76,22 @@ for item in search_amount:
     
     json_array = r.content.decode("utf-8")
     
-    json_str = json.loads(json_array)
+    json_array = json.loads(json_array)
+
+    result.append(json_array)
     
-    json_str = json.dumps(json_str, ensure_ascii=False, indent=4)
+    for item in result:
+        for individual in item["data"]:
+            for input_name, input_facebook_name, input_id in zip(input_names, input_facebook_names, input_ids):
+                if individual["page_name"].lower() == input_name.lower() or individual["page_name"].lower() == input_facebook_name.lower():
+                    item["Meta_id"] = input_id
+               
+    
+result_str = json.dumps(result, ensure_ascii=False, indent=4)
+    
+print("result_str: ", result_str)
 
-    with open(f"{file_name}.json", "w") as f:
-        f.write(json_str)
+with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "w") as f:
+    f.write(result_str)
 
-    upload_file(f"{file_name}.json", "nightapp", f"Meta_Ads/{file_name}_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
