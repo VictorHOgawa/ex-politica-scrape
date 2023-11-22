@@ -13,7 +13,7 @@ class articleItem(Item):
     link = Field()
     users = Field()
 
-with open("Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
+with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
     search_terms = json.load(f)
 
 now = datetime.now()

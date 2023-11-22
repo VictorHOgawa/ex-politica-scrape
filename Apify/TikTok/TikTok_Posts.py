@@ -73,7 +73,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
 
-with open("home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
     f.write(json_str)
     
-upload_file("home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")
