@@ -23,7 +23,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://172.20.10.2:3333/user/website/21c35dba-7f00-4a71-94bb-ff80952aacbf")
 # search_words = request.json()
-search_words = {'users': [{'id': '123123', 'social_name': 'Ronaldo Caiado'}]}
+search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
 main_url = ""
 
@@ -60,26 +60,18 @@ class GoJornalOpcaoSpider(scrapy.Spider):
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:
-            # found_names = []
-            # for paragraph in content:
-            #     for user in search_words['users']:
-            #         if user['social_name'] in paragraph:
-            #             found_names.append({'name': user['social_name'], 'id': user['id']})
-            #             item = articleItem(
-            #                 updated=updated,
-            #                 title=title,
-            #                 content=content,
-            #                 link=response.url,
-            #                 users=found_names
-            #             )
-            #             yield item
-            item = articleItem(
-                updated=updated,
-                title=title,
-                content=content,
-                link=response.url,
-                # users=found_names
-            )
-            yield item
+            found_names = []
+            for paragraph in content:
+                for user in search_words['users']:
+                    if user['social_name'] in paragraph:
+                        found_names.append({'name': user['social_name'], 'id': user['id']})
+                        item = articleItem(
+                            updated=updated,
+                            title=title,
+                            content=content,
+                            link=response.url,
+                            users=found_names
+                        )
+                        yield item
         else:
             raise scrapy.exceptions.CloseSpider
