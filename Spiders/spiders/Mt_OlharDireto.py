@@ -25,7 +25,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_OlharDireto.json") as f:
     search_terms = json.load(f)
     
-request = requests.get("http://172.30.32.1:3333/user/website/c7711fee-09bf-4c80-8823-263c23b58e65")
+request = requests.get("http://172.20.10.2:3333/scrape/news/c7711fee-09bf-4c80-8823-263c23b58e65")
 search_words = request.json()
 # search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
 
@@ -37,7 +37,7 @@ class MtOlhardiretoSpider(scrapy.Spider):
     start_urls = ["https://www.olhardireto.com.br/noticias/index.asp?id=33&editoria=politica-mt&pagina=1"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
+            f"s3:/nightapp/News/MT/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,

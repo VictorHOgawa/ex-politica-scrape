@@ -32,33 +32,36 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
+last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+input = requests.get("http://172.20.10.2:3333/scrape/instagram")
 
 input = input.json()
 
-input = input["tiktok"]
+input = input["instagram"]
 
-tiktok_names = [item["tiktok"] for item in input]
-# tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
+instagram_names = [item["instagram"] for item in input]
+# instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
 
-tiktok_ids = [item["id"] for item in input]
-# tiktok_ids = ["12", "34", "56"]
+instagram_ids = [item["id"] for item in input]
+# instagram_ids = ["12", "34", "56", "78"]
 
-# Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "disableCheerioBoost": False,
-    "disableEnrichAuthorStats": False,
-    "profiles": [f"{tiktok_name}" for tiktok_name in tiktok_names],
-    "shouldDownloadCovers": False,
-    "shouldDownloadSlideshowImages": False,
-    "shouldDownloadVideos": False
+    "directUrls": [f"https://www.instagram.com/{instagram_name}/" for instagram_name in instagram_names],
+    # "directUrls": ["https://instagram.com/lulaoficial"],
+    "resultsType": "posts",
+    "resultsLimit": 50,
+    "addParentData": False,
+    "searchType": "hashtag",
+    "searchLimit": 1,
+    "untilDate": last_week
 }
+
 # Run the Actor and wait for it to finish
-run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
+run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
@@ -67,13 +70,13 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_array.append(json.loads(json_data))
     
     for item in json_array:
-        for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
-            if tiktok_name.lower() in item["webVideoUrl"].lower():
-                item["tiktok_id"] = tiktok_id
+        for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
+            if item["ownerUsername"].lower() == instagram_name.lower():
+                item["instagram_id"] = instagram_id
+                
+    json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-    json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
-
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts.json", "nightapp", f"Apify/Instagram/Instagram_Posts_{timestamp}.json")

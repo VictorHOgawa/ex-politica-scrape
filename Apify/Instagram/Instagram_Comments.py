@@ -34,34 +34,37 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://172.20.10.2:3333/scrape/instagram")
+# input = requests.get("http://172.20.10.2:3333/scrape/instagram")
 
-input = input.json()
+# input = input.json()
 
-input = input["instagram"]
+# input = input["instagram"]
 
-instagram_names = [item["instagram"] for item in input]
-# instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
+# instagram_names = [item["instagram"] for item in input]
+# # instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
 
-instagram_ids = [item["id"] for item in input]
-# instagram_ids = ["12", "34", "56", "78"]
+# instagram_ids = [item["id"] for item in input]
+# # instagram_ids = ["12", "34", "56", "78"]
 
 client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "directUrls": [f"https://www.instagram.com/{instagram_name}/" for instagram_name in instagram_names],
-    # "directUrls": ["https://instagram.com/lulaoficial"],
-    "resultsType": "posts",
-    "resultsLimit": 50,
-    "addParentData": False,
-    "searchType": "hashtag",
-    "searchLimit": 1,
-    "untilDate": last_week
+    "directUrls": [
+        "https://www.instagram.com/p/C0DP9tKsVAU/",
+        "https://www.instagram.com/p/C0DP9qAMisl/", 
+        "https://www.instagram.com/p/C0DP9p_sfDw/", 
+        "https://www.instagram.com/p/C0AklagMOs-/", 
+        "https://www.instagram.com/p/C0AI6O8vbYD/", 
+        "https://www.instagram.com/p/Cz99tCKM8wH/", 
+        "https://www.instagram.com/p/Cz9sUJjL86P/", 
+        "https://www.instagram.com/p/Cz9CAljMoTo/", 
+    ],
+    "resultsLimit": 24
 }
 
 # Run the Actor and wait for it to finish
-run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)
+run = client.actor("SbK00X0JYCPblD2wp").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
@@ -69,10 +72,10 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
-    for item in json_array:
-        for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
-            if item["ownerUsername"].lower() == instagram_name.lower():
-                item["instagram_id"] = instagram_id
+    # for item in json_array:
+    #     for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
+    #         if item["ownerUsername"].lower() == instagram_name.lower():
+    #             item["instagram_id"] = instagram_id
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 

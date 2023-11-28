@@ -33,32 +33,38 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+# input = requests.get("http://172.20.10.2:3333/scrape/tiktok")
 
-input = input.json()
+# input = input.json()
 
-input = input["tiktok"]
+# input = input["tiktok"]
 
-tiktok_names = [item["tiktok"] for item in input]
-# tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
+# tiktok_names = [item["tiktok"] for item in input]
+# # tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
 
-tiktok_ids = [item["id"] for item in input]
-# tiktok_ids = ["12", "34", "56"]
+# tiktok_ids = [item["id"] for item in input]
+# # tiktok_ids = ["12", "34", "56"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "disableCheerioBoost": False,
-    "disableEnrichAuthorStats": False,
-    "profiles": [f"{tiktok_name}" for tiktok_name in tiktok_names],
-    "shouldDownloadCovers": False,
-    "shouldDownloadSlideshowImages": False,
-    "shouldDownloadVideos": False
+    "postURLs": [
+        "https://www.tiktok.com/@lulaoficial/video/7298870015485332741",
+        "https://www.tiktok.com/@lulaoficial/video/7195584999184207110",
+        "https://www.tiktok.com/@bolsonaromessiasjair/video/7305875006683155717",
+        "https://www.tiktok.com/@bolsonaromessiasjair/video/7305409806800538886",
+        "https://www.tiktok.com/@prefeitorobertodorner/video/7286902645351255302",
+        "https://www.tiktok.com/@prefeitorobertodorner/video/7226460454787353862",
+        "https://www.tiktok.com/@mauromendesoficial/video/7305533755781958917",
+        "https://www.tiktok.com/@mauromendesoficial/video/7305518105415945478",
+    ],
+    "commentsPerPost": 100,
+    "maxRepliesPerComment": 0,
 }
 # Run the Actor and wait for it to finish
-run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
+run = client.actor("BDec00yAmCm1QbMEI").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
@@ -66,14 +72,14 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
-    for item in json_array:
-        for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
-            if tiktok_name.lower() in item["webVideoUrl"].lower():
-                item["tiktok_id"] = tiktok_id
+    # for item in json_array:
+    #     for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
+    #         if tiktok_name.lower() in item["webVideoUrl"].lower():
+    #             item["tiktok_id"] = tiktok_id
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/TikTok_Comments_{timestamp}.json")

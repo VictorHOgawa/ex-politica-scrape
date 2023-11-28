@@ -32,48 +32,52 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
+last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.10.10:3333/scrape/tiktok")
+input = requests.get("http://192.168.10.10:3333/scrape/youtube")
 
 input = input.json()
 
-input = input["tiktok"]
+input = input["youtube"]
 
-tiktok_names = [item["tiktok"] for item in input]
-# tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
+print("input: ", input)
 
-tiktok_ids = [item["id"] for item in input]
-# tiktok_ids = ["12", "34", "56"]
+channel_names = [item["youtube"] for item in input]
+# channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
+
+channel_ids = [item["id"] for item in input]
+# channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "disableCheerioBoost": False,
-    "disableEnrichAuthorStats": False,
-    "profiles": [f"{tiktok_name}" for tiktok_name in tiktok_names],
-    "shouldDownloadCovers": False,
-    "shouldDownloadSlideshowImages": False,
-    "shouldDownloadVideos": False
+    "dateFilter": last_week,
+    "details": True,
+    "proxySettings": {
+        "useApifyProxy": True
+    },
+    "start_urls": [{"url": f"https://www.youtube.com/@{channel_name}"} for channel_name in channel_names]
 }
+
 # Run the Actor and wait for it to finish
-run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
+run = client.actor("TyjYgGDGcTNVmil8z").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
-    json_array.append(json.loads(json_data))
+    json_array.append(json.loads(json_data.replace("'", '"')))
     
     for item in json_array:
-        for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
-            if tiktok_name.lower() in item["webVideoUrl"].lower():
-                item["tiktok_id"] = tiktok_id
+        for channel_name, channel_id in zip(channel_names, channel_ids):
+            if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}/about".lower():
+                item["channel_id"] = channel_id
+                
+    json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-    json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
-
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/TikTok_Posts_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/YouTube_Videos_{timestamp}.json")

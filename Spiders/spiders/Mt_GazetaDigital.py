@@ -28,7 +28,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_GazetaDigital.json") as f:
     search_terms = json.load(f)
     
-request = requests.get("http://172.30.32.1:3333/user/website/924d2218-803f-44bd-890d-30619b116bb2")
+request = requests.get("http://172.20.10.2:3333/scrape/news/924d2218-803f-44bd-890d-30619b116bb2")
 search_words = request.json()
 # search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
 
@@ -40,7 +40,7 @@ class MtGazetadigitalSpider(scrapy.Spider):
     start_urls = ["https://www.gazetadigital.com.br/includes/listagem_com_foto.inc.php?page=0&sid=152"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
+            f"s3:/nightapp/News/MT/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,

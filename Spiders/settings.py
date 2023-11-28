@@ -111,7 +111,7 @@ BUCKET="nightapp"
 AWS_DEFAULT_REGION="sa-east-1"
 AWS_ACCESS_KEY_ID="AKIA6MOM3OQOF7HA5AOG"
 AWS_SECRET_ACCESS_KEY="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"
-FILES_STORE = 's3://nightapp/'
+FILES_STORE = 's3:/nightapp/'
 FEED_STORAGE_S3_ACL = 'public-read'
 ITEM_PIPELINES = {
     # 'Axion.pipelines.AxionPipeline': 300,

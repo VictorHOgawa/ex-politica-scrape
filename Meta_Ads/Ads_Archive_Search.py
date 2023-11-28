@@ -91,7 +91,7 @@ result_str = json.dumps(result, ensure_ascii=False, indent=4)
     
 print("result_str: ", result_str)
 
-with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "w") as f:
+with open(f"/Results/Meta_Ads_Results_{timestamp}.json", "w") as f:
     f.write(result_str)
 
-upload_file(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
+upload_file(f"/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")

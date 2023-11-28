@@ -51,7 +51,7 @@ client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 # Prepare the Actor input
 run_input = {
     "username": [f"{instagram_name}" for instagram_name in instagram_names],
-    "resultsLimit": 20,
+    "resultsLimit": 5,
 }
 
 # Run the Actor and wait for it to finish

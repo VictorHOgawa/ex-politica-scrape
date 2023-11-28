@@ -21,7 +21,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get("http://172.30.32.1:3333/user/website/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
+request = requests.get("http://172.20.10.2:3333/scrape/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
 search_words = request.json()
 # search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
@@ -33,7 +33,7 @@ class GoPortal6Spider(scrapy.Spider):
     start_urls = ["https://portal6.com.br/categoria/poder/politica/page/1/"]
     custom_settings = {
         "FEEDS": {
-            f"s3://nightapp/News/GO/{name}_{timestamp}.json": {
+            f"s3:/nightapp/News/GO/{name}_{timestamp}.json": {
                 "format": "json",
                 "encoding": "utf8",
                 "store_empty": False,

@@ -22,10 +22,10 @@ today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
 # days=150 => last 10 days
-search_limit = date.today() - timedelta(days=1)
+search_limit = date.today() - timedelta(days=10)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get("http://172.30.32.1:3333/user/website/1daff77c-0c85-45b8-845e-5aa978e34541")
+request = requests.get("http://172.20.10.2:3333/scrape/news/1daff77c-0c85-45b8-845e-5aa978e34541")
 search_words = request.json()
 # search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
 
@@ -35,7 +35,7 @@ class MtSonoticiasSpider(scrapy.Spider):
     start_urls = ["https://sonoticias.com.br/politica-listagem"]
     custom_settings = { 
     "FEEDS": {
-        f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
+        f"s3:/nightapp/News/MT/{name}_{timestamp}.json": {
             "format": "json",
             "encoding": "utf8",
             "store_empty": False,
