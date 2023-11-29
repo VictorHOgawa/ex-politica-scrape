@@ -9,7 +9,7 @@
 
 # locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PATH/TO/SELECTORS.json") as f:
+# with open("Spiders/CSS_Selectors/PATH/TO/SELECTORS.json") as f:
 #     search_terms = json.load(f)
     
 # now = datetime.now()
@@ -33,7 +33,7 @@
 #     start_urls = [""]
 #     custom_settings = {
 #         "FEEDS": {
-#             f"s3:/nightapp/STATE/{name}_{timestamp}.json": {
+#             f"s3://nightapp/STATE/{name}_{timestamp}.json": {
 #                 "format": "json",
 #                 "encoding": "utf8",
 #                 "store_empty": False,

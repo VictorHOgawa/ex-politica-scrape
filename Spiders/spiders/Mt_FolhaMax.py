@@ -18,7 +18,7 @@
 
 # locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
+# with open("Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
 #     search_terms = json.load(f)
     
 # now = datetime.now()
@@ -60,7 +60,7 @@
 #     start_urls = ["https://www.folhamax.com/includes/__lista_noticias.inc.php?pageNum_Pagina=0&query_string=/politica/&totalRows_Pagina=69728"]
 #     custom_settings = {
 #         "FEEDS": {
-#             f"s3:/nightapp/News/MT/{name}_{timestamp}.json": {
+#             f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
 #                 "format": "json",
 #                 "encoding": "utf8",
 #                 "store_empty": False,

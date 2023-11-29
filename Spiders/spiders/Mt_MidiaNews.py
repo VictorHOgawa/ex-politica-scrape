@@ -16,7 +16,7 @@
 
 # locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_MidiaNews.json") as f:
+# with open("Spiders/CSS_Selectors/MT/Mt_MidiaNews.json") as f:
 #     search_terms = json.load(f)
     
 # now = datetime.now()
@@ -40,7 +40,7 @@
 #     start_urls = ["https://www.midianews.com.br/index_secao.php?query_string=/&pageNum_Pagina=0&sid=1&totalRows_Pagina=55461"]
 #     custom_settings = {
 #         "FEEDS": {
-#             f"s3:/nightapp/News/MT/{name}_{timestamp}.json": {
+#             f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
 #                 "format": "json",
 #                 "encoding": "utf8",
 #                 "store_empty": False,
