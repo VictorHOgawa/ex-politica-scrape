@@ -59,19 +59,25 @@ run_input = {
 run = client.actor("KoJrdxJCTtpon81KY").call(run_input=run_input)
 
 json_array = []
+posts_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
     for item in json_array:
+        posts_array.append(item['topLevelUrl'])
         for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
             if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
                 item["facebook_id"] = facebook_id
-    
+        
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+    posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
     
 with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts.json", "w") as f:
     f.write(json_str)
+    
+with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.json", "w") as f:
+    f.write(posts_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts.json", "nightapp", f"Apify/Facebook/Facebook_Posts_{timestamp}.json")
