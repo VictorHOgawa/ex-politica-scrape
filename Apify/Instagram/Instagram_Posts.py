@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://172.20.10.2:3333/scrape/instagram")
+input = requests.get("http://18.231.150.215/scrape/instagram")
 
 input = input.json()
 
@@ -46,7 +46,7 @@ instagram_names = [item["instagram"] for item in input]
 instagram_ids = [item["id"] for item in input]
 # instagram_ids = ["12", "34", "56", "78"]
 
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
@@ -64,19 +64,27 @@ run_input = {
 run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)
 
 json_array = []
+posts_set = set()
 # Fetch and print Actor results from the run's dataset (if there are any)
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
     for item in json_array:
+        if item["url"]:
+            posts_set.add(item["url"])
         for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
             if item["ownerUsername"].lower() == instagram_name.lower():
                 item["instagram_id"] = instagram_id
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+    posts_array = list(posts_set)
+    posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
 
 with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts.json", "w") as f:
     f.write(json_str)
+    
+with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts_Urls.json", "w") as f:
+    f.write(posts_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts.json", "nightapp", f"Apify/Instagram/Instagram_Posts_{timestamp}.json")

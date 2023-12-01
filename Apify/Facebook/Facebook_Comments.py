@@ -33,42 +33,19 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-# input = requests.get("http:// 172.31.37.204:3333/scrape/facebook")
+with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.json", "r") as f:
+    input = json.load(f)
 
-# input = input.json()
-
-# input = input["facebook"]
-
-# facebook_names = [item["facebook"] for item in input]
-# # facebook_names = ["mauromendesoficial", "lula", "robertodornersinop", "emanuelpinheiromt"]
-
-# facebook_ids = [item["id"] for item in input]
-# # facebook_ids = ["12", "34", "56", "78"]
+input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
     "includeNestedComments": False,
     "resultsLimit": 20,
-    "startUrls": [
-        {
-            "url": "https://www.facebook.com/mauromendesoficial/posts/pfbid036SDoUaRUwf5Vpdfqivxxu258N2EoZSvmMdTjx4wMWY2GdANLZhk7CtkAuQLPrCiil"
-        },
-        {
-            "url": "https://www.facebook.com/antoniogomidept/posts/pfbid02Bg9vj4PXsAiwdFnk3spb2zKWEEmm34EfqzGAQgXtPc93KVFnQh7gkbzjCqGuyG3wl"
-        },
-        {
-            "url": "https://www.facebook.com/photo/?fbid=911009023745037&set=a.510912953754648"
-        },
-        {
-            "url": "https://www.facebook.com/jairmessias.bolsonaro/posts/pfbid09LjbWyRA7peevRKEQtLHYwJUuZEUXu5dWnVxYNMjEyynvh5RSxi84hX1fybsd7xel"
-        },
-        {
-            "url": "https://www.facebook.com/photo/?fbid=976694817141273&set=a.522422392568520"
-        }
-    ]
+    "startUrls": input
 }
 
 # Run the Actor and wait for it to finish

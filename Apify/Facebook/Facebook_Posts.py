@@ -46,7 +46,7 @@ facebook_ids = [item["id"] for item in input]
 # facebook_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
@@ -59,19 +59,21 @@ run_input = {
 run = client.actor("KoJrdxJCTtpon81KY").call(run_input=run_input)
 
 json_array = []
-posts_array = []
+posts_set = set()
 # Fetch and print Actor results from the run's dataset (if there are any)
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
     for item in json_array:
-        posts_array.append(item['topLevelUrl'])
+        if item["topLevelUrl"]:
+            posts_set.add(item["topLevelUrl"])
         for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
             if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
                 item["facebook_id"] = facebook_id
         
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+    posts_array = list(posts_set)
     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
     
 with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts.json", "w") as f:

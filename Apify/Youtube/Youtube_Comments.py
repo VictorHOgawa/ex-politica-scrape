@@ -34,41 +34,18 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-# input = requests.get("http://192.168.10.10:3333/scrape/youtube")
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "r") as f:
+    input = json.load(f)
 
-# input = input.json()
-
-# input = input["youtube"]
-
-# channel_names = [item["youtube"] for item in input]
-# # channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
-
-# channel_ids = [item["id"] for item in input]
-# # channel_ids = ["12", "34", "56", "78"]
+input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
     "maxComments": 20,
-    "startUrls": [
-        { "url": "https://www.youtube.com/watch?v=1JDXJMJdbVg" },
-        { "url": "https://www.youtube.com/watch?v=gyI-Cg3CCRI" },
-        { "url": "https://www.youtube.com/watch?v=_s-7OyTKV7k" },
-        { "url": "https://www.youtube.com/watch?v=wlXZcRskaz8" },
-        { "url": "https://www.youtube.com/watch?v=GWYwnzkXvvE" },
-        { "url": "https://www.youtube.com/watch?v=E_57iqhgVJs" },
-        { "url": "https://www.youtube.com/watch?v=FZvBmFcuiEE" },
-        { "url": "https://www.youtube.com/watch?v=mZrEG0MD8FE" },
-        { "url": "https://www.youtube.com/watch?v=mqnktie_4Os" },
-        { "url": "https://www.youtube.com/watch?v=OFHlhhWLe9M" },
-        { "url": "https://www.youtube.com/watch?v=aeQgvaPrtsk" },
-        { "url": "https://www.youtube.com/watch?v=wUvEemhmiAI" },
-        { "url": "https://www.youtube.com/watch?v=28xzOJNBlG4" },
-        { "url": "https://www.youtube.com/watch?v=Wdjh81uH6FU" },
-        { "url": "https://www.youtube.com/watch?v=gMaBOp1bcoQ" },
-    ]
+    "startUrls": input
 }
 
 # Run the Actor and wait for it to finish

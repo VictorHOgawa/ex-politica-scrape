@@ -34,33 +34,15 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-# input = requests.get("http://172.20.10.2:3333/scrape/instagram")
+with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts_Urls.json") as f:
+    input = json.load(f)
 
-# input = input.json()
-
-# input = input["instagram"]
-
-# instagram_names = [item["instagram"] for item in input]
-# # instagram_names = ["mauromendesoficial", "lulaoficial", "robertodorner", "emanuelpinheiromt"]
-
-# instagram_ids = [item["id"] for item in input]
-# # instagram_ids = ["12", "34", "56", "78"]
-
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "directUrls": [
-        "https://www.instagram.com/p/C0DP9tKsVAU/",
-        "https://www.instagram.com/p/C0DP9qAMisl/", 
-        "https://www.instagram.com/p/C0DP9p_sfDw/", 
-        "https://www.instagram.com/p/C0AklagMOs-/", 
-        "https://www.instagram.com/p/C0AI6O8vbYD/", 
-        "https://www.instagram.com/p/Cz99tCKM8wH/", 
-        "https://www.instagram.com/p/Cz9sUJjL86P/", 
-        "https://www.instagram.com/p/Cz9CAljMoTo/", 
-    ],
-    "resultsLimit": 24
+    "directUrls": input,
+    "resultsLimit": 20
 }
 
 # Run the Actor and wait for it to finish

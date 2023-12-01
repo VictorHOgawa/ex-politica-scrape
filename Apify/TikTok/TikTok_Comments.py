@@ -33,34 +33,16 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://172.20.10.2:3333/scrape/tiktok")
-
-# input = input.json()
-
-# input = input["tiktok"]
-
-# tiktok_names = [item["tiktok"] for item in input]
-# # tiktok_names = ["mauromendesoficial", "lulaoficial", "prefeitorobertodorner"]
-
-# tiktok_ids = [item["id"] for item in input]
-# # tiktok_ids = ["12", "34", "56"]
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/TikTok_Posts_Urls.json") as f:
+    input = json.load(f)
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
+client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # Prepare the Actor input
 run_input = {
-    "postURLs": [
-        "https://www.tiktok.com/@lulaoficial/video/7298870015485332741",
-        "https://www.tiktok.com/@lulaoficial/video/7195584999184207110",
-        "https://www.tiktok.com/@bolsonaromessiasjair/video/7305875006683155717",
-        "https://www.tiktok.com/@bolsonaromessiasjair/video/7305409806800538886",
-        "https://www.tiktok.com/@prefeitorobertodorner/video/7286902645351255302",
-        "https://www.tiktok.com/@prefeitorobertodorner/video/7226460454787353862",
-        "https://www.tiktok.com/@mauromendesoficial/video/7305533755781958917",
-        "https://www.tiktok.com/@mauromendesoficial/video/7305518105415945478",
-    ],
-    "commentsPerPost": 100,
+    "postURLs": input,
+    "commentsPerPost": 20,
     "maxRepliesPerComment": 0,
 }
 # Run the Actor and wait for it to finish

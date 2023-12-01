@@ -33,7 +33,7 @@
 # now = datetime.now()
 # timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://172.20.10.2:3333/scrape/tiktok")
+# input = requests.get("http://18.231.150.215/scrape/tiktok")
 
 # input = input.json()
 
@@ -44,9 +44,7 @@
 # tiktok_ids = [item["id"] for item in input]
 
 # # Initialize the ApifyClient with your API token
-# client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
-
-# username = "mauromendesoficial"
+# client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
 
 # # Prepare the Actor input
 # run_input = { 
@@ -69,7 +67,7 @@
                 
 #     json_str = json.dumps(json_array)
 
-# with open(f"TikTok_Profiles.json", "w") as f:
+# with open(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Profiles.json", "w") as f:
 #     f.write(json_str)
     
-# upload_file(f"TikTok_Profiles.json", "nightapp", f"MT/Apify/TikTok/TikTok_Profiles_{timestamp}.json")
+# upload_file(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Profiles.json", "nightapp", f"MT/Apify/TikTok/TikTok_Profiles_{timestamp}.json")
