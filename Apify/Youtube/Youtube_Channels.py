@@ -49,7 +49,7 @@ channel_ids = [item["id"] for item in input]
 # channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zSiObpSelvqCZWxGLaBHq7ilXC4KoM3187bY")
+client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
 
 # Prepare the Actor input
 run_input = {
@@ -75,7 +75,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("Apify/Results/Youtube/Youtube_Channel.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channel.json", "w") as f:
     f.write(json_str)
     
-upload_file("Apify/Results/Youtube/Youtube_Channel.json", "nightapp", f"Apify/YouTube/YouTube_Channel_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channel.json", "nightapp", f"Apify/YouTube/YouTube_Channel_{timestamp}.json")

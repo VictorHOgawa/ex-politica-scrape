@@ -87,7 +87,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open("Apify/Results/Facebook/Facebook_Comments.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"Apify/Results/Facebook/Facebook_Comments.json", "nightapp", f"Apify/Facebook/Facebook_Comments_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "nightapp", f"Apify/Facebook/Facebook_Comments_{timestamp}.json")

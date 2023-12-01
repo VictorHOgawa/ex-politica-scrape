@@ -79,7 +79,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
 
-with open("Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/TikTok_Comments_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/TikTok_Comments_{timestamp}.json")

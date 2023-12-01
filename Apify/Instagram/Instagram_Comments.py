@@ -79,7 +79,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("Apify/Results/Instagram/Instagram_Comments.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("Apify/Results/Instagram/Instagram_Comments.json", "nightapp", f"Apify/Instagram/Instagram_Comments_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Comments.json", "nightapp", f"Apify/Instagram/Instagram_Comments_{timestamp}.json")
