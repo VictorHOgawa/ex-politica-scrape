@@ -33,7 +33,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://192.168.10.10:3333/scrape/facebook")
+input = requests.get("http://18.231.150.215/scrape/facebook")
 
 input = input.json()
 
@@ -46,7 +46,7 @@ facebook_ids = [item["id"] for item in input]
 # facebook_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
+client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
 
 # Prepare the Actor input
 run_input = {

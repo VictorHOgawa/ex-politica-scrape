@@ -33,7 +33,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-# input = requests.get("http://172.20.10.2:3333/scrape/facebook")
+# input = requests.get("http:// 172.31.37.204:3333/scrape/facebook")
 
 # input = input.json()
 
@@ -46,7 +46,7 @@ timestamp = datetime.timestamp(now)
 # # facebook_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
+client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
 
 # Prepare the Actor input
 run_input = {
@@ -67,16 +67,7 @@ run_input = {
         },
         {
             "url": "https://www.facebook.com/photo/?fbid=976694817141273&set=a.522422392568520"
-        },
-        {
-            "url": "https://www.facebook.com/marciocorreaanapolis/posts/pfbid0qfFW5Tv9TYrH14d5LWu23DnuUM5VYYajDmfphKApJxzxdCehSrGS4M8Azgfg6WDgl"
-        },
-        {
-            "url": "https://www.facebook.com/Lula/posts/pfbid022NSNuUVKs2qTXRbvqWKLHdNWusYLTgwjahvbng8RMuzmpEchjZpVvMfGiz3AjAGTl"
-        },
-        {
-            "url": "https://www.facebook.com/antoniogomidept/posts/pfbid0YPaNRq8NHnm3NH6WTCaHoZpdwDMAxkLBySfumppH42TFZvnGpd6wdWugRTBP754hl"
-        },
+        }
     ]
 }
 

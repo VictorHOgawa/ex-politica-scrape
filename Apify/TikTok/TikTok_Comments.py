@@ -46,7 +46,7 @@ timestamp = datetime.timestamp(now)
 # # tiktok_ids = ["12", "34", "56"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
+client = ApifyClient("apify_api_3WrsXIFZMCrjfdhBnFtLoeptjsAfhF3gfJT1")
 
 # Prepare the Actor input
 run_input = {
