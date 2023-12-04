@@ -37,7 +37,7 @@ last_week = date.today() - timedelta(days=7)
 with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts_Urls.json") as f:
     input = json.load(f)
 
-client = ApifyClient("apify_api_AFsRWftU7R9hqH5zV3jKfzmfpK4Y5r4kBVy4")
+client = ApifyClient("apify_api_OaY17Jd46ebE6oJ5fpjh894YD7vhQP21Eu35")
 
 # Prepare the Actor input
 run_input = {
