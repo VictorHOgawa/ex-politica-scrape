@@ -33,7 +33,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-with open("/home/scrapeops/Axioon/Apify/Results/Youtube/TikTok_Posts_Urls.json") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json") as f:
     input = json.load(f)
 
 # Initialize the ApifyClient with your API token
