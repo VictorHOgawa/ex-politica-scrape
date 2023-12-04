@@ -84,7 +84,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("Youtube_Videos.json", "w") as f:
     f.write(json_str)
 
-with open("Youtube_Videos_Urls.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
     f.write(posts_str)
     
-upload_file("Youtube_Videos.json", "nightapp", f"Apify/YouTube/YouTube_Videos_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/YouTube_Videos_{timestamp}.json")
