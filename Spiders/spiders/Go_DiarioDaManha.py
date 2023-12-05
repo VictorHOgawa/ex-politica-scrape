@@ -58,7 +58,6 @@ class GoDiarioDaManha(scrapy.Spider):
         updated = updated.replace("de", "").strip()
         updated = datetime.strptime(updated, "%d  %B  %Y").strftime("%d/%m/%Y")
         updated = datetime.strptime(updated, "%d/%m/%Y")
-        print("updated: ", updated)
         title = response.css(search_terms['title']).get()
         content = response.css(search_terms['content']).getall()
         if search_limit <= updated <= today:

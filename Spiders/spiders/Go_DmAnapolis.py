@@ -45,7 +45,6 @@ class GoDmAnapolisSpider(scrapy.Spider):
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
-            print("link: ", link)
             yield Request(link, callback=self.parse_article, priority=1)
         next_page = response.css(search_terms['next_page'])[-1].get()
         if next_page is not None:

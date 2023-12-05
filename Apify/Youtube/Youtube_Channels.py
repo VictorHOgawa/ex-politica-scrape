@@ -40,8 +40,6 @@ input = input.json()
 
 input = input["youtube"]
 
-print("input: ", input)
-
 channel_names = [item["youtube"] for item in input]
 # channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
 

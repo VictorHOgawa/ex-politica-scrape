@@ -152,8 +152,6 @@ while True:
 							"link": article_payload_url,
 							"users": found_names
 						})
-						print("item: ", item)
-   
 		else:
 			unique_item = list({v['link']:v for v in item}.values())
 			with open("/home/scrapeops/Axioon/Spiders/Results/Mt_FolhaMax.json", "w") as f:
