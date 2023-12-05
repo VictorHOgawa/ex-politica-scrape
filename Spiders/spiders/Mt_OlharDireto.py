@@ -22,7 +22,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-with open("Spiders/CSS_Selectors/MT/Mt_OlharDireto.json") as f:
+with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_OlharDireto.json") as f:
     search_terms = json.load(f)
     
 # request = requests.get("http://172.20.10.2:3333/scrape/news/c7711fee-09bf-4c80-8823-263c23b58e65")
