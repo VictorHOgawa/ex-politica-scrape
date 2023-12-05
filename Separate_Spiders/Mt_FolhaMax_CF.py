@@ -75,7 +75,7 @@ while True:
 	}
 
 	response = requests.post(url, json=payload, headers=headers)
-
+ 
 	html = response.json()['extracted_html']
 	
 	bs = BeautifulSoup(html, 'html.parser')
@@ -90,7 +90,6 @@ while True:
 		##
 		## href link in each article
 		links.append(link['href'])
-  
   
 		##
 		## Start parsing each article
@@ -121,6 +120,8 @@ while True:
 		article_updated = article_updated.replace("de", "").strip()
 		article_updated = datetime.strptime(article_updated, "%d  %B  %Y").strftime("%d/%m/%Y")
 		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
+  
+		print("updated: ", article_updated)
 		
 		##
 		## article_title
