@@ -22,8 +22,8 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-# days=1050 => last 10 days
-search_limit = date.today() - timedelta(days=10)
+# days=150 => last 10 days
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # request = requests.get("http://172.20.10.2:3333/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
