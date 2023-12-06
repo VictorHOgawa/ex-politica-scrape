@@ -126,7 +126,6 @@ while True:
 		article_updated = article_updated.strip()
 		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
   
-		print("updated: ", article_updated)
 		
 		##
 		## article_title

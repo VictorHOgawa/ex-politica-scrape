@@ -121,7 +121,6 @@ while True:
 		article_updated = datetime.strptime(article_updated, "%d  %B  %Y").strftime("%d/%m/%Y")
 		article_updated = datetime.strptime(article_updated, "%d/%m/%Y")
   
-		print("updated: ", article_updated)
 		
 		##
 		## article_title
