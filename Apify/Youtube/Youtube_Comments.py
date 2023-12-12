@@ -40,7 +40,7 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json
 input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_OaY17Jd46ebE6oJ5fpjh894YD7vhQP21Eu35")
+client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
 
 # Prepare the Actor input
 run_input = {
