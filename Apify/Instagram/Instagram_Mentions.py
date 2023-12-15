@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://18.231.150.215/scrape/instagram")
+input = requests.get("http://192.168.0.224/scrape/instagram")
 
 input = input.json()
 
@@ -46,7 +46,7 @@ instagram_names = [item["instagram"] for item in input]
 instagram_ids = [item["id"] for item in input]
 # instagram_ids = ["12", "34", "56", "78"]
 
-client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
+client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
 
 # Prepare the Actor input
 run_input = {
@@ -63,11 +63,11 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
-    for item in json_array:
-        for taggedUser in item["taggedUsers"]:
-            for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
-                if taggedUser["username"].lower() == instagram_name.lower():
-                    item["instagram_id"] = instagram_id
+    # for item in json_array:
+    #     for taggedUser in item["taggedUsers"]:
+    #         for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
+    #             if taggedUser["username"].lower() == instagram_name.lower():
+    #                 item["instagram_id"] = instagram_id
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
     

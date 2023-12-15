@@ -39,7 +39,7 @@ with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.jso
 input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_cJsB3f5hwtrpVwa37WSq4MA1yZuogt49Ewq1")
+client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
 
 # Prepare the Actor input
 run_input = {
