@@ -33,7 +33,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://192.168.0.224/scrape/tiktok")
+input = requests.get("http://192.168.0.224:3333/scrape/tiktok")
 
 input = input.json()
 
@@ -46,7 +46,7 @@ tiktok_ids = [item["id"] for item in input]
 # tiktok_ids = ["12", "34", "56"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
+client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
 
 # Prepare the Actor input
 run_input = {

@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224/scrape/instagram")
+input = requests.get("http://192.168.0.224:3333/scrape/instagram")
 
 input = input.json()
 
@@ -46,7 +46,7 @@ instagram_names = [item["instagram"] for item in input]
 instagram_ids = [item["id"] for item in input]
 # instagram_ids = ["12", "34", "56", "78"]
 
-client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
+client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
 
 # Prepare the Actor input
 run_input = {

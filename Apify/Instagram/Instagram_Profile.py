@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224/scrape/instagram")
+input = requests.get("http://192.168.0.224:3333/scrape/instagram")
 
 input = input.json()
 

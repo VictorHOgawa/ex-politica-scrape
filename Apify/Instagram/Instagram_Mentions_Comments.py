@@ -32,30 +32,21 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
+last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224:3333/scrape/facebook")
-
-input = input.json()
-
-input = input["facebook"]
-
-facebook_names = [item["facebook"] for item in input]
-# facebook_names = ["mauromendesoficial", "lula", "robertodornersinop", "emanuelpinheiromt"]
-
-facebook_ids = [item["id"] for item in input]
-# facebook_ids = ["12", "34", "56", "78"]
-
-# Initialize the ApifyClient with your API token
+with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Mentions_Urls.json") as f:
+    input = json.load(f)
 
 client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
 
 # Prepare the Actor input
-run_input = { "startUrls": [
-        { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
-    ] }
+run_input = {
+    "directUrls": input,
+    "resultsLimit": 20
+}
 
 # Run the Actor and wait for it to finish
-run = client.actor("4Hv5RhChiaDk6iwad").call(run_input=run_input)
+run = client.actor("SbK00X0JYCPblD2wp").call(run_input=run_input)
 
 json_array = []
 # Fetch and print Actor results from the run's dataset (if there are any)
@@ -63,14 +54,14 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
-    for item in json_array:
-        for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
-            if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
-                item["facebook_id"] = facebook_id
-    
+    # for item in json_array:
+    #     for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
+    #         if item["ownerUsername"].lower() == instagram_name.lower():
+    #             item["instagram_id"] = instagram_id
+                
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
-    
-with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
+
+with open("Instagram_Mentions_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Pages.json", "nightapp", f"Apify/Facebook/Facebook_Pages_{timestamp}.json")
+upload_file("Instagram_Mentions_Comments.json", "nightapp", f"Apify/Instagram/Instagram_Mentions_Comments_{timestamp}.json")

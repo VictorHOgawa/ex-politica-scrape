@@ -37,7 +37,7 @@
 # search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 # search_limit = datetime.strftime(search_limit, "%Y-%m-%d")
 
-# input = requests.get("http://192.168.0.224/scrape/name")
+# input = requests.get("http://192.168.0.224:3333/scrape/name")
 # input = input.json()
 
 # input = input["list"]

@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224/scrape/youtube")
+input = requests.get("http://192.168.0.224:3333/scrape/youtube")
 
 input = input.json()
 
@@ -47,7 +47,7 @@ channel_ids = [item["id"] for item in input]
 # channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
+client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
 
 # Prepare the Actor input
 run_input = {
