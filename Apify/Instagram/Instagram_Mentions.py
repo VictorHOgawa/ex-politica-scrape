@@ -72,6 +72,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
                     if taggedUser["username"].lower() == instagram_name.lower():
                         item["instagram_id"] = instagram_id
+                        item["instagram_username"] = instagram_name
 
     json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
     posts_array = list(posts_set)
