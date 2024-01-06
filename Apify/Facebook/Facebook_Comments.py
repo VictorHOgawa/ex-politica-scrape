@@ -39,7 +39,7 @@ with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.jso
 input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_ZXGC8knF27heQtxjZuZJseKUNlg7933Fsb4C")
 
 # Prepare the Actor input
 run_input = {
@@ -57,14 +57,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
     
-    # for item in json_array:
-    #     for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
-    #         if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
-    #             item["facebook_id"] = facebook_id
-    
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
 with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "nightapp", f"Apify/Facebook/Facebook_Comments_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "nightapp", f"Apify/Facebook/Comments/Facebook_Comments_{timestamp}.json")

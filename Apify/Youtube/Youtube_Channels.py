@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224:3333/scrape/youtube")
+input = requests.get("http://18.231.150.215/scrape/youtube")
 
 input = input.json()
 
@@ -47,7 +47,7 @@ channel_ids = [item["id"] for item in input]
 # channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_Qr0oFvbgV4MyqTdYEXThOxSqbtenVO2m5t1b")
 
 # Prepare the Actor input
 run_input = {
@@ -76,4 +76,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("/home/scrapeops/Axioon/Apify/Results/TikTok/Youtube_Channel.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/Youtube_Channel.json", "nightapp", f"Apify/YouTube/YouTube_Channel_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/Youtube_Channel.json", "nightapp", f"Apify/YouTube/Channel/YouTube_Channel_{timestamp}.json")

@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224:3333/scrape/instagram")
+input = requests.get("http://18.231.150.215/scrape/instagram")
 
 input = input.json()
 
@@ -47,7 +47,7 @@ instagram_ids = [item["id"] for item in input]
 # instagram_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_SlXMMEa2d01fyt9ph80z604NP6gb5g209Ypt")
+client = ApifyClient("apify_api_eqT96k2DpQVrWahXGf6RjtLz9ZN9t53ooU8e")
 
 # Prepare the Actor input
 run_input = {
@@ -80,4 +80,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "nightapp", f"Apify/Instagram/Instagram_Profiles_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "nightapp", f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json")

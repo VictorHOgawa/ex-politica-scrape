@@ -21,9 +21,9 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-# request = requests.get("http://192.168.0.224:3333/scrape/news/6eb8b551-9a16-4f5f-91c4-9c76a2513d0b")
-# search_words = request.json()
-search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
+request = requests.get("http://18.231.150.215/scrape/news/6eb8b551-9a16-4f5f-91c4-9c76a2513d0b")
+search_words = request.json()
+# search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
 main_url = "https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=10"
 

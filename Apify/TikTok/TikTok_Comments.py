@@ -37,7 +37,7 @@ with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json") 
     input = json.load(f)
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_DBrvEynIe09EOVyxrNzDeq3k7YFB7V0YYWHc")
 
 # Prepare the Actor input
 run_input = {
@@ -64,4 +64,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/TikTok_Comments_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json")

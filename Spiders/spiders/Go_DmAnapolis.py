@@ -21,9 +21,9 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-# request = requests.get("http://192.168.0.224:3333/scrape/news/b10409df-dda2-4aa4-af07-3eda30b76944")
-# search_words = request.json()
-search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
+request = requests.get("http://18.231.150.215/scrape/news/b10409df-dda2-4aa4-af07-3eda30b76944")
+search_words = request.json()
+# search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
 main_url = "https://www.dmanapolis.com.br/politica"
 

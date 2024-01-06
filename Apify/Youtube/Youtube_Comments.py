@@ -40,7 +40,7 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json
 input = [{"url": url} for url in input]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_Qr0oFvbgV4MyqTdYEXThOxSqbtenVO2m5t1b")
 
 # Prepare the Actor input
 run_input = {
@@ -56,15 +56,10 @@ json_array = []
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
-    
-    # for item in json_array:
-    #     for channel_name, channel_id in zip(channel_names, channel_ids):
-    #         if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}/about".lower():
-    #             item["channel_id"] = channel_id
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
 with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Comments.json", "nightapp", f"Apify/YouTube/YouTube_Comments_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Comments.json", "nightapp", f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json")

@@ -33,7 +33,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://192.168.0.224:3333/scrape/facebook")
+input = requests.get("http://18.231.150.215/scrape/facebook")
 
 input = input.json()
 
@@ -47,7 +47,7 @@ facebook_ids = [item["id"] for item in input]
 
 # Initialize the ApifyClient with your API token
 
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_ZXGC8knF27heQtxjZuZJseKUNlg7933Fsb4C")
 
 # Prepare the Actor input
 run_input = { "startUrls": [
@@ -73,4 +73,4 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Pages.json", "nightapp", f"Apify/Facebook/Facebook_Pages_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Pages.json", "nightapp", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")

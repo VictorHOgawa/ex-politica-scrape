@@ -34,7 +34,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get("http://192.168.0.224:3333/scrape/youtube")
+input = requests.get("http://18.231.150.215/scrape/youtube")
 
 input = input.json()
 
@@ -47,7 +47,7 @@ channel_ids = [item["id"] for item in input]
 # channel_ids = ["12", "34", "56", "78"]
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_Qr0oFvbgV4MyqTdYEXThOxSqbtenVO2m5t1b")
 
 # Prepare the Actor input
 run_input = {
@@ -68,7 +68,7 @@ posts_set = set()
 # Fetch and print Actor results from the run's dataset (if there are any)
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
-    json_array.append(json.loads(json_data.replace("'", '"')))
+    json_array.append(json.loads(json_data))
     
     for item in json_array:
         if item["url"]:
@@ -87,4 +87,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "w
 with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
     f.write(posts_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/YouTube_Videos_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")

@@ -21,9 +21,9 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-# request = requests.get("http://192.168.0.224:3333/scrape/news/aa5af0b0-4857-46cd-a8d4-ad3ff45dbac4")
-# search_words = request.json()
-search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
+request = requests.get("http://18.231.150.215/scrape/news/aa5af0b0-4857-46cd-a8d4-ad3ff45dbac4")
+search_words = request.json()
+# search_words = {'users': [{'id': '123', 'social_name': 'Roberto Naves'}, {'id': '456', 'social_name': 'Antônio Gomide'}, {'id': '789', 'social_name': 'Márcio Corrêa'}]}
 
 main_url = "https://diariodegoias.com.br/politica/"
 

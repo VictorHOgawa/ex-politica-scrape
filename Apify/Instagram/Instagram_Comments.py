@@ -37,7 +37,7 @@ last_week = date.today() - timedelta(days=7)
 with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Posts_Urls.json") as f:
     input = json.load(f)
 
-client = ApifyClient("apify_api_zzThAdwrN40w8wyDUC7n3NO9zhXtUs2sHaYL")
+client = ApifyClient("apify_api_eqT96k2DpQVrWahXGf6RjtLz9ZN9t53ooU8e")
 
 # Prepare the Actor input
 run_input = {
@@ -53,15 +53,10 @@ json_array = []
 for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_data = json.dumps(item, ensure_ascii=False)
     json_array.append(json.loads(json_data))
-    
-    # for item in json_array:
-    #     for instagram_name, instagram_id in zip(instagram_names, instagram_ids):
-    #         if item["ownerUsername"].lower() == instagram_name.lower():
-    #             item["instagram_id"] = instagram_id
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
 with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Comments.json", "nightapp", f"Apify/Instagram/Instagram_Comments_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Comments.json", "nightapp", f"Apify/Instagram/Comments/Instagram_Comments_{timestamp}.json")
