@@ -83,3 +83,5 @@ with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.jso
     f.write(posts_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts.json", "nightapp", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})

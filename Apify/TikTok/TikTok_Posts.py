@@ -85,3 +85,5 @@ with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json", 
     f.write(posts_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json"})

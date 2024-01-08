@@ -63,3 +63,5 @@ with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json"
     f.write(json_str)
     
 upload_file(f"/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Comments.json", "nightapp", f"Apify/Facebook/Comments/Facebook_Comments_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/facebook/comments", json={"records": f"Apify/Facebook/Comments/Facebook_Comments_{timestamp}.json"})

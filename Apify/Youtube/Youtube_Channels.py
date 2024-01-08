@@ -77,3 +77,5 @@ with open("/home/scrapeops/Axioon/Apify/Results/TikTok/Youtube_Channel.json", "w
     f.write(json_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/Youtube_Channel.json", "nightapp", f"Apify/YouTube/Channel/YouTube_Channel_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})

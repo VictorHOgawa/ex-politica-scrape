@@ -93,3 +93,5 @@ with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "
     f.write(result_str)
 
 upload_file(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})

@@ -85,3 +85,5 @@ with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Mentions_Url
     f.write(posts_str)
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Mentions.json", "nightapp", f"Apify/Instagram/Mentions/Instagram_Mentions_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/instagram/mentions", json={"records": f"Apify/Instagram/Mentions/Instagram_Mentions_{timestamp}.json"})

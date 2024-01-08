@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
-# from apify_client import ApifyClient
-# import requests
+from apify_client import ApifyClient
+import requests
 import logging
 import boto3
 import json
@@ -32,59 +32,62 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-# last_week = date.today() - timedelta(days=7)
+last_week = date.today() - timedelta(days=7)
 
-# input = requests.get("http://18.231.150.215/scrape/youtube")
+input = requests.get("http://18.231.150.215/scrape/youtube")
 
-# input = input.json()
+input = input.json()
 
-# input = input["youtube"]
+input = input["youtube"]
 
-# channel_names = [item["youtube"] for item in input]
-# # channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
+channel_names = [item["youtube"] for item in input]
+# channel_names = ["mauromendesoficial", "lulaoficial", "robertodorner8443", "inprensaemanuel"]
 
-# channel_ids = [item["id"] for item in input]
-# # channel_ids = ["12", "34", "56", "78"]
+channel_ids = [item["id"] for item in input]
+# channel_ids = ["12", "34", "56", "78"]
 
-# # Initialize the ApifyClient with your API token
-# client = ApifyClient("apify_api_Qr0oFvbgV4MyqTdYEXThOxSqbtenVO2m5t1b")
+# Initialize the ApifyClient with your API token
+client = ApifyClient("apify_api_Qr0oFvbgV4MyqTdYEXThOxSqbtenVO2m5t1b")
 
-# # Prepare the Actor input
-# run_input = {
-#     "dateFilter": last_week,
-#     "details": True,
-#     "proxySettings": {
-#         "useApifyProxy": True
-#     },
-#     "start_urls": [{"url": f"https://www.youtube.com/@{channel_name}"} for channel_name in channel_names]
-# }
+# Prepare the Actor input
+run_input = {
+    "dateFilter": last_week,
+    "details": True,
+    "proxySettings": {
+        "useApifyProxy": True
+    },
+    "start_urls": [{"url": f"https://www.youtube.com/@{channel_name}"} for channel_name in channel_names]
+}
 
-# # Run the Actor and wait for it to finish
+# Run the Actor and wait for it to finish
 
-# run = client.actor("TyjYgGDGcTNVmil8z").call(run_input=run_input)
+run = client.actor("TyjYgGDGcTNVmil8z").call(run_input=run_input)
 
-# json_array = []
-# posts_set = set()
-# # Fetch and print Actor results from the run's dataset (if there are any)
-# for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-#     json_data = json.dumps(item, ensure_ascii=False)
-#     json_array.append(json.loads(json_data))
+json_array = []
+posts_set = set()
+# Fetch and print Actor results from the run's dataset (if there are any)
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    json_data = json.dumps(item, ensure_ascii=False)
+    json_array.append(json.loads(json_data))
     
-#     for item in json_array:
-#         if item["url"]:
-#             posts_set.add(item["url"])
-#         for channel_name, channel_id in zip(channel_names, channel_ids):
-#             if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}/about".lower():
-#                 item["channel_id"] = channel_id
+    for item in json_array:
+        if item["url"]:
+            posts_set.add(item["url"])
+        for channel_name, channel_id in zip(channel_names, channel_ids):
+            if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}/about".lower():
+                item["channel_id"] = channel_id
                 
-#     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
-#     posts_array = list(posts_set)
-#     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
+    json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+    posts_array = list(posts_set)
+    posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
 
-# with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "w") as f:
-#     f.write(json_str)
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "w") as f:
+    f.write(json_str)
 
-# with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
-#     f.write(posts_str)
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
+    f.write(posts_str)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")
+
+file_name = requests.post("http://18.231.150.215/webhook/youtube/video", json={"records": f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json"})
+# file_name = requests.post("http://192.168.0.224:3333/webhook/youtube/video", json={"records": f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json"})
