@@ -82,15 +82,15 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         posts_str = json.dumps(posts_array, ensure_ascii=False, indent=4)
 
     if json_str != "":
-        with open(f"TikTok_Posts_{tiktok_name}.json", "w") as f:
+        with open(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "w") as f:
             f.write(json_str)
 
     if posts_str != "":
-        with open(f"TikTok_Posts_Urls_{tiktok_name}.json", "w") as f:
+        with open(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json", "w") as f:
             f.write(posts_str)
         
     if json_str != "":
-        upload_file(f"TikTok_Posts_{tiktok_name}.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
+        upload_file(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
 
     if json_str != "":
         file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json"})

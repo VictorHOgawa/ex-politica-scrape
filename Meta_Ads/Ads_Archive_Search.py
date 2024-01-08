@@ -46,16 +46,13 @@ input_names = [name["social_name"] for name in input]
 
 input_facebook_names = [name["facebook"] for name in input]
 
-
 input_ids = [name["id"] for name in input]
-
 
 search_amount = [
     {"name": f"{name["social_name"]}", "bylines": f"{name["name"]}, {name['social_name']}, {name["facebook"]}", "ad_delivery_date_min": f"{search_limit}"} for name in input
-    # {"name": "Mauro Mendes, Mauro Mendes Ferreira", "bylines": "Mauro Mendes, Mauro Mendes Ferreira", "ad_delivery_date_min": "2022-09-01"}
 ]
 
-search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BOzhZB2ncAYDjgwtgRdVwzkVVUD9ZAE4v46EhwBgajFChBeZBDMpmYeUg7mkAD6G5UC6ovaynnpW5GSDRz8pN7Mecu7uKnZB4RkBrS8Evuj3MSpwZCJZAZAXtsrOjw1sFOHjAZCYYorHDeFsZB7mrBcXucQFsUHzpodBTm7igBohdzSHk7ubIx4mZB6l4kSUOsuJOEqZBNYscitK"}
+search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BO0spMJKFMtcJspXbZC9j2KAwczyHIIA0qnuo40LJtoCZB9Wepd3I2hYtWIpx9fdSyOZCFH6H9IyKCxqvQ40EfKGYH1pAVQukGml57Tq2ZAksdRgxnX2OzVVhCYs0YAmBGJAYgSia1oFevNS0TUrNb0RlJW0o2Wssi2SEEFYIv1Cbyb8zgNL1PZB9zTEYrwRRHl6O5"}
 
 current_version = "v18.0"
 
