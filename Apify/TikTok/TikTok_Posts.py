@@ -63,6 +63,8 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
 
     json_array = []
+    json_str = ""
+    posts_str = ""
     posts_set = set()
     # Fetch and print Actor results from the run's dataset (if there are any)
     for item in client.dataset(run["defaultDatasetId"]).iterate_items():
@@ -79,12 +81,16 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         posts_array = list(posts_set)
         posts_str = json.dumps(posts_array, ensure_ascii=False, indent=4)
 
-    with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
-        f.write(json_str)
+    if json_str != "":
+        with open(f"TikTok_Posts_{tiktok_name}.json", "w") as f:
+            f.write(json_str)
 
-    with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json", "w") as f:
-        f.write(posts_str)
+    if posts_str != "":
+        with open(f"TikTok_Posts_Urls_{tiktok_name}.json", "w") as f:
+            f.write(posts_str)
         
-    upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json")
+    if json_str != "":
+        upload_file(f"TikTok_Posts_{tiktok_name}.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
 
-    file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json"})
+    if json_str != "":
+        file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json"})
