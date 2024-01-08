@@ -48,42 +48,43 @@ tiktok_ids = [item["id"] for item in input]
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_DBrvEynIe09EOVyxrNzDeq3k7YFB7V0YYWHc")
 
-# Prepare the Actor input
-run_input = {
-    "disableCheerioBoost": False,
-    "disableEnrichAuthorStats": False,
-    "profiles": [f"{tiktok_name}" for tiktok_name in tiktok_names],
-    "shouldDownloadCovers": False,
-    "shouldDownloadSlideshowImages": False,
-    "shouldDownloadVideos": False
-}
-# Run the Actor and wait for it to finish
-run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
-
-json_array = []
-posts_set = set()
-# Fetch and print Actor results from the run's dataset (if there are any)
-for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-    json_data = json.dumps(item, ensure_ascii=False)
-    json_array.append(json.loads(json_data))
+for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     
-    for item in json_array:
-        if item["webVideoUrl"]:
-            posts_set.add(item["webVideoUrl"])
-        for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
-            if tiktok_name.lower() in item["webVideoUrl"].lower():
-                item["tiktok_id"] = tiktok_id
+    # Prepare the Actor input
+    run_input = {
+        "disableCheerioBoost": False,
+        "disableEnrichAuthorStats": False,
+        "profiles": [tiktok_name],
+        "shouldDownloadCovers": False,
+        "shouldDownloadSlideshowImages": False,
+        "shouldDownloadVideos": False
+    }
+    # Run the Actor and wait for it to finish
+    run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
 
-    json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
-    posts_array = list(posts_set)
-    posts_str = json.dumps(posts_array, ensure_ascii=False, indent=4)
+    json_array = []
+    posts_set = set()
+    # Fetch and print Actor results from the run's dataset (if there are any)
+    for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+        json_data = json.dumps(item, ensure_ascii=False)
+        json_array.append(json.loads(json_data))
+        
+        for item in json_array:
+            if item["webVideoUrl"]:
+                posts_set.add(item["webVideoUrl"])
+                if tiktok_name.lower() in item["webVideoUrl"].lower():
+                    item["tiktok_id"] = tiktok_id
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
-    f.write(json_str)
+        json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
+        posts_array = list(posts_set)
+        posts_str = json.dumps(posts_array, ensure_ascii=False, indent=4)
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json", "w") as f:
-    f.write(posts_str)
-    
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json")
+    with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "w") as f:
+        f.write(json_str)
 
-file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json"})
+    with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json", "w") as f:
+        f.write(posts_str)
+        
+    upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts.json", "nightapp", f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json")
+
+    file_name = requests.post("http://18.231.150.215/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{timestamp}.json"})
