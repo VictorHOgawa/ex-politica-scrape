@@ -76,3 +76,6 @@ class GoDiarioDaManha(scrapy.Spider):
                         yield item
         else:
             raise scrapy.exceptions.CloseSpider
+
+file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/GO/Go_DiarioDaManha_{timestamp}.json"})
+print("file_name: ", file_name)
