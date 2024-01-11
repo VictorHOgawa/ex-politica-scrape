@@ -1,10 +1,38 @@
 from datetime import date, datetime, timedelta
+from botocore.exceptions import ClientError
 from scrapy.item import Item, Field
+from urllib.parse import urljoin
 from scrapy.http import Request
 import requests
+import logging
 import scrapy
+import boto3
 import json
 import re
+import os
+
+def upload_file(file_name, bucket, object_name=None):
+    """Upload a file to an S3 "bucket"
+
+    :param file_name: File to upload
+    :param "bucket": "bucket" to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = os.path.basename(file_name)
+
+    # Upload the file
+    s3_client = boto3.client('s3', aws_access_key_id="AKIA6MOM3OQOF7HA5AOG", aws_secret_access_key="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")
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+        acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
 
 class articleItem(Item):
     title = Field()
@@ -13,8 +41,6 @@ class articleItem(Item):
     link = Field()
     users = Field()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
-    search_terms = json.load(f)
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
@@ -26,24 +52,26 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
+with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
+    search_terms = json.load(f)
+
 request = requests.get("http://18.231.150.215/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
 search_words = request.json()
-# search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
 
 class MtCenariomtSpider(scrapy.Spider):
     name = "Mt_CenarioMt"
     allowed_domains = ["cenariomt.com.br"]
     start_urls = ["https://www.cenariomt.com.br/cenario-politico/"]
-    custom_settings = { 
-    "FEEDS": {
-        f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
-            "format": "json",
-            "encoding": "utf8",
-            "store_empty": False,
-            "indent": 4,
-        }
-    }
-} 
+#     custom_settings = { 
+#     "FEEDS": {
+#         f"s3://nightapp/News/MT/{name}_{timestamp}.json": {
+#             "format": "json",
+#             "encoding": "utf8",
+#             "store_empty": False,
+#             "indent": 4,
+#         }
+#     }
+# } 
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
@@ -74,6 +102,32 @@ class MtCenariomtSpider(scrapy.Spider):
                             users=found_names
                         )
                         yield item
+                        if item is not None:
+                            article_dict = {
+                               "updated": item['updated'].strftime("%d/%m/%Y"),
+                               "title": item['title'],
+                               "content": item['content'],
+                               "link": item['link'],
+                               "users": item['users']
+                            }
+                            file_path = f"Spiders/Results/{self.name}_{timestamp}.json"
+                            if not os.path.isfile(file_path):
+                                # Create an empty array and write it to the file
+                                with open(file_path, "w") as f:
+                                    json.dump([], f)
+
+                            # Load existing JSON data from the file
+                            with open(file_path, "r") as f:
+                                data = json.load(f)
+
+                            # Append the article_dict object to the loaded array
+                            data.append(article_dict)
+
+                            # Write the updated array back to the file
+                            with open(file_path, "w") as f:
+                                json.dump(data, f, ensure_ascii=False)
+                            # file_name = requests.post("http://192.168.0.224:3333/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
+                            file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider
         

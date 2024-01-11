@@ -167,6 +167,7 @@ while True:
 			with open("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
 			upload_file("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "nightapp", f"News/MT/Mt_MidiaNews_{timestamp}.json")
+			file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/MT/Mt_MidiaNews_{timestamp}.json"})
 			sys.exit()
     
     #
