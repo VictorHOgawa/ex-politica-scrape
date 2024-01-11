@@ -39,7 +39,7 @@ search_limit = date.today() - timedelta(days=30)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 search_limit = datetime.strftime(search_limit, "%Y-%m-%d")
 
-input = requests.get("http://18.231.150.215/scrape/name")
+input = requests.get(f"os.getenv('API_IP')/scrape/name")
 input = input.json()
 
 input = input["list"]
@@ -92,4 +92,4 @@ with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "
 
 upload_file(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
 
-file_name = requests.post("http://18.231.150.215/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})
+file_name = requests.post(f"os.getenv('API_IP')/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})

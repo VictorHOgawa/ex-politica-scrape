@@ -47,7 +47,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 main_url = "https://midianews.com.br"
 
-request = requests.get("http://18.231.150.215/scrape/news/4452c674-338d-48d0-bf6a-ee983a67d82d")
+request = requests.get(f"os.getenv('API_IP')/scrape/news/4452c674-338d-48d0-bf6a-ee983a67d82d")
 search_words = request.json()
 
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_MidiaNews.json") as f:
@@ -114,6 +114,6 @@ class MtMidiaNewsSpider(scrapy.Spider):
                             with open(file_path, "w") as f:
                                 json.dump(data, f, ensure_ascii=False)
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/MT/{self.name}_{timestamp}.json")
-                            file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider

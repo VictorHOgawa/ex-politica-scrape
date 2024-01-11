@@ -62,4 +62,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Mentions_Com
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Mentions_Comments.json", "nightapp", f"Apify/Instagram/Mentions_Comments/Instagram_Mentions_Comments_{timestamp}.json")
 
-file_name = requests.post("http://18.231.150.215/webhook/instagram/mentions/comments", json={"records": f"Apify/Instagram/Mentions_Comments/Instagram_Mentions_Comments_{timestamp}.json"})
+file_name = requests.post(f"os.getenv('API_IP')/webhook/instagram/mentions/comments", json={"records": f"Apify/Instagram/Mentions_Comments/Instagram_Mentions_Comments_{timestamp}.json"})

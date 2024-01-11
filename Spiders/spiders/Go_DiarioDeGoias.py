@@ -45,7 +45,7 @@ search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://diariodegoias.com.br/politica/"
 
-request = requests.get("http://18.231.150.215/scrape/news/aa5af0b0-4857-46cd-a8d4-ad3ff45dbac4")
+request = requests.get(f"os.getenv('API_IP')/scrape/news/aa5af0b0-4857-46cd-a8d4-ad3ff45dbac4")
 search_words = request.json()
 
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDeGoias.json") as f:
@@ -109,6 +109,6 @@ class GoDiarioDeGoiasSpider(scrapy.Spider):
                                 json.dump(data, f, ensure_ascii=False)
 
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/GO/{self.name}_{timestamp}.json")
-                            file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider

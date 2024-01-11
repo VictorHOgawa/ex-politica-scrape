@@ -62,4 +62,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Comments.json", 
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Comments.json", "nightapp", f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json")
 
-file_name = requests.post("http://18.231.150.215/webhook/youtube/comments", json={"records": f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json"})
+file_name = requests.post(f"os.getenv('API_IP')/webhook/youtube/comments", json={"records": f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json"})

@@ -37,7 +37,7 @@ load_dotenv()
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get("http://18.231.150.215/scrape/facebook")
+input = requests.get(f"os.getenv('API_IP')/scrape/facebook")
 
 input = input.json()
 
@@ -82,4 +82,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts_Urls.jso
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Facebook/Facebook_Posts.json", "nightapp", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
 
-file_name = requests.post("http://18.231.150.215/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})
+file_name = requests.post(f"os.getenv('API_IP')/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})

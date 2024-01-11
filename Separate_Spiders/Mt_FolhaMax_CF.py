@@ -48,7 +48,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get("http://18.231.150.215/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
+request = requests.get(f"os.getenv('API_IP')/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
 search_words = request.json()
 
 item = []
@@ -142,7 +142,7 @@ while True:
 			with open("/home/scrapeops/Axioon/Spiders/Results/Mt_FolhaMax.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
 			upload_file("/home/scrapeops/Axioon/Spiders/Results/Mt_FolhaMax.json", "nightapp", f"News/MT/Mt_FolhaMax_{timestamp}.json")
-			file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})
+			file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})
 			sys.exit()
     
 	next_page = bs.find("a", {"class": "next"}).get("href")

@@ -48,7 +48,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
     search_terms = json.load(f)
 
-request = requests.get("http://18.231.150.215/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
+request = requests.get(f"os.getenv('API_IP')/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
 search_words = request.json()
 
 class MtCenariomtSpider(scrapy.Spider):
@@ -108,7 +108,7 @@ class MtCenariomtSpider(scrapy.Spider):
                                 json.dump(data, f, ensure_ascii=False)
 
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/MT/{self.name}_{timestamp}.json")
-                            file_name = requests.post("http://18.231.150.215/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider
         
