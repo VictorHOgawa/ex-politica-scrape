@@ -1,33 +1,11 @@
 from datetime import date, datetime, timedelta
-from botocore.exceptions import ClientError
+from ..upload_file import upload_file
+from dotenv import load_dotenv
 import requests
-import logging
-import boto3
 import json
 import os
 
-def upload_file(file_name, bucket, object_name=None):
-    """Upload a file to an S3 "bucket"
-
-    :param file_name: File to upload
-    :param "bucket": "bucket" to upload to
-    :param object_name: S3 object name. If not specified then file_name is used
-    :return: True if file was uploaded, else False
-    """
-
-    # If S3 object_name was not specified, use file_name
-    if object_name is None:
-        object_name = os.path.basename(file_name)
-
-    # Upload the file
-    s3_client = boto3.client('s3', aws_access_key_id="AKIA6MOM3OQOF7HA5AOG", aws_secret_access_key="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")
-    try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
-        acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
-    except ClientError as e:
-        logging.error(e)
-        return False
-    return True
+load_dotenv()
 
 now = datetime.now()
 now_in_days = now.strftime("%Y-%m-%d")
@@ -52,7 +30,7 @@ search_amount = [
     {"name": f"{name["social_name"]}", "bylines": f"{name["name"]}, {name['social_name']}, {name["facebook"]}", "ad_delivery_date_min": f"{search_limit}"} for name in input
 ]
 
-search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": "EAACxJFtlwx0BO0spMJKFMtcJspXbZC9j2KAwczyHIIA0qnuo40LJtoCZB9Wepd3I2hYtWIpx9fdSyOZCFH6H9IyKCxqvQ40EfKGYH1pAVQukGml57Tq2ZAksdRgxnX2OzVVhCYs0YAmBGJAYgSia1oFevNS0TUrNb0RlJW0o2Wssi2SEEFYIv1Cbyb8zgNL1PZB9zTEYrwRRHl6O5"}
+search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": os.getenv("META_ADS_ACCESS_TOKEN")}
 
 current_version = "v18.0"
 
@@ -83,7 +61,6 @@ for item in search_amount:
                 if individual["page_name"].lower() == input_name.lower() or individual["page_name"].lower() == input_facebook_name.lower():
                     item["Meta_id"] = input_id
                
-    
 result_str = json.dumps(result, ensure_ascii=False, indent=4)
     
 with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "w") as f:
