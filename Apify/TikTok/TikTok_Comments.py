@@ -37,28 +37,40 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls.json") as f:
-    input = json.load(f)
+input = requests.get(f"{os.getenv('API_IP')}/scrape/tiktok")
 
-client = ApifyClient(os.getenv("TIKTOK_APIFY_CLIENT_KEY"))
+input = input.json()
 
-run_input = {
-    "postURLs": input,
-    "commentsPerPost": 20,
-    "maxRepliesPerComment": 0,
-}
-run = client.actor("BDec00yAmCm1QbMEI").call(run_input=run_input)
+input = input["tiktok"]
 
-json_array = []
-for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-    json_data = json.dumps(item, ensure_ascii=False)
-    json_array.append(json.loads(json_data))
+tiktok_names = [item["tiktok"] for item in input]
 
-    json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
+comments_input = []
 
-with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
-    f.write(json_str)
+for tiktok_name in tiktok_names:
+    if os.path.exists(f"TikTok_Posts_Urls_{tiktok_name}.json"):
+        with open(f"TikTok_Posts_Urls_{tiktok_name}.json") as f:
+            comments_input = json.load(f)
     
-upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json")
+        client = ApifyClient(os.getenv("TIKTOK_APIFY_CLIENT_KEY"))
 
-file_name = requests.post(f"{os.getenv('API_IP')}/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json"})
+        run_input = {
+            "postURLs": comments_input,
+            "commentsPerPost": 20,
+            "maxRepliesPerComment": 0,
+        }
+        run = client.actor("BDec00yAmCm1QbMEI").call(run_input=run_input)
+
+        json_array = []
+        for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+            json_data = json.dumps(item, ensure_ascii=False)
+            json_array.append(json.loads(json_data))
+
+            json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
+
+        with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
+            f.write(json_str)
+            
+        upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json")
+
+        file_name = requests.post(f"{os.getenv('API_IP')}/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json"})
