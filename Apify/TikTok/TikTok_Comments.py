@@ -61,4 +61,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json")
 
-file_name = requests.post(f"os.getenv('API_IP')/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json"})
+file_name = requests.post(f"{os.getenv('API_IP')}/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json"})

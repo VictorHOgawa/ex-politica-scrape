@@ -47,7 +47,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 main_url = "https://www.gazetadigital.com.br/includes/"
 
-request = requests.get(f"os.getenv('API_IP')/scrape/news/924d2218-803f-44bd-890d-30619b116bb2")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/news/924d2218-803f-44bd-890d-30619b116bb2")
 search_words = request.json()
 
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_GazetaDigital.json") as f:
@@ -114,6 +114,6 @@ class MtGazetadigitalSpider(scrapy.Spider):
                                 json.dump(data, f, ensure_ascii=False)
 
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/MT/{self.name}_{timestamp}.json")
-                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider

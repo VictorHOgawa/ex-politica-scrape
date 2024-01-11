@@ -36,7 +36,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get(f"os.getenv('API_IP')/scrape/youtube")
+input = requests.get(f"{os.getenv('API_IP')}/scrape/youtube")
 
 input = input.json()
 
@@ -84,4 +84,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json
     
 upload_file(f"/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")
 
-file_name = requests.post(f"os.getenv('API_IP')/webhook/youtube/video", json={"records": f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json"})
+file_name = requests.post(f"{os.getenv('API_IP')}/webhook/youtube/video", json={"records": f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json"})

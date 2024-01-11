@@ -45,7 +45,7 @@ search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=10"
 
-request = requests.get(f"os.getenv('API_IP')/scrape/news/6eb8b551-9a16-4f5f-91c4-9c76a2513d0b")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/news/6eb8b551-9a16-4f5f-91c4-9c76a2513d0b")
 search_words = request.json()
 
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
@@ -110,7 +110,7 @@ class GoDiarioDaManha(scrapy.Spider):
                                 json.dump(data, f, ensure_ascii=False)
                                 
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/GO/{self.name}_{timestamp}.json")
-                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider
         

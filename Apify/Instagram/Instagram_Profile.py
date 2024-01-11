@@ -38,7 +38,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-input = requests.get(f"os.getenv('API_IP')/scrape/instagram")
+input = requests.get(f"{os.getenv('API_IP')}/scrape/instagram")
 
 input = input.json()
 
@@ -79,4 +79,4 @@ with open("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.jso
     
 upload_file("/home/scrapeops/Axioon/Apify/Results/Instagram/Instagram_Profiles.json", "nightapp", f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json")
 
-file_name = requests.post(f"os.getenv('API_IP')/webhook/instagram/profile", json={"records": f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json"})
+file_name = requests.post(f"{os.getenv('API_IP')}/webhook/instagram/profile", json={"records": f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json"})

@@ -45,7 +45,7 @@ search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://www.dmanapolis.com.br/politica"
 
-request = requests.get(f"os.getenv('API_IP')/scrape/news/b10409df-dda2-4aa4-af07-3eda30b76944")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/news/b10409df-dda2-4aa4-af07-3eda30b76944")
 search_words = request.json()
 
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DmAnapolis.json") as f:
@@ -109,6 +109,6 @@ class GoDmAnapolisSpider(scrapy.Spider):
                                 json.dump(data, f, ensure_ascii=False)
 
                             upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/GO/{self.name}_{timestamp}.json")
-                            file_name = requests.post(f"os.getenv('API_IP')/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
+                            file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider

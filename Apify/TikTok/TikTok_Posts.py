@@ -37,7 +37,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-input = requests.get(f"os.getenv('API_IP')/scrape/tiktok")
+input = requests.get(f"{os.getenv('API_IP')}/scrape/tiktok")
 
 input = input.json()
 
