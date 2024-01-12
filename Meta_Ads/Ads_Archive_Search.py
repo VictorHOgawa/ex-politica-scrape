@@ -51,7 +51,7 @@ input_facebook_names = [name["facebook"] for name in input]
 input_ids = [name["id"] for name in input]
 
 search_amount = [
-    {"name": f"{name["social_name"]}", "bylines": f"{name["name"]}, {name['social_name']}, {name["facebook"]}", "ad_delivery_date_min": f"{search_limit}"} for name in input
+    {"name": f"{name['social_name']}", "bylines": f"{name['name']}, {name['social_name']}, {name['facebook']}", "ad_delivery_date_min": f"{search_limit}"} for name in input
 ]
 
 search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": os.getenv("META_ADS_ACCESS_TOKEN")}
