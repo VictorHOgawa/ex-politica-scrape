@@ -68,9 +68,9 @@ for tiktok_name in tiktok_names:
 
             json_str = json.dumps(json_array, ensure_ascii=False, indent=4)
 
-        with open("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "w") as f:
+        with open(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments_{tiktok_name}.json", "w") as f:
             f.write(json_str)
             
-        upload_file("/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json")
+        upload_file(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Comments_{tiktok_name}.json", "nightapp", f"Apify/TikTok/Comments/TikTok_Comments_{tiktok_name}_{timestamp}.json")
 
-        file_name = requests.post(f"{os.getenv('API_IP')}/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{timestamp}.json"})
+        file_name = requests.post(f"{os.getenv('API_IP')}/webhook/tiktok/comments", json={"records": f"Apify/TikTok/Comments/TikTok_Comments_{tiktok_name}_{timestamp}.json"})
