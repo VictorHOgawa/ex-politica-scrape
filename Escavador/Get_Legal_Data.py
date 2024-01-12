@@ -35,7 +35,7 @@ def upload_file(file_name, bucket, object_name=None):
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 
-inputs = requests.get("http://192.168.0.224:3333/scrape/cpf")
+inputs = requests.get(f"{os.getenv('API_IP')}/scrape/cpf")
 
 inputs = json.loads(inputs.text)
 
@@ -53,4 +53,4 @@ for input in inputs:
         
     upload_file(f"/home/scrapeops/Axioon/Results/{input['cpf']}.json", "nightapp", f"Legal/{input['cpf']}_{timestamp}.json")
         
-    file_name = requests.post("http://192.168.0.224:3333/webhook/legal", json={"records": f"Legal/{input['cpf']}_{timestamp}.json"})
+    file_name = requests.post(f"{os.getenv('API_IP')}/webhook/legal", json={"records": f"Legal/{input['cpf']}_{timestamp}.json"})
