@@ -71,8 +71,6 @@ for item in search_amount:
 
     r = requests.get(f"{search_url}ad_reached_countries={search_queries['ad_reached_countries']}&search_terms={search_queries['search_terms']}&search_type=KEYWORD_EXACT_PHRASE&ad_delivery_date_min={search_queries['ad_delivery_date_min']}&bylines={search_queries['bylines']}&ad_type={search_queries['ad_type']}&fields={search_queries['fields']}&limit={search_queries['limit']}&access_token={search_queries['access_token']}")
 
-    print("r: ", r)
-
     file_name = item["name"].replace("%20","-")
     
     json_array = r.content.decode("utf-8")
