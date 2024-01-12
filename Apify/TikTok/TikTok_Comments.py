@@ -48,8 +48,8 @@ tiktok_names = [item["tiktok"] for item in input]
 comments_input = []
 
 for tiktok_name in tiktok_names:
-    if os.path.exists(f"TikTok_Posts_Urls_{tiktok_name}.json"):
-        with open(f"TikTok_Posts_Urls_{tiktok_name}.json") as f:
+    if os.path.exists(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json"):
+        with open(f"/home/scrapeops/Axioon/Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json") as f:
             comments_input = json.load(f)
     
         client = ApifyClient(os.getenv("TIKTOK_APIFY_CLIENT_KEY"))
