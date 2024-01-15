@@ -87,9 +87,9 @@ for item in search_amount:
                
 result_str = json.dumps(result, ensure_ascii=False, indent=4)
     
-with open(f"Meta_Ads_Results_{timestamp}.json", "w") as f:
+with open(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "w") as f:
     f.write(result_str)
 
-upload_file(f"Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Results/Meta_Ads_Results_{timestamp}.json", "nightapp", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
 
 file_name = requests.post(f"{os.getenv('API_IP')}/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})
