@@ -1,0 +1,8 @@
+{
+  "article": "article.post",
+  "link": "h2.entry-title a::attr(href)",
+  "next_page": "a.next::attr(href)",
+  "updated": "span.published::text",
+  "title": "h1.entry-title::text",
+  "content": "div.entry-content p::text"
+}

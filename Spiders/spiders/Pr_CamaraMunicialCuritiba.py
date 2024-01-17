@@ -1,12 +1,13 @@
 from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
-from scrapy.http import Request
 from ..items import articleItem
+from scrapy.http import Request
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 import requests
 import logging
-import scrapy
 import locale
+import scrapy
 import boto3
 import json
 import os
@@ -47,41 +48,39 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get(f"{os.getenv('API_IP')}/scrape/news/069f1600-bc0a-49b7-95a8-5832e98a0d7d")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/news/4ffb6757-67a2-4a99-84a4-f187628c4ac1")
 search_words = request.json()
-print(search_words)
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_BemParana.json") as f:
+with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_CamaraMunicipalCuritiba.json") as f:
     search_terms = json.load(f)
 
-main_url = "https://www.bemparana.com.br/noticias/politica/"
+main_url = "https://www.curitiba.pr.leg.br/informacao/noticias?b_start:int="
 
-class PrBemParanaSpider(scrapy.Spider):
-    name = "Pr_BemParana"
-    allowed_domains = ["bemparana.com.br"]
-    start_urls = ["https://www.bemparana.com.br/noticias/politica/"]
+class Pr_CamaraMunicipalCuritibaSpider(scrapy.Spider):
+    name = "Pr_CamaraMunicipalCuritiba"
+    allowed_domains = ["curitiba.pr.leg.br"]
+    start_urls = ["https://www.curitiba.pr.leg.br/informacao/noticias?b_start:int=0"]
     
     def parse(self, response):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
-            check_link = link.split("//")[1]
-            if check_link.split("/")[1] != "assinatura":
-                print("check_link: ", check_link)
-                yield Request(f"https://{check_link}", callback=self.parse_article, priority=1)
-        next_page = response.css(search_terms['next_page'])[-1].get()
-        print("next_page: ", next_page)
+            yield Request(link, callback=self.parse_article, priority=1)
+        next_page = response.css(search_terms['next_page']).get()
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         else:
             print("NÃO TEM NEXT BUTTON")
             
     def parse_article(self, response):
-        updated = response.css(search_terms['updated']).get()
+        updated = response.css(search_terms['updated'])[-1].getall()
+        updated = updated[0].strip()
         updated = updated.split(" ")[0]
         updated = datetime.strptime(updated, "%d/%m/%Y").strftime("%d/%m/%Y")
         updated = datetime.strptime(updated, "%d/%m/%Y")
         title = response.css(search_terms['title']).get()
+        title = title.strip()
         content = response.css(search_terms['content']).getall()
+        content = BeautifulSoup(" ".join(content), "html.parser").text
         if search_limit <= updated <= today:
             found_names = []
             for paragraph in content:

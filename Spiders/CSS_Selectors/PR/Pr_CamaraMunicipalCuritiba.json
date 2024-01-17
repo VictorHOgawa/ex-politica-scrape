@@ -1,0 +1,8 @@
+{
+  "article": "div.tileItem",
+  "link": "h2.tileHeadline a.url::attr(href)",
+  "next_page": "div.listingBar span.next a::attr(href)",
+  "updated": "span.documentModified::text",
+  "title": "h1#parent-fieldname-title::text",
+  "content": "div#parent-fieldname-text"
+}

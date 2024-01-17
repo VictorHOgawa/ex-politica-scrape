@@ -5,6 +5,7 @@
 # from dotenv import load_dotenv
 # import requests
 # import logging
+# import locale
 # import scrapy
 # import boto3
 # import json
