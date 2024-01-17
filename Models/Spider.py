@@ -1,17 +1,42 @@
 # from datetime import date, datetime, timedelta
+# from botocore.exceptions import ClientError
 # from ..items import articleItem
 # from scrapy.http import Request
-# from urllib.parse import urljoin
-# import locale
+# from dotenv import load_dotenv
 # import requests
+# import logging
 # import scrapy
+# import boto3
 # import json
+# import os
+
+# load_dotenv()
+
+# def upload_file(file_name, bucket, object_name=None):
+#     """Upload a file to an S3 "bucket"
+
+#     :param file_name: File to upload
+#     :param "bucket": "bucket" to upload to
+#     :param object_name: S3 object name. If not specified then file_name is used
+#     :return: True if file was uploaded, else False
+#     """
+
+#     # If S3 object_name was not specified, use file_name
+#     if object_name is None:
+#         object_name = os.path.basename(file_name)
+
+#     # Upload the file
+#     s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))
+#     try:
+#         response = s3_client.upload_file(file_name, bucket, object_name)
+#         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
+#     except ClientError as e:
+#         logging.error(e)
+#         return False
+#     return True
 
 # locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PATH/TO/SELECTORS.json") as f:
-#     search_terms = json.load(f)
-    
 # now = datetime.now()
 # timestamp = datetime.timestamp(now)
 
@@ -21,9 +46,11 @@
 # search_limit = date.today() - timedelta(days=1)
 # search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-# # request = requests.get("http://172.20.10.2:3333/scrape/news/21c35dba-7f00-4a71-94bb-ff80952aacbf")
-# # search_words = request.json()
-# search_words = {'users': [{'id': 'c57d379e-42d4-4878-89be-f2e7b4d61590', 'social_name': 'Roberto Dorner'}, {'id': '3023f094-6095-448a-96e3-446f0b9f46f2', 'social_name': 'Mauro Mendes'}, {'id': '2b9955f1-0991-4aed-ad78-ea40ee3ce00a', 'social_name': 'Emanuel Pinheiro'}]}
+# request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1daff77c-0c85-45b8-845e-5aa978e34541")
+# search_words = request.json()
+
+# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/STATE/STATE_SITENAME.json") as f:
+#     search_terms = json.load(f)
 
 # main_url = ""
 
@@ -31,16 +58,6 @@
 #     name = "STATE_SITENAME"
 #     allowed_domains = [""]
 #     start_urls = [""]
-#     custom_settings = {
-#         "FEEDS": {
-#             f"s3://nightapp/STATE/{name}_{timestamp}.json": {
-#                 "format": "json",
-#                 "encoding": "utf8",
-#                 "store_empty": False,
-#                 "indent": 4,
-#             }
-#         }
-#     }
     
 #     def parse(self, response):
 #         for article in response.css(search_terms['article']):
@@ -70,5 +87,29 @@
 #                             users=found_names
 #                         )
 #                         yield item
+#                         if item is not None:
+                            # article_dict = {
+                            #    "updated": item['updated'].strftime("%d/%m/%Y"),
+                            #    "title": item['title'],
+                            #    "content": item['content'],
+                            #    "link": item['link'],
+                            #    "users": item['users']
+                            # }
+                            # file_path = f"Spiders/Results/{self.name}_{timestamp}.json"
+                            # if not os.path.isfile(file_path):
+                            #     with open(file_path, "w") as f:
+                            #         json.dump([], f)
+
+                            # with open(file_path, "r") as f:
+                            #     data = json.load(f)
+
+                            # data.append(article_dict)
+
+                            # with open(file_path, "w") as f:
+                            #     json.dump(data, f, ensure_ascii=False)
+                                
+                            # upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "nightapp", f"News/STATE/{self.name}_{timestamp}.json")
+                            # file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/STATE/{self.name}_{timestamp}.json"})
+                     
 #         else:
 #             raise scrapy.exceptions.CloseSpider
