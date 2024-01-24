@@ -1,6 +1,6 @@
 {
-  "article": "article.post.category-politica",
-  "link": "h2.entry-title a::attr(href)",
+  "article": "article.post.fusion-column",
+  "link": "a::attr(href)",
   "next_page": "",
   "updated": "span.updated::text",
   "title": "h2.entry-title::text",

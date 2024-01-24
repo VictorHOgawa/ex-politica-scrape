@@ -1,0 +1,8 @@
+{
+  "article": "div.box_geral_noticias",
+  "link": "div.box_titulo a::attr(href)",
+  "next_page": "a.fonte_paginacao::attr(href)",
+  "updated": "div.informacoes_post b::text",
+  "title": "span.h2.titulo_post b::text",
+  "content": "div.conteudo_post"
+}
