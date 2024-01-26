@@ -4,5 +4,5 @@
   "next_page": "nav.archive-pagination a::attr(href)",
   "updated": "span.published strong::text",
   "title": "h1.post-title::text",
-  "content": "div.post-content p::text"
+  "content": "div.post-content"
 }

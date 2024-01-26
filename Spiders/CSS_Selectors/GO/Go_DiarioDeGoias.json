@@ -4,5 +4,5 @@
   "next_page": "ul.pagination li a.next::attr(href)",
   "updated": "span.date time::text",
   "title": "h1.noticia-titulo::text",
-  "content": "div.col-12.col-lg-8.pb-4 p::text"
+  "content": "div.col-12.col-lg-8.pb-4"
 }

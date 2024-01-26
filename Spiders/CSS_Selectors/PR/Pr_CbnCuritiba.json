@@ -4,5 +4,5 @@
   "next_page": "",
   "updated": "span.updated::text",
   "title": "h2.entry-title::text",
-  "content": "div.post-content p::text"
+  "content": "div.post-content"
 }

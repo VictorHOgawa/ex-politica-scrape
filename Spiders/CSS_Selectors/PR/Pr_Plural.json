@@ -4,5 +4,5 @@
   "next_page": "a.next::attr(href)",
   "updated": "span.published::text",
   "title": "h1.entry-title::text",
-  "content": "div.entry-content p::text"
+  "content": "div.entry-content"
 }

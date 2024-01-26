@@ -4,5 +4,5 @@
   "next_page": "nav.pagination-wrap a.next::attr(href)",
   "updated": "span.meta-info-update time.date-updated::text",
   "title": "h1.single-title.entry-title::text",
-  "content": "div.entry-content p::text"
+  "content": "div.entry-content"
 }

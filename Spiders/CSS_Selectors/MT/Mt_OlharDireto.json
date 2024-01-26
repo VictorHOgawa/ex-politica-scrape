@@ -4,5 +4,5 @@
   "next_page": "div#paginacao ul li a::attr(href)",
   "updated": "p.datahora::text",
   "title": "h3.item::text",
-  "content": "div#conteudo div.html.texto::text"
+  "content": "div#conteudo div.html.texto"
 }

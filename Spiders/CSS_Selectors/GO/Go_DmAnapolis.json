@@ -4,5 +4,5 @@
   "next_page": "div.paginacao a::attr(href)",
   "updated": "div.data-post span::text",
   "title": "h1.titulo-post::text",
-  "content": "div.texto p::text"
+  "content": "div.texto"
 }

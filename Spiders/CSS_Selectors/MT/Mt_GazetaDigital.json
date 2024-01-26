@@ -4,5 +4,5 @@
   "next_page": "div.Pagination a.next::attr(href)",
   "updated": "p.interna-data span.hidden-xs::text",
   "title": "h1.interna-title::text",
-  "content": "div#text-content p::text"
+  "content": "div#text-content"
 }

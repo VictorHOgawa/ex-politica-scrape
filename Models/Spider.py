@@ -47,7 +47,7 @@
 # search_limit = date.today() - timedelta(days=60)
 # search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-# request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1daff77c-0c85-45b8-845e-5aa978e34541")
+# request = requests.get(f"{os.getenv('API_IP')}/scrape/news/SITE_ID")
 # search_words = request.json()
 
 # with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/STATE/STATE_SITENAME.json") as f:

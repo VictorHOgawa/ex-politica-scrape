@@ -58,7 +58,7 @@ run_input = {
     "addParentData": False,
     "searchType": "hashtag",
     "searchLimit": 1,
-    "untilDate": last_week
+    # "untilDate": last_week
 }
 
 run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)
