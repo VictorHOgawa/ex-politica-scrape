@@ -45,7 +45,7 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=60)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")

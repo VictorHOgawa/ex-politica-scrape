@@ -35,7 +35,7 @@ now = datetime.now()
 now_in_days = now.strftime("%Y-%m-%d")
 timestamp = datetime.timestamp(now)
 
-search_limit = date.today() - timedelta(days=60)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 search_limit = datetime.strftime(search_limit, "%Y-%m-%d")
 
