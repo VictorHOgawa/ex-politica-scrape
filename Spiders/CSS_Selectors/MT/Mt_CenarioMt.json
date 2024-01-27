@@ -1,6 +1,6 @@
 {
-  "article": "h4.entry-title",
-  "link": "a.p-url::attr(href)",
+  "article": "div.p-outer.rb-p20-gutter.rb-col-t6.rb-col-m12",
+  "link": "div.p-header a.p-url::attr(href)",
   "next_page": "nav.pagination-wrap a.next::attr(href)",
   "updated": "span.meta-info-update time.date-updated::text",
   "title": "h1.single-title.entry-title::text",

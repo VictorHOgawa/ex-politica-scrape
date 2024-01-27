@@ -49,7 +49,7 @@
 # request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
 # search_words = request.json()
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
+# with open("Spiders/CSS_Selectors/MT/Mt_FolhaMax.json") as f:
 #     search_terms = json.load(f)
 
 # class MtFolhamaxSpider(scrapy.Spider):

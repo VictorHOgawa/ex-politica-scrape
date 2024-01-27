@@ -51,7 +51,6 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") a
 
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
 search_words = request.json()
-
 class MtCenariomtSpider(scrapy.Spider):
     name = "Mt_CenarioMt"
     allowed_domains = ["cenariomt.com.br"]
@@ -61,7 +60,7 @@ class MtCenariomtSpider(scrapy.Spider):
         for article in response.css(search_terms['article']):
             link = article.css(search_terms['link']).get()
             yield Request(link, callback=self.parse_article, priority=1)
-        next_page = response.css(search_terms['next_page'])[-1].get()
+        next_page = response.css(search_terms['next_page']).get()
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         else:

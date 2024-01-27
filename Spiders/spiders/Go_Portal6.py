@@ -65,7 +65,6 @@ class GoPortal6Spider(scrapy.Spider):
             link = article.css(search_terms['link']).get()
             yield Request(link, callback=self.parse_article, priority=1)
         next_page = response.css(search_terms['next_page'])[-1].get()
-        print("NEXT PAGE: ", next_page)
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
         else:

@@ -50,7 +50,7 @@
 # request = requests.get(f"{os.getenv('API_IP')}/scrape/news/4452c674-338d-48d0-bf6a-ee983a67d82d")
 # search_words = request.json()
 
-# with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_MidiaNews.json") as f:
+# with open("Spiders/CSS_Selectors/MT/Mt_MidiaNews.json") as f:
 #     search_terms = json.load(f)    
 
 # class MtMidiaNewsSpider(scrapy.Spider):

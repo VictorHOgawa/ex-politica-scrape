@@ -80,7 +80,6 @@ class PrPluralSpider(scrapy.Spider):
         content = response.css(search_terms['content']).getall()
         content = BeautifulSoup(" ".join(content), "html.parser").text
         content = content.replace("\n", " ")
-        print("content: ", content)
         if search_limit <= updated <= today:
             found_names = []
             # for paragraph in content:
