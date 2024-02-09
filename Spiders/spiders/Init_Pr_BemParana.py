@@ -42,7 +42,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/069f1600-bc0a-49b7-95a8-5832e98a0d7d")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_BemParana.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/PR/Pr_BemParana.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.bemparana.com.br/noticias/politica/"

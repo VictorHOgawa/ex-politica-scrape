@@ -42,7 +42,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/4ffb6757-67a2-4a99-84a4-f187628c4ac1")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_CamaraMunicipalCuritiba.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/PR/Pr_CamaraMunicipalCuritiba.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.curitiba.pr.leg.br/informacao/noticias?b_start:int="

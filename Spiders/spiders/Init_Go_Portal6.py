@@ -43,7 +43,7 @@ main_url = "https://portal6.com.br/categoria/poder/politica/page/1/"
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_Portal6.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_Portal6.json") as f:
     search_terms = json.load(f)
 
 class InitGoPortal6Spider(scrapy.Spider):

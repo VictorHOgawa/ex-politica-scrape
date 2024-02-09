@@ -43,7 +43,7 @@ main_url = "https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&a
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/6eb8b551-9a16-4f5f-91c4-9c76a2513d0b")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
     search_terms = json.load(f)
 
 class InitGoDiarioDaManha(scrapy.Spider):

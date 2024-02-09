@@ -150,9 +150,9 @@
 
 # 		else:
 # 			unique_item = list({v['link']:v for v in item}.values())
-# 			with open("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "w") as f:
+# 			with open("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_MidiaNews.json", "w") as f:
 # 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
-# 			upload_file("/home/scrapeops/Axioon/Spiders/Results/Mt_MidiaNews.json", "axioon", f"News/MT/Mt_MidiaNews_{timestamp}.json")
+# 			upload_file("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_MidiaNews.json", "axioon", f"News/MT/Mt_MidiaNews_{timestamp}.json")
 # 			file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/MT/Mt_MidiaNews_{timestamp}.json"})
 # 			sys.exit()
     

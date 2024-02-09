@@ -42,7 +42,7 @@ request = requests.get(f"{os.getenv('API_IP')}/scrape/news/069f1600-bc0a-49b7-95
 search_words = request.json()
 
 # INIT API ROUTE
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_Plural.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/PR/Pr_Plural.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.plural.jor.br/noticias/"

@@ -36,7 +36,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=30)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") as f:
     search_terms = json.load(f)
 
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")

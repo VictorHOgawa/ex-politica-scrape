@@ -39,7 +39,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1daff77c-0c85-45b8-845e-5aa978e34541")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_SoNoticias.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/MT/Mt_SoNoticias.json") as f:
     search_terms = json.load(f)
     
 class InitMtSonoticiasSpider(scrapy.Spider):

@@ -59,9 +59,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open("/home/scrapeops/Axioon/Init_Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
+with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/Axioon/Init_Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
+upload_file(f"/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
 
 file_name = requests.post(f"{os.getenv('API_IP')}/webhook/facebook/profile", json={"records": f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json"})

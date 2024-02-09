@@ -40,7 +40,7 @@ main_url = "https://diariodegoias.com.br/politica/"
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/aa5af0b0-4857-46cd-a8d4-ad3ff45dbac4")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDeGoias.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_DiarioDeGoias.json") as f:
     search_terms = json.load(f)
 
 class InitGoDiarioDeGoiasSpider(scrapy.Spider):

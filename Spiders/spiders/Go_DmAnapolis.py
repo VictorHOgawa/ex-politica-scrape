@@ -39,7 +39,7 @@ main_url = "https://www.dmanapolis.com.br/politica"
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/b10409df-dda2-4aa4-af07-3eda30b76944")
 search_words = request.json()
 
-with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DmAnapolis.json") as f:
+with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_DmAnapolis.json") as f:
     search_terms = json.load(f)
 
 class GoDmAnapolisSpider(scrapy.Spider):
