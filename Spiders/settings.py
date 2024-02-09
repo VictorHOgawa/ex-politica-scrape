@@ -1,3 +1,5 @@
+
+import os
 # Scrapy settings for Spiders project
 #
 # For simplicity, this file contains only settings considered important or
@@ -94,7 +96,8 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # SCRAPEOPS_API_KEY = 'b4d91964-2a5f-41cf-90a5-62de6faf0dfa'
-SCRAPEOPS_API_KEY = '0beda8b5-3c2a-4c06-b838-c29285e22fdb'
+# SCRAPEOPS_API_KEY = '0beda8b5-3c2a-4c06-b838-c29285e22fdb'
+SCRAPEOPS_API_KEY = os.getenv("SCRAPEOPS_API_KEY")
 # SCRAPEOPS_PROXY_ENABLED = True
 
 EXTENSIONS = {
@@ -107,11 +110,11 @@ DOWNLOADER_MIDDLEWARES = {
     # 'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
  }
 
-BUCKET="nightapp"
+BUCKET="axioon"
 AWS_DEFAULT_REGION="sa-east-1"
-AWS_ACCESS_KEY_ID="AKIA6MOM3OQOF7HA5AOG"
-AWS_SECRET_ACCESS_KEY="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"
-FILES_STORE = 's3://nightapp/'
+AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
+FILES_STORE = 's3://axioon/'
 FEED_STORAGE_S3_ACL = 'public-read'
 ITEM_PIPELINES = {
     # 'Axion.pipelines.AxionPipeline': 300,

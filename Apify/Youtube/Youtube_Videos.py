@@ -11,20 +11,10 @@ import os
 load_dotenv()
 
 def upload_file(file_name, bucket, object_name=None):
-    """Upload a file to an S3 "bucket"
-
-    :param file_name: File to upload
-    :param "bucket": "bucket" to upload to
-    :param object_name: S3 object name. If not specified then file_name is used
-    :return: True if file was uploaded, else False
-    """
-
-    # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    # Upload the file
-    s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))
+    s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"), region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -82,6 +72,6 @@ with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "w
 with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
     f.write(posts_str)
     
-upload_file(f"/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "nightapp", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")
+upload_file(f"/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Videos.json", "axioon", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")
 
 file_name = requests.post(f"{os.getenv('API_IP')}/webhook/youtube/video", json={"records": f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json"})
