@@ -47,8 +47,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_BemParana.json") a
 
 main_url = "https://www.bemparana.com.br/noticias/politica/"
 
-class PrBemParanaSpider(scrapy.Spider):
-    name = "Pr_BemParana"
+class InitPrBemParanaSpider(scrapy.Spider):
+    name = "Init_Pr_BemParana"
     allowed_domains = ["bemparana.com.br"]
     start_urls = ["https://www.bemparana.com.br/noticias/politica/"]
     

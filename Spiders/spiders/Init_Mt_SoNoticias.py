@@ -42,8 +42,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_SoNoticias.json") as f:
     search_terms = json.load(f)
     
-class MtSonoticiasSpider(scrapy.Spider):
-    name = "Mt_SoNoticias"
+class InitMtSonoticiasSpider(scrapy.Spider):
+    name = "Init_Mt_SoNoticias"
     allowed_domains = ["sonoticias.com.br"]
     start_urls = ["https://sonoticias.com.br/politica-listagem"]
     

@@ -47,8 +47,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_Plural.json") as f
 
 main_url = "https://www.plural.jor.br/noticias/"
 
-class PrPluralSpider(scrapy.Spider):
-    name = "Pr_Plural"
+class InitPrPluralSpider(scrapy.Spider):
+    name = "Init_Pr_Plural"
     allowed_domains = ["plural.jor.br"]
     start_urls = ["https://www.plural.jor.br/noticias/"]
     

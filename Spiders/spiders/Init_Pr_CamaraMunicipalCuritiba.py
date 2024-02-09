@@ -47,8 +47,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_CamaraMunicipalCur
 
 main_url = "https://www.curitiba.pr.leg.br/informacao/noticias?b_start:int="
 
-class Pr_CamaraMunicipalCuritibaSpider(scrapy.Spider):
-    name = "Pr_CamaraMunicipalCuritiba"
+class InitPr_CamaraMunicipalCuritibaSpider(scrapy.Spider):
+    name = "Init_Pr_CamaraMunicipalCuritiba"
     allowed_domains = ["curitiba.pr.leg.br"]
     start_urls = ["https://www.curitiba.pr.leg.br/informacao/noticias?b_start:int=0"]
     

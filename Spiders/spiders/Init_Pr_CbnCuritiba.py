@@ -47,8 +47,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/PR/Pr_CbnCuritiba.json")
 
 main_url = "https://cbncuritiba.com.br/page/"
 
-class PrCbnCuritibaSpider(scrapy.Spider):
-    name = "Pr_CbnCuritiba"
+class InitPrCbnCuritibaSpider(scrapy.Spider):
+    name = "Init_Pr_CbnCuritiba"
     allowed_domains = ["cbncuritiba.com.br"]
     start_urls = ["https://cbncuritiba.com.br/page/1"]
     INCREMENT = 1

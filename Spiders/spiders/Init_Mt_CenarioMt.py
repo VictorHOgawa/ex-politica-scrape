@@ -42,8 +42,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_CenarioMt.json") a
 
 request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1a6efd0a-a1f8-4bdb-86ab-7e7dc68cc9f4")
 search_words = request.json()
-class MtCenariomtSpider(scrapy.Spider):
-    name = "Mt_CenarioMt"
+class InitMtCenariomtSpider(scrapy.Spider):
+    name = "Init_Mt_CenarioMt"
     allowed_domains = ["cenariomt.com.br"]
     start_urls = ["https://www.cenariomt.com.br/cenario-politico/"]
 

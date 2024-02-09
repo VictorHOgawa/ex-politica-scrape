@@ -46,8 +46,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_Portal6.json") as f:
     search_terms = json.load(f)
 
-class GoPortal6Spider(scrapy.Spider):
-    name = "Go_Portal6"
+class InitGoPortal6Spider(scrapy.Spider):
+    name = "Init_Go_Portal6"
     allowed_domains = ["portal6.com.br"]
     start_urls = ["https://portal6.com.br/categoria/poder/politica/page/1/"]
     

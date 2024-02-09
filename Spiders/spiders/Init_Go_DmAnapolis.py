@@ -43,8 +43,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DmAnapolis.json") as f:
     search_terms = json.load(f)
 
-class GoDmAnapolisSpider(scrapy.Spider):
-    name = "Go_DmAnapolis"
+class InitGoDmAnapolisSpider(scrapy.Spider):
+    name = "Init_Go_DmAnapolis"
     allowed_domains = ["dmanapolis.com.br"]
     start_urls = ["https://dmanapolis.com.br/politica/pagina/1/"]
     

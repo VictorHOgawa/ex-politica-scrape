@@ -48,8 +48,8 @@ with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_GoiasEmDia.json") 
 
 main_url = "https://www.goiasemdia.com.br/"
 
-class GoGoiasEmDiaSpider(scrapy.Spider):
-    name = "Go_GoiasEmDia"
+class InitGoGoiasEmDiaSpider(scrapy.Spider):
+    name = "Init_Go_GoiasEmDia"
     allowed_domains = ["goiasemdia.com.br"]
     start_urls = ["https://www.goiasemdia.com.br/noticias/"]
     

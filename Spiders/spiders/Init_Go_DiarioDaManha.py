@@ -46,8 +46,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDaManha.json") as f:
     search_terms = json.load(f)
 
-class GoDiarioDaManha(scrapy.Spider):
-    name = "Go_DiarioDaManha"
+class InitGoDiarioDaManha(scrapy.Spider):
+    name = "Init_Go_DiarioDaManha"
     allowed_domains = ["dm.com.br"]
     start_urls = ["https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=20"]
     INCREMENT = 0

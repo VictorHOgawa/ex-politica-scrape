@@ -43,8 +43,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/GO/Go_DiarioDeGoias.json") as f:
     search_terms = json.load(f)
 
-class GoDiarioDeGoiasSpider(scrapy.Spider):
-    name = "Go_DiarioDeGoias"
+class InitGoDiarioDeGoiasSpider(scrapy.Spider):
+    name = "Init_Go_DiarioDeGoias"
     allowed_domains = ["diariodegoias.com.br"]
     start_urls = ["https://diariodegoias.com.br/politica/"]
     

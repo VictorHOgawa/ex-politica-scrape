@@ -45,8 +45,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_OlharDireto.json") as f:
     search_terms = json.load(f)
 
-class MtOlhardiretoSpider(scrapy.Spider):
-    name = "Mt_OlharDireto"
+class InitMtOlhardiretoSpider(scrapy.Spider):
+    name = "Init_Mt_OlharDireto"
     allowed_domains = ["olhardireto.com.br"]
     start_urls = ["https://www.olhardireto.com.br/noticias/index.asp?id=33&editoria=politica-mt&pagina=1"]
     

@@ -45,8 +45,8 @@ search_words = request.json()
 with open("/home/scrapeops/Axioon/Spiders/CSS_Selectors/MT/Mt_GazetaDigital.json") as f:
     search_terms = json.load(f)
 
-class MtGazetadigitalSpider(scrapy.Spider):
-    name = "Mt_GazetaDigital"
+class InitMtGazetadigitalSpider(scrapy.Spider):
+    name = "Init_Mt_GazetaDigital"
     allowed_domains = ["gazetadigital.com.br"]
     start_urls = ["https://www.gazetadigital.com.br/includes/listagem_com_foto.inc.php?page=0&sid=152"]
 
