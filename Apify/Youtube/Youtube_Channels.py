@@ -60,9 +60,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("Youtube_Channel.json", "w") as f:
+with open("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channel.json", "w") as f:
     f.write(json_str)
     
-upload_file("Youtube_Channel.json", "axioon", f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json")
+upload_file("/home/scrapeops/Axioon/Apify/Results/Youtube/Youtube_Channel.json", "axioon", f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json")
 
 file_name = requests.post(f"{os.getenv('API_IP')}/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})
