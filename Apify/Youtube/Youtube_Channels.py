@@ -1,14 +1,14 @@
 from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
-# from apify_client import ApifyClient
-# from dotenv import load_dotenv
-# import requests
+from apify_client import ApifyClient
+from dotenv import load_dotenv
+import requests
 import logging
 import boto3
-# import json
+import json
 import os
 
-# load_dotenv()
+load_dotenv()
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
@@ -25,44 +25,44 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-# last_week = date.today() - timedelta(days=7)
+last_week = date.today() - timedelta(days=7)
 
-# input = requests.get(f"{os.getenv('API_IP')}/scrape/youtube")
+input = requests.get(f"{os.getenv('API_IP')}/scrape/youtube")
 
-# input = input.json()
+input = input.json()
 
-# input = input["youtube"]
+input = input["youtube"]
 
-# channel_names = [item["youtube"] for item in input]
+channel_names = [item["youtube"] for item in input]
 
-# channel_ids = [item["id"] for item in input]
+channel_ids = [item["id"] for item in input]
 
-# client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
 
-# run_input = {
-#     "maxResultStreams": 0,
-#     "maxResults": 1,
-#     "maxResultsShorts": 0,
-#     "startUrls": [{"url": f"https://www.youtube.com/@{channel_name}"} for channel_name in channel_names]
-# }
+run_input = {
+    "maxResultStreams": 0,
+    "maxResults": 1,
+    "maxResultsShorts": 0,
+    "startUrls": [{"url": f"https://www.youtube.com/@{channel_name}"} for channel_name in channel_names]
+}
 
-# run = client.actor("67Q6fmd8iedTVcCwY").call(run_input=run_input)
+run = client.actor("67Q6fmd8iedTVcCwY").call(run_input=run_input)
 
-# json_array = []
-# for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-#     json_data = json.dumps(item, ensure_ascii=False)
-#     json_array.append(json.loads(json_data))
+json_array = []
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    json_data = json.dumps(item, ensure_ascii=False)
+    json_array.append(json.loads(json_data))
     
-#     for item in json_array:
-#         for channel_name, channel_id in zip(channel_names, channel_ids):
-#             if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}".lower():
-#                 item["channel_id"] = channel_id
+    for item in json_array:
+        for channel_name, channel_id in zip(channel_names, channel_ids):
+            if item["inputChannelUrl"].lower() == f"https://www.youtube.com/@{channel_name}".lower():
+                item["channel_id"] = channel_id
                 
-#     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+    json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-# with open("Youtube_Channel.json", "w") as f:
-#     f.write(json_str)
+with open("Youtube_Channel.json", "w") as f:
+    f.write(json_str)
     
 upload_file("Youtube_Channel.json", "axioon", f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json")
 
-# file_name = requests.post(f"{os.getenv('API_IP')}/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})
+file_name = requests.post(f"{os.getenv('API_IP')}/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})
