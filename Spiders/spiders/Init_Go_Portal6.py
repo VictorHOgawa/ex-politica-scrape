@@ -40,7 +40,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://portal6.com.br/categoria/poder/politica/page/1/"
 
 # INIT API ROUTE
-request = requests.get(f"{os.getenv('API_IP')}/scrape/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/without/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
 search_words = request.json()
 
 with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_Portal6.json") as f:

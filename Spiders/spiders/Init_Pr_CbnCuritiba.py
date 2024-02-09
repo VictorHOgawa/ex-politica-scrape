@@ -38,7 +38,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=60)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get(f"{os.getenv('API_IP')}/scrape/news/962411d8-8ca3-41aa-ac0c-02dc9e12e9d9")
+request = requests.get(f"{os.getenv('API_IP')}/scrape/without/news/962411d8-8ca3-41aa-ac0c-02dc9e12e9d9")
 search_words = request.json()
 
 # INIT API ROUTE
