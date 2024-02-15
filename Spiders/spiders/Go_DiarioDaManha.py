@@ -35,7 +35,7 @@ locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=30)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://www.dm.com.br/ajax/noticiasCategory?offset=0&categoryId=49&amount=10"
 

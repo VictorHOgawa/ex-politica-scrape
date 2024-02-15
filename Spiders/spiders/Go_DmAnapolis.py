@@ -32,7 +32,7 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=30)
+search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://www.dmanapolis.com.br/politica"
 
