@@ -34,7 +34,7 @@ input = [{"url": url} for url in input]
 client = ApifyClient(os.getenv("YOUTUBE_APIFY_CLIENT_KEY"))
 
 run_input = {
-    "maxComments": 20,
+    "maxComments": 1000,
     "startUrls": input
 }
 

@@ -46,11 +46,12 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         "disableCheerioBoost": False,
         "disableEnrichAuthorStats": False,
         "profiles": [tiktok_name],
+        "resultsPerPage": 100,
         "shouldDownloadCovers": False,
         "shouldDownloadSlideshowImages": False,
         "shouldDownloadVideos": False
     }
-    run = client.actor("OtzYfK1ndEGdwWFKQ").call(run_input=run_input)
+    run = client.actor("GdWCkxBtKWOsKjdch").call(run_input=run_input)
 
     json_array = []
     json_str = ""

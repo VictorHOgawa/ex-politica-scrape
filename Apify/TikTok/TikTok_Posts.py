@@ -46,6 +46,7 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         "disableEnrichAuthorStats": False,
         "profiles": [tiktok_name],
         "resultsPerPage": 20,
+        "scrapeLastNDays": 1,
         "shouldDownloadCovers": False,
         "shouldDownloadSlideshowImages": False,
         "shouldDownloadVideos": False

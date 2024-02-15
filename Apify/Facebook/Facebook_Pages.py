@@ -1,7 +1,7 @@
 from botocore.exceptions import ClientError
 from apify_client import ApifyClient
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import requests
 import logging
 import boto3
@@ -27,6 +27,7 @@ load_dotenv()
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
+yesterday = date.today() - timedelta(days=1)
 
 input = requests.get(f"{os.getenv('API_IP')}/scrape/facebook")
 
@@ -40,9 +41,12 @@ facebook_ids = [item["id"] for item in input]
 
 client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
 
-run_input = { "startUrls": [
+run_input = { 
+    "startUrls": [
         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
-    ] }
+        ],
+    "onlyPostsNewerThan": yesterday
+    }
 
 run = client.actor("4Hv5RhChiaDk6iwad").call(run_input=run_input)
 

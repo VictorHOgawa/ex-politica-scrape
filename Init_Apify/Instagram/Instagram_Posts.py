@@ -27,7 +27,7 @@ load_dotenv()
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-last_week = date.today() - timedelta(days=7)
+last_two_months = date.today() - timedelta(days=60)
 
 # INIT API ROUTE
 input = requests.get(f"{os.getenv('API_IP')}/scrape/without/instagram")
@@ -45,11 +45,11 @@ client = ApifyClient(os.getenv("INSTAGRAM_APIFY_CLIENT_KEY"))
 run_input = {
     "directUrls": [f"https://www.instagram.com/{instagram_name}/" for instagram_name in instagram_names],
     "resultsType": "posts",
-    "resultsLimit": 20,
+    "resultsLimit": 1000,
     "addParentData": False,
     "searchType": "hashtag",
     "searchLimit": 1,
-    # "untilDate": last_week
+    "untilDate": last_two_months
 }
 
 run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)

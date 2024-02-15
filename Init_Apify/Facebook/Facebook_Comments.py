@@ -37,7 +37,7 @@ client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
 
 run_input = {
     "includeNestedComments": False,
-    "resultsLimit": 20,
+    "resultsLimit": 1000,
     "startUrls": input
 }
 

@@ -47,7 +47,7 @@ for tiktok_name in tiktok_names:
 
         run_input = {
             "postURLs": comments_input,
-            "commentsPerPost": 20,
+            "commentsPerPost": 1000,
             "maxRepliesPerComment": 0,
         }
         run = client.actor("BDec00yAmCm1QbMEI").call(run_input=run_input)

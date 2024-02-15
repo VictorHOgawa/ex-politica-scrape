@@ -44,7 +44,7 @@ client = ApifyClient(os.getenv("INSTAGRAM_APIFY_CLIENT_KEY"))
 
 run_input = {
     "username": [f"{instagram_name}" for instagram_name in instagram_names],
-    "resultsLimit": 20,
+    "resultsLimit": 100,
 }
 
 run = client.actor("zTSjdcGqjg6KEIBlt").call(run_input=run_input)
