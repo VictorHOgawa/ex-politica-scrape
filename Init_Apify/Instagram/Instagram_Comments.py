@@ -32,7 +32,7 @@ last_week = date.today() - timedelta(days=7)
 with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Instagram/Instagram_Posts_Urls.json") as f:
     input = json.load(f)
 
-client = ApifyClient(os.getenv("INSTAGRAM_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = {
     "directUrls": input,

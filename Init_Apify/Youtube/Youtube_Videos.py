@@ -37,7 +37,7 @@ channel_names = [item["youtube"] for item in input]
 
 channel_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.getenv("YOUTUBE_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = {
     "dateFilter": last_two_months,

@@ -30,16 +30,15 @@ timestamp = datetime.timestamp(now)
 
 # INIT API ROUTE
 input = requests.get(f"{os.getenv('API_IP')}/scrape/without/facebook")
-
 input = input.json()
 
-input = input["facebook"]
+input = input["profiles"]
 
 facebook_names = [item["facebook"] for item in input]
 
 facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = { "startUrls": [
         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
@@ -59,9 +58,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
+with open("Init_Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
+upload_file(f"Init_Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
 
 file_name = requests.post(f"{os.getenv('API_IP')}/webhook/facebook/profile", json={"records": f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json"})

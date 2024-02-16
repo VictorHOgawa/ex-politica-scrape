@@ -37,7 +37,7 @@ tiktok_names = [item["tiktok"] for item in input]
 
 tiktok_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.getenv("TIKTOK_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     
