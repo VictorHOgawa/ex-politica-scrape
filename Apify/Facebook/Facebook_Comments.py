@@ -33,7 +33,7 @@ with open("/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Posts_U
 
 input = [{"url": url} for url in input]
 
-client = ApifyClient(os.getenv("FACEBOOK_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = {
     "includeNestedComments": False,

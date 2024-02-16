@@ -31,7 +31,7 @@ with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Vide
 
 input = [{"url": url} for url in input]
 
-client = ApifyClient(os.getenv("YOUTUBE_APIFY_CLIENT_KEY"))
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = {
     "maxComments": 1000,

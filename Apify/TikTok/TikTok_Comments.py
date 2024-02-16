@@ -42,7 +42,7 @@ for tiktok_name in tiktok_names:
         with open(f"/home/scrapeops/axioon-scrape/Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json") as f:
             comments_input = json.load(f)
     
-        client = ApifyClient(os.getenv("TIKTOK_APIFY_CLIENT_KEY"))
+        client = ApifyClient(os.getenv("APIFY_KEY"))
 
         run_input = {
             "postURLs": comments_input,
