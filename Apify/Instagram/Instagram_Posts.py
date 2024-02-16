@@ -47,9 +47,7 @@ instagram_names = [item["instagram"] for item in input]
 
 instagram_ids = [item["id"] for item in input]
 
-# client = ApifyClient(os.getenv("APIFY_KEY"))
-
-client = ApifyClient("apify_api_DBrvEynIe09EOVyxrNzDeq3k7YFB7V0YYWHc")
+client = ApifyClient(os.getenv("APIFY_KEY"))
 
 run_input = {
     "directUrls": [f"https://www.instagram.com/{instagram_name}/" for instagram_name in instagram_names],
