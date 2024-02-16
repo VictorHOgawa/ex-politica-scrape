@@ -31,7 +31,7 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/without/youtube")
 
 input = input.json()
 
-input = input["youtube"]
+input = input["profiles"]
 
 channel_names = [item["youtube"] for item in input]
 

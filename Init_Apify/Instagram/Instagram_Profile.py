@@ -33,7 +33,7 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/without/instagram")
 
 input = input.json()
 
-input = input["instagram"]
+input = input["profiles"]
 
 instagram_names = [item["instagram"] for item in input]
 

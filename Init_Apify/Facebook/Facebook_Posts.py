@@ -32,7 +32,7 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/without/facebook")
 
 input = input.json()
 
-input = input["facebook"]
+input = input["profiles"]
 
 facebook_names = [item["facebook"] for item in input]
 

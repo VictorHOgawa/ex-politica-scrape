@@ -32,7 +32,7 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/without/tiktok")
 
 input = input.json()
 
-input = input["tiktok"]
+input = input["profiles"]
 
 tiktok_names = [item["tiktok"] for item in input]
 
