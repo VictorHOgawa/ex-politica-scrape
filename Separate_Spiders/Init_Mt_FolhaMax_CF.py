@@ -1,6 +1,6 @@
 # from datetime import date, datetime, timedelta
 # from botocore.exceptions import ClientError
-# from dotenv import load_dotenv
+# 
 # from bs4 import BeautifulSoup
 # import requests
 # import logging
@@ -10,7 +10,7 @@
 # import sys
 # import os
 
-# load_dotenv()
+# 
 
 # def upload_file(file_name, bucket, object_name=None):
 #     """Upload a file to an S3 "bucket"
@@ -26,7 +26,7 @@
 #         object_name = os.path.basename(file_name)
 
 #     # Upload the file
-#     s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))
+#     s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"])
 #     try:
 #         response = s3_client.upload_file(file_name, bucket, object_name)
 #         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -49,7 +49,7 @@
 # search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # # INIT API ROUTE
-# request = requests.get(f"{os.getenv('API_IP')}/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
+# request = requests.get(f"{os.environ["API_IP"]}/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
 # search_words = request.json()
 
 # item = []
@@ -143,7 +143,7 @@
 # 			with open("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_FolhaMax.json", "w") as f:
 # 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
 # 			upload_file("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_FolhaMax.json", "axioon", f"News/MT/Mt_FolhaMax_{timestamp}.json")
-# 			file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})
+# 			file_name = requests.post(f"{os.environ["API_IP"]}/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})
 # 			sys.exit()
     
 # 	next_page = bs.find("a", {"class": "next"}).get("href")

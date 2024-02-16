@@ -2,7 +2,7 @@ from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
 from ..items import articleItem
 from scrapy.http import Request
-from dotenv import load_dotenv
+
 from bs4 import BeautifulSoup
 import requests
 import logging
@@ -13,13 +13,13 @@ import json
 import re
 import os
 
-load_dotenv()
+
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"), region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -40,7 +40,7 @@ search_limit = date.today() - timedelta(days=60)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 # INIT API ROUTE
-request = requests.get(f"{os.getenv('API_IP')}/scrape/without/news/9ecbcb82-b10e-43f5-81b8-5adc60a851ae")
+request = requests.get(f"{os.environ["API_IP"]}/scrape/without/news/9ecbcb82-b10e-43f5-81b8-5adc60a851ae")
 search_words = request.json()
 
 with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_GoiasEmDia.json") as f:
@@ -108,7 +108,7 @@ class InitGoGoiasEmDiaSpider(scrapy.Spider):
                             json.dump(data, f, ensure_ascii=False)
                             
                         upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "axioon", f"News/GO/{self.name}_{timestamp}.json")
-                        file_name = requests.post(f"{os.getenv('API_IP')}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
+                        file_name = requests.post(f"{os.environ["API_IP"]}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
                      
         else:
             raise scrapy.exceptions.CloseSpider

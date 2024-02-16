@@ -1,20 +1,20 @@
 from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
 from apify_client import ApifyClient
-from dotenv import load_dotenv
+
 import requests
 import logging
 import boto3
 import json
 import os
 
-load_dotenv()
+
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"), region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -23,13 +23,13 @@ def upload_file(file_name, bucket, object_name=None):
         return False
     return True
 
-load_dotenv()
+
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
 yesterday = date.today() - timedelta(days=1)
 
-# input = requests.get(f"{os.getenv('API_IP')}/scrape/instagram")
+# input = requests.get(f"{os.environ["API_IP"]}/scrape/instagram")
 
 # input = input.json()
 input = {
@@ -47,7 +47,7 @@ instagram_names = [item["instagram"] for item in input]
 
 instagram_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.getenv("APIFY_KEY"))
+client = ApifyClient(os.environ["APIFY_KEY"])
 
 run_input = {
     "directUrls": [f"https://www.instagram.com/{instagram_name}/" for instagram_name in instagram_names],
@@ -86,4 +86,4 @@ with open("Apify/Results/Instagram/Instagram_Posts_Urls.json", "w") as f:
     
 upload_file("Apify/Results/Instagram/Instagram_Posts.json", "axioon", f"Apify/Instagram/Posts/Instagram_Posts_{timestamp}.json")
 
-file_name = requests.post(f"{os.getenv('API_IP')}/webhook/instagram/posts", json={"records": f"Apify/Instagram/Posts/Instagram_Posts_{timestamp}.json"})
+file_name = requests.post(f"{os.environ["API_IP"]}/webhook/instagram/posts", json={"records": f"Apify/Instagram/Posts/Instagram_Posts_{timestamp}.json"})

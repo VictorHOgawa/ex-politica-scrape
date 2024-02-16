@@ -1,19 +1,19 @@
 from datetime import date, datetime, timedelta
 from botocore.exceptions import ClientError
-from dotenv import load_dotenv
+
 import requests
 import logging
 import boto3
 import json
 import os
 
-load_dotenv()
+
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"), aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"), region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -30,7 +30,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 search_limit = datetime.strftime(search_limit, "%Y-%m-%d")
 
 # INIT API ROUTE
-input = requests.get(f"{os.getenv('API_IP')}/scrape/without/name")
+input = requests.get(f"{os.environ["API_IP"]}/scrape/without/name")
 input = input.json()
 
 input = input["list"]
@@ -45,7 +45,7 @@ search_amount = [
     {"name": f"{name['social_name']}", "bylines": f"{name['name']}, {name['social_name']}, {name['facebook']}", "ad_delivery_date_min": f"{search_limit}"} for name in input
 ]
 
-search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": os.getenv("META_ADS_ACCESS_TOKEN")}
+search_queries = {"ad_reached_countries": "BR", "search_terms": "", "ad_delivery_date_min": "", "bylines": "", "ad_type": "POLITICAL_AND_ISSUE_ADS", "fields": "ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution","limit": 5000, "access_token": os.environ["META_ADS_ACCESS_TOKEN"]}
 
 current_version = "v18.0"
 
@@ -83,4 +83,4 @@ with open(f"/home/scrapeops/axioon-scrape/Results/Meta_Ads_Results_{timestamp}.j
 
 upload_file(f"/home/scrapeops/axioon-scrape/Results/Meta_Ads_Results_{timestamp}.json", "axioon", f"Meta_Ads/Meta_Ads_Results_{timestamp}.json")
 
-file_name = requests.post(f"{os.getenv('API_IP')}/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})
+file_name = requests.post(f"{os.environ["API_IP"]}/webhook/facebook/ads", json={"records": f"Apify/Meta_Ads/Meta_Ads_Results_{timestamp}.json"})
