@@ -14,7 +14,7 @@ def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -28,7 +28,7 @@ timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
 # INIT API ROUTE
-input = requests.get(f"{os.environ["API_IP"]}/scrape/without/youtube")
+input = requests.get(f"{os.environ['API_IP']}/scrape/without/youtube")
 
 input = input.json()
 
@@ -38,7 +38,7 @@ channel_names = [item["youtube"] for item in input]
 
 channel_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ["APIFY_KEY"])
+client = ApifyClient(os.environ['APIFY_KEY'])
 
 run_input = {
     "maxResultStreams": 0,
@@ -66,4 +66,4 @@ with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Chan
     
 upload_file("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Channel.json", "axioon", f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json")
 
-file_name = requests.post(f"{os.environ["API_IP"]}/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})
+file_name = requests.post(f"{os.environ['API_IP']}/webhook/youtube/channel", json={"records": f"Apify/YouTube/Channels/YouTube_Channels_{timestamp}.json"})

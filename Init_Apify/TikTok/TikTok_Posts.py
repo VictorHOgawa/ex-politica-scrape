@@ -14,7 +14,7 @@ def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -28,7 +28,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 
 # INIT API ROUTE
-input = requests.get(f"{os.environ["API_IP"]}/scrape/without/tiktok")
+input = requests.get(f"{os.environ['API_IP']}/scrape/without/tiktok")
 
 input = input.json()
 
@@ -38,7 +38,7 @@ tiktok_names = [item["tiktok"] for item in input]
 
 tiktok_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ["APIFY_KEY"])
+client = ApifyClient(os.environ['APIFY_KEY'])
 
 for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     
@@ -83,4 +83,4 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         upload_file(f"/home/scrapeops/axioon-scrape/Init_Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "axioon", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
 
     if json_str != "":
-        file_name = requests.post(f"{os.environ["API_IP"]}/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json"})
+        file_name = requests.post(f"{os.environ['API_IP']}/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json"})

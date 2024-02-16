@@ -18,7 +18,7 @@ def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -39,7 +39,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://www.gazetadigital.com.br/includes/"
 
 # INIT API ROUTE
-request = requests.get(f"{os.environ["API_IP"]}/scrape/without/news/924d2218-803f-44bd-890d-30619b116bb2")
+request = requests.get(f"{os.environ['API_IP']}/scrape/without/news/924d2218-803f-44bd-890d-30619b116bb2")
 search_words = request.json()
 
 with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/MT/Mt_GazetaDigital.json") as f:
@@ -107,6 +107,6 @@ class InitMtGazetadigitalSpider(scrapy.Spider):
                             json.dump(data, f, ensure_ascii=False)
 
                         upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "axioon", f"News/MT/{self.name}_{timestamp}.json")
-                        file_name = requests.post(f"{os.environ["API_IP"]}/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
+                        file_name = requests.post(f"{os.environ['API_IP']}/webhook/news", json={"records": f"News/MT/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider

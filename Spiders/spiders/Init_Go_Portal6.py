@@ -18,7 +18,7 @@ def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    s3_client = boto3.client('s3', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"], region_name="us-east-1")
+    s3_client = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], region_name="us-east-1")
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
         acl = s3_client.put_object_acl(Bucket=bucket, Key=object_name, ACL='public-read')
@@ -40,7 +40,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 main_url = "https://portal6.com.br/categoria/poder/politica/page/1/"
 
 # INIT API ROUTE
-request = requests.get(f"{os.environ["API_IP"]}/scrape/without/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
+request = requests.get(f"{os.environ['API_IP']}/scrape/without/news/7d7d1aec-bd48-4f50-9dfc-c50eceec6142")
 search_words = request.json()
 
 with open("/home/scrapeops/axioon-scrape/Spiders/CSS_Selectors/GO/Go_Portal6.json") as f:
@@ -106,6 +106,6 @@ class InitGoPortal6Spider(scrapy.Spider):
                             json.dump(data, f, ensure_ascii=False)
                         
                         upload_file(f"Spiders/Results/{self.name}_{timestamp}.json", "axioon", f"News/GO/{self.name}_{timestamp}.json")
-                        file_name = requests.post(f"{os.environ["API_IP"]}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
+                        file_name = requests.post(f"{os.environ['API_IP']}/webhook/news", json={"records": f"News/GO/{self.name}_{timestamp}.json"})
         else:
             raise scrapy.exceptions.CloseSpider
