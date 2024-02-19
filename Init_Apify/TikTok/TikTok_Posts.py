@@ -46,6 +46,7 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         "disableCheerioBoost": False,
         "disableEnrichAuthorStats": False,
         "profiles": [tiktok_name],
+        "scrapeLastNDays": 60,
         "resultsPerPage": 100,
         "shouldDownloadCovers": False,
         "shouldDownloadSlideshowImages": False,

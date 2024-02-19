@@ -24,7 +24,7 @@ def upload_file(file_name, bucket, object_name=None):
     return True
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-last_week = date.today() - timedelta(days=7)
+yesterday = date.today() - timedelta(days=1)
 
 input = requests.get(f"{os.environ['API_IP']}/scrape/youtube")
 
@@ -39,7 +39,7 @@ channel_ids = [item["id"] for item in input]
 client = ApifyClient(os.environ['APIFY_KEY'])
 
 run_input = {
-    "dateFilter": last_week,
+    "dateFilter": yesterday,
     "details": True,
     "proxySettings": {
         "useApifyProxy": True

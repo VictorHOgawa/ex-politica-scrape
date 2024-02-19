@@ -1,7 +1,6 @@
 from botocore.exceptions import ClientError
 from apify_client import ApifyClient
-
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import requests
 import logging
 import boto3
@@ -26,6 +25,7 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
+yesterday = date.today() - timedelta(days=1)
 
 input = requests.get(f"{os.environ['API_IP']}/scrape/facebook")
 
@@ -41,6 +41,7 @@ client = ApifyClient(os.environ['APIFY_KEY'])
 
 run_input = {
     "resultsLimit": 20,
+    "onlyPostsNewerThan": yesterday,
     "startUrls": [
         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
     ] }
@@ -54,10 +55,10 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_array.append(json.loads(json_data))
     
     for item in json_array:
-        if item["topLevelUrl"]:
+        if item["url"]:
             posts_set.add(item["url"])
         for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
-            if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
+            if item["url"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
                 item["facebook_id"] = facebook_id
         
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)

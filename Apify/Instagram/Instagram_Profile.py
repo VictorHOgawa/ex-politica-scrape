@@ -26,7 +26,7 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-last_week = date.today() - timedelta(days=7)
+yesterday = date.today() - timedelta(days=1)
 
 input = requests.get(f"{os.environ['API_IP']}/scrape/instagram")
 
@@ -47,7 +47,7 @@ run_input = {
     "addParentData": False,
     "searchType": "hashtag",
     "searchLimit": 1,
-    "untilDate": last_week
+    "untilDate": yesterday
 }
 
 run = client.actor("shu8hvrXbJbY3Eb9W").call(run_input=run_input)
