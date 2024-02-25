@@ -1,14 +1,11 @@
 from botocore.exceptions import ClientError
 from apify_client import ApifyClient
-
 from datetime import datetime, date, timedelta
 import requests
 import logging
 import boto3
 import json
 import os
-
-
 
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
@@ -22,8 +19,6 @@ def upload_file(file_name, bucket, object_name=None):
         logging.error(e)
         return False
     return True
-
-
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
@@ -39,7 +34,7 @@ facebook_names = [item["facebook"] for item in input]
 
 facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
 
 run_input = { 
     "startUrls": [
@@ -62,9 +57,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     
-with open("/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
+with open("Apify/Results/Facebook/Facebook_Pages.json", "w") as f:
     f.write(json_str)
     
-upload_file(f"/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
+upload_file(f"Apify/Results/Facebook/Facebook_Pages.json", "axioon", f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json")
 
 file_name = requests.post(f"{os.environ['API_IP']}/webhook/facebook/profile", json={"records": f"Apify/Facebook/Pages/Facebook_Pages_{timestamp}.json"})

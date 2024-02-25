@@ -1,8 +1,0 @@
-{
-  "article": "h2.entry-title",
-  "link": "a::attr(href)",
-  "next_page": "a.next::attr(href)",
-  "updated": "span.updated::text",
-  "title": "h1.entry-title::text",
-  "content": "div.entry-content"
-}

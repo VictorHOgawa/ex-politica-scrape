@@ -40,7 +40,7 @@ instagram_names = [item["instagram"] for item in input]
 
 instagram_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['INSTAGRAM_APIFY_KEY'])
 
 run_input = {
     "username": [f"{instagram_name}" for instagram_name in instagram_names],
@@ -69,12 +69,12 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     posts_array = list(posts_set)
     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
     
-with open ("/home/scrapeops/axioon-scrape/Init_Apify/Results/Instagram/Instagram_Mentions.json", "w") as f:
+with open ("Init_Apify/Results/Instagram/Instagram_Mentions.json", "w") as f:
     f.write(json_str)
 
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Instagram/Instagram_Mentions_Urls.json", "w") as f:
+with open("Init_Apify/Results/Instagram/Instagram_Mentions_Urls.json", "w") as f:
     f.write(posts_str)
     
-upload_file("/home/scrapeops/axioon-scrape/Init_Apify/Results/Instagram/Instagram_Mentions.json", "axioon", f"Apify/Instagram/Mentions/Instagram_Mentions_{timestamp}.json")
+upload_file("Init_Apify/Results/Instagram/Instagram_Mentions.json", "axioon", f"Apify/Instagram/Mentions/Instagram_Mentions_{timestamp}.json")
 
 file_name = requests.post(f"{os.environ['API_IP']}/webhook/instagram/mentions", json={"records": f"Apify/Instagram/Mentions/Instagram_Mentions_{timestamp}.json"})

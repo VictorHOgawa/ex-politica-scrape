@@ -1,8 +1,0 @@
-{
-  "article": "div.col-sm-4",
-  "link": "a::attr(href)",
-  "next_page": "div.Pagination a.btn.next::attr(href)",
-  "updated": "div.d-none.d-sm-block.w-100 span::text",
-  "title": "h3.folha-titulo::text",
-  "content": "div#text-content p::text"
-}

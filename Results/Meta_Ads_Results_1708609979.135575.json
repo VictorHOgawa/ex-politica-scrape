@@ -1,0 +1,159 @@
+[
+    {
+        "data": []
+    },
+    {
+        "data": []
+    },
+    {
+        "data": []
+    },
+    {
+        "data": []
+    },
+    {
+        "data": [
+            {
+                "ad_creation_time": "2023-12-19",
+                "ad_delivery_start_time": "2023-12-19",
+                "ad_delivery_stop_time": "2023-12-26",
+                "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=727227259349918&access_token=EAACxJFtlwx0BO37u9l6548ZCUhXd0sHgE6sZCiKUex2k2gWRXZA92RWBPhwurGRF9h6OriqF1mSgkSusyr8x2ZBXvxLR54oUNXlaTpuPv7DtRLy55j2h9NBsMXNynApGcZB79h7GhnZB0myrxZB2353aoyGYWuHUCkmSK2BHPw2VhgQ7bvqQWZC3TnZB8wMXG5HzQxAcs4Td7j0HxLHX7",
+                "bylines": "Bruno Pessuti",
+                "page_name": "Bruno Pessuti",
+                "currency": "BRL",
+                "spend": {
+                    "lower_bound": "200",
+                    "upper_bound": "299"
+                },
+                "impressions": {
+                    "lower_bound": "125000",
+                    "upper_bound": "149999"
+                },
+                "delivery_by_region": [
+                    {
+                        "percentage": "1",
+                        "region": "Paraná"
+                    }
+                ],
+                "demographic_distribution": [
+                    {
+                        "percentage": "0.000175",
+                        "age": "45-54",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.048541",
+                        "age": "35-44",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.032859",
+                        "age": "55-64",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.105427",
+                        "age": "25-34",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.293368",
+                        "age": "18-24",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.034163",
+                        "age": "45-54",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.0443",
+                        "age": "35-44",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.021197",
+                        "age": "65+",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.10728",
+                        "age": "25-34",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.036009",
+                        "age": "45-54",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.025636",
+                        "age": "55-64",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.000214",
+                        "age": "65+",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.012845",
+                        "age": "65+",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.004149",
+                        "age": "18-24",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.000351",
+                        "age": "35-44",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.002113",
+                        "age": "13-17",
+                        "gender": "male"
+                    },
+                    {
+                        "percentage": "0.000366",
+                        "age": "13-17",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.002044",
+                        "age": "13-17",
+                        "gender": "female"
+                    },
+                    {
+                        "percentage": "0.000969",
+                        "age": "25-34",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.000114",
+                        "age": "55-64",
+                        "gender": "unknown"
+                    },
+                    {
+                        "percentage": "0.227878",
+                        "age": "18-24",
+                        "gender": "male"
+                    }
+                ],
+                "id": "727227259349918"
+            }
+        ],
+        "paging": {
+            "cursors": {
+                "after": "c2NyYXBpbmdfY3Vyc29yOk1UY3dNekF5TVRRMU9EbzNNamN5TWpjeU5Ua3pORGs1TVRnPQZDZD"
+            },
+            "next": "https://graph.facebook.com/v19.0/ads_archive?ad_reached_countries=BR&search_terms=Bruno%20Pessuti&search_type=KEYWORD_EXACT_PHRASE&ad_delivery_date_min=2023-12-24&bylines=Bruno%20Eduardo%20Fischer%20Pessuti,%20Bruno%20Pessuti,%20Bruno%20Pessuti&ad_type=POLITICAL_AND_ISSUE_ADS&fields=ad_creation_time,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,bylines,page_name,currency,spend,impressions,delivery_by_region,demographic_distribution&limit=5000&access_token=EAACxJFtlwx0BO37u9l6548ZCUhXd0sHgE6sZCiKUex2k2gWRXZA92RWBPhwurGRF9h6OriqF1mSgkSusyr8x2ZBXvxLR54oUNXlaTpuPv7DtRLy55j2h9NBsMXNynApGcZB79h7GhnZB0myrxZB2353aoyGYWuHUCkmSK2BHPw2VhgQ7bvqQWZC3TnZB8wMXG5HzQxAcs4Td7j0HxLHX7&after=c2NyYXBpbmdfY3Vyc29yOk1UY3dNekF5TVRRMU9EbzNNamN5TWpjeU5Ua3pORGs1TVRnPQZDZD"
+        },
+        "Meta_id": "a5d371dd-4b84-4f91-bf2f-588f249f56e4"
+    },
+    {
+        "data": []
+    }
+]

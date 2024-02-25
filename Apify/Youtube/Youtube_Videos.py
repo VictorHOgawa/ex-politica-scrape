@@ -24,7 +24,7 @@ def upload_file(file_name, bucket, object_name=None):
     return True
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-yesterday = date.today() - timedelta(days=1)
+yesterday = date.today() - timedelta(days=15)
 
 input = requests.get(f"{os.environ['API_IP']}/scrape/youtube")
 
@@ -36,7 +36,7 @@ channel_names = [item["youtube"] for item in input]
 
 channel_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 run_input = {
     "dateFilter": yesterday,
@@ -66,10 +66,10 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     posts_array = list(posts_set)
     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
 
-with open("/home/scrapeops/axioon-scrape/Apify/Results/Youtube/Youtube_Videos.json", "w") as f:
+with open("Apify/Results/Youtube/Youtube_Videos.json", "w") as f:
     f.write(json_str)
 
-with open("/home/scrapeops/axioon-scrape/Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
+with open("Apify/Results/Youtube/Youtube_Videos_Urls.json", "w") as f:
     f.write(posts_str)
     
 upload_file(f"Apify/Results/Youtube/Youtube_Videos.json", "axioon", f"Apify/YouTube/Videos/YouTube_Videos_{timestamp}.json")

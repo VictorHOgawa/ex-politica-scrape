@@ -1,0 +1,8 @@
+{
+  "article": "a.noticiaLink",
+  "link": "::attr(href)",
+  "next_page": "div.pagination a::attr(href)",
+  "updated": "aside.dataAutor small::text",
+  "title": "div.tituloNoticia",
+  "content": "article.textoArea"
+}

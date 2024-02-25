@@ -38,7 +38,7 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get(f"{os.environ['API_IP']}/scrape/news/1ee1046b-1fe7-4308-92ae-121e524082ea")
+request = requests.get(f"{os.environ['API_IP']}/scrape/news/d9a13231-ff58-47f7-a3f1-e918c35b38fc")
 search_words = request.json()
 
 item = []
@@ -58,7 +58,7 @@ while True:
 	}
 	headers = {
 		"content-type": "application/json",
-		"X-RapidAPI-Key": os.getenv("X_RAPIDAPI_KEY"),
+		"X-RapidAPI-Key": os.environ("X_RAPIDAPI_KEY"),
 		"X-RapidAPI-Host": "dripcrawler.p.rapidapi.com"
 	}
 
@@ -85,7 +85,7 @@ while True:
 		}
 		headers = {
 			"content-type": "application/json",
-			"X-RapidAPI-Key": os.getenv("X_RAPIDAPI_KEY"),
+			"X-RapidAPI-Key": os.environ("X_RAPIDAPI_KEY"),
 			"X-RapidAPI-Host": "dripcrawler.p.rapidapi.com"
 		}
 
@@ -129,9 +129,9 @@ while True:
 						})
 		else:
 			unique_item = list({v['link']:v for v in item}.values())
-			with open("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_FolhaMax.json", "w") as f:
+			with open("Spiders/Results/Mt_FolhaMax.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
-			upload_file("/home/scrapeops/axioon-scrape/Spiders/Results/Mt_FolhaMax.json", "axioon", f"News/MT/Mt_FolhaMax_{timestamp}.json")
+			upload_file("Spiders/Results/Mt_FolhaMax.json", "axioon", f"News/MT/Mt_FolhaMax_{timestamp}.json")
 			file_name = requests.post(f"{os.environ['API_IP']}/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})
 			sys.exit()
     

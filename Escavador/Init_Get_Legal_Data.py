@@ -26,7 +26,7 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 
 # INIT API ROUTE
-inputs = requests.get(f"{os.environ['API_IP']}/scrape/without/cpf")
+inputs = requests.get(f"{os.environ['API_IP']}/scrape/cpf")
 
 inputs = json.loads(inputs.text)
 
@@ -39,9 +39,9 @@ for input in inputs:
     
     data["user_id"] = input["id"]
     
-    with open(f"/home/scrapeops/axioon-scrape/Results/{input['cpf']}.json", "w") as file:
+    with open(f"Results/{input['cpf']}.json", "w") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
         
-    upload_file(f"/home/scrapeops/axioon-scrape/Results/{input['cpf']}.json", "axioon", f"Legal/{input['cpf']}_{timestamp}.json")
+    upload_file(f"Results/{input['cpf']}.json", "axioon", f"Legal/{input['cpf']}_{timestamp}.json")
         
     file_name = requests.post(f"{os.environ['API_IP']}/webhook/legal", json={"records": f"Legal/{input['cpf']}_{timestamp}.json"})

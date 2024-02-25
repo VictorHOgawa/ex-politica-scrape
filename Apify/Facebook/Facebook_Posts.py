@@ -7,8 +7,6 @@ import boto3
 import json
 import os
 
-
-
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
@@ -25,11 +23,12 @@ def upload_file(file_name, bucket, object_name=None):
 
 now = datetime.now()
 timestamp = datetime.timestamp(now)
-yesterday = date.today() - timedelta(days=1)
+yesterday = date.today() - timedelta(days=15)
 
 input = requests.get(f"{os.environ['API_IP']}/scrape/facebook")
 
 input = input.json()
+
 
 input = input["facebook"]
 
@@ -37,7 +36,7 @@ facebook_names = [item["facebook"] for item in input]
 
 facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
 
 run_input = {
     "resultsLimit": 20,
@@ -55,22 +54,22 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     json_array.append(json.loads(json_data))
     
     for item in json_array:
-        if item["url"]:
+        if item["facebookUrl"]:
             posts_set.add(item["url"])
         for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
-            if item["url"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
+            if item["facebookUrl"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
                 item["facebook_id"] = facebook_id
         
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
     posts_array = list(posts_set)
     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
     
-with open("/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Posts.json", "w") as f:
+with open("Apify/Results/Facebook/Facebook_Posts.json", "w") as f:
     f.write(json_str)
     
-with open("/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Posts_Urls.json", "w") as f:
+with open("Apify/Results/Facebook/Facebook_Posts_Urls.json", "w") as f:
     f.write(posts_str)
     
-upload_file("/home/scrapeops/axioon-scrape/Apify/Results/Facebook/Facebook_Posts.json", "axioon", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
+upload_file("Apify/Results/Facebook/Facebook_Posts.json", "axioon", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
 
 file_name = requests.post(f"{os.environ['API_IP']}/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})

@@ -26,12 +26,12 @@ now = datetime.now()
 timestamp = datetime.timestamp(now)
 last_week = date.today() - timedelta(days=7)
 
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Videos_Urls.json", "r") as f:
+with open("Init_Apify/Results/Youtube/Youtube_Videos_Urls.json", "r") as f:
     input = json.load(f)
 
 input = [{"url": url} for url in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 run_input = {
     "maxComments": 1000,
@@ -47,9 +47,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
                 
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Comments.json", "w") as f:
+with open("Init_Apify/Results/Youtube/Youtube_Comments.json", "w") as f:
     f.write(json_str)
     
-upload_file("/home/scrapeops/axioon-scrape/Init_Apify/Results/Youtube/Youtube_Comments.json", "axioon", f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json")
+upload_file("Init_Apify/Results/Youtube/Youtube_Comments.json", "axioon", f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json")
 
 file_name = requests.post(f"{os.environ['API_IP']}/webhook/youtube/comments", json={"records": f"Apify/YouTube/Comments/YouTube_Comments_{timestamp}.json"})

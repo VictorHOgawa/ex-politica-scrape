@@ -32,46 +32,46 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/without/facebook")
 
 input = input.json()
 
-input = input["profiles"]
+# input = input["profiles"]
 
-facebook_names = [item["facebook"] for item in input]
+# facebook_names = [item["facebook"] for item in input]
 
-facebook_ids = [item["id"] for item in input]
+# facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+# client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
 
-run_input = {
-    "resultsLimit": 100,
-    "onlyPostsNewerThan": last_two_months,
-    "startUrls": [
-        { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
-    ] }
+# run_input = {
+#     "resultsLimit": 100,
+#     "onlyPostsNewerThan": last_two_months,
+#     "startUrls": [
+#         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names
+#     ] }
 
-run = client.actor("KoJrdxJCTtpon81KY").call(run_input=run_input)
+# run = client.actor("KoJrdxJCTtpon81KY").call(run_input=run_input)
 
-json_array = []
-posts_set = set()
-for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-    json_data = json.dumps(item, ensure_ascii=False)
-    json_array.append(json.loads(json_data))
+# json_array = []
+# posts_set = set()
+# for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+#     json_data = json.dumps(item, ensure_ascii=False)
+#     json_array.append(json.loads(json_data))
     
-    for item in json_array:
-        if item["url"]:
-            posts_set.add(item["url"])
-        for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
-            if item["url"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
-                item["facebook_id"] = facebook_id
+#     for item in json_array:
+#         if item["url"]:
+#             posts_set.add(item["url"])
+#         for facebook_name, facebook_id in zip(facebook_names, facebook_ids):
+#             if item["url"].lower() == f"https://www.facebook.com/{facebook_name}/".lower():
+#                 item["facebook_id"] = facebook_id
         
-    json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
-    posts_array = list(posts_set)
-    posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
+#     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
+#     posts_array = list(posts_set)
+#     posts_str = json.dumps(posts_array, indent=4, ensure_ascii=False)
     
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Posts.json", "w") as f:
-    f.write(json_str)
+# with open("Init_Apify/Results/Facebook/Facebook_Posts.json", "w") as f:
+#     f.write(json_str)
     
-with open("/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Posts_Urls.json", "w") as f:
-    f.write(posts_str)
+# with open("Init_Apify/Results/Facebook/Facebook_Posts_Urls.json", "w") as f:
+#     f.write(posts_str)
     
-upload_file("/home/scrapeops/axioon-scrape/Init_Apify/Results/Facebook/Facebook_Posts.json", "axioon", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
+# upload_file("Init_Apify/Results/Facebook/Facebook_Posts.json", "axioon", f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json")
 
-file_name = requests.post(f"{os.environ['API_IP']}/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})
+# file_name = requests.post(f"{os.environ['API_IP']}/webhook/facebook/posts", json={"records": f"Apify/Facebook/Posts/Facebook_Posts_{timestamp}.json"})

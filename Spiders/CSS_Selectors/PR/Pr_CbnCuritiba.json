@@ -1,8 +1,0 @@
-{
-  "article": "article.post.fusion-column",
-  "link": "a::attr(href)",
-  "next_page": "",
-  "updated": "span.updated::text",
-  "title": "h2.entry-title::text",
-  "content": "div.post-content"
-}

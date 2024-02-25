@@ -31,13 +31,15 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/tiktok")
 
 input = input.json()
 
+print("input: ", input)
+
 input = input["tiktok"]
 
 tiktok_names = [item["tiktok"] for item in input]
 
 tiktok_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['APIFY_KEY'])
+client = ApifyClient(os.environ['TIKTOK_APIFY_KEY'])
 
 for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     
@@ -46,7 +48,7 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         "disableEnrichAuthorStats": False,
         "profiles": [tiktok_name],
         "resultsPerPage": 20,
-        "scrapeLastNDays": 1,
+        "scrapeLastNDays": 15,
         "shouldDownloadCovers": False,
         "shouldDownloadSlideshowImages": False,
         "shouldDownloadVideos": False
@@ -72,15 +74,15 @@ for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
         posts_str = json.dumps(posts_array, ensure_ascii=False, indent=4)
 
     if json_str != "":
-        with open(f"/home/scrapeops/axioon-scrape/Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "w") as f:
+        with open(f"Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "w") as f:
             f.write(json_str)
 
     if posts_str != "":
-        with open(f"/home/scrapeops/axioon-scrape/Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json", "w") as f:
+        with open(f"Apify/Results/TikTok/TikTok_Posts_Urls_{tiktok_name}.json", "w") as f:
             f.write(posts_str)
         
     if json_str != "":
-        upload_file(f"/home/scrapeops/axioon-scrape/Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "axioon", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
+        upload_file(f"Apify/Results/TikTok/TikTok_Posts_{tiktok_name}.json", "axioon", f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json")
 
     if json_str != "":
         file_name = requests.post(f"{os.environ['API_IP']}/webhook/tiktok", json={"records": f"Apify/TikTok/Posts/TikTok_Posts_{tiktok_name}_{timestamp}.json"})
