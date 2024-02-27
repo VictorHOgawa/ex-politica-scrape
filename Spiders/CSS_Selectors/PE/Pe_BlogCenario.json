@@ -1,0 +1,8 @@
+{
+  "article": "div.post",
+  "link": "div.post_title a::attr(href)",
+  "next_page": "",
+  "updated": "div.b-info::text",
+  "title": "div.post_title a::text",
+  "content": "div.entry p::text"
+}

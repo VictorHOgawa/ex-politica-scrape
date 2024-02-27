@@ -28,19 +28,20 @@ timestamp = datetime.timestamp(now)
 inputs = requests.get(f"{os.environ['API_IP']}/scrape/cpf")
 
 inputs = json.loads(inputs.text)
+print("inputs: ", inputs)
 
-for input in inputs:
-    r = requests.get(f"https://api.escavador.com/api/v2/envolvido/processos?cpf_cnpj={input['cpf']}", headers={"Authorization": f"Bearer {os.environ['ESCAVADOR_TOKEN']}"})
+# for input in inputs:
+#     r = requests.get(f"https://api.escavador.com/api/v2/envolvido/processos?cpf_cnpj={input['cpf']}", headers={"Authorization": f"Bearer {os.environ['ESCAVADOR_TOKEN']}"})
 
-    json_data = json.dumps(r.json())
+#     json_data = json.dumps(r.json())
     
-    data = json.loads(json_data)
+#     data = json.loads(json_data)
     
-    data["user_id"] = input["id"]
+#     data["user_id"] = input["id"]
     
-    with open(f"Results/{input['cpf']}.json", "w") as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+#     with open(f"Results/{input['cpf']}.json", "w") as file:
+#         json.dump(data, file, indent=4, ensure_ascii=False)
         
-    upload_file(f"Results/{input['cpf']}.json", "axioon", f"Legal/{input['cpf']}_{timestamp}.json")
+#     upload_file(f"Results/{input['cpf']}.json", "axioon", f"Legal/{input['cpf']}_{timestamp}.json")
         
-    file_name = requests.post(f"{os.environ['API_IP']}/webhook/legal", json={"records": f"Legal/{input['cpf']}_{timestamp}.json"})
+#     file_name = requests.post(f"{os.environ['API_IP']}/webhook/legal", json={"records": f"Legal/{input['cpf']}_{timestamp}.json"})

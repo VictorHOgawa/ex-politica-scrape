@@ -1,0 +1,8 @@
+{
+  "article": "article.type-post",
+  "link": "a.post-link::attr(href)",
+  "next_page": "div.nav-links a.next::attr(href)",
+  "updated": "time.post-published-date::text",
+  "title": "h1.post-title::text",
+  "content": "div.post-content"
+}

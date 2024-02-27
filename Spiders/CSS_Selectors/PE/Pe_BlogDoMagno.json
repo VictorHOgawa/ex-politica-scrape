@@ -1,0 +1,8 @@
+{
+  "article": "article.type-post",
+  "link": "a.titulo-postagem::attr(href)",
+  "next_page": "",
+  "updated": "article.type-post span.elementor-post-info__item--type-date::text",
+  "title": "article.type-post a.titulo-postagem::text",
+  "content": "article.type-post div.elementor-widget-theme-post-content div.elementor-widget-container"
+}

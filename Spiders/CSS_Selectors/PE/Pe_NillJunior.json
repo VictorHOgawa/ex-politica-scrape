@@ -1,0 +1,8 @@
+{
+  "article": "div.post.type-post",
+  "link": "h2.post-title a::attr(href)",
+  "next_page": "ul.page-numbers a.next::attr(href)",
+  "updated": "span.meta-date::text",
+  "title": "h1.post-title a::text",
+  "content": "div.entry"
+}

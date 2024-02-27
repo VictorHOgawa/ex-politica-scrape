@@ -32,7 +32,7 @@ last_week = date.today() - timedelta(days=7)
 with open("Init_Apify/Results/Instagram/Instagram_Posts_Urls.json") as f:
     input = json.load(f)
 
-client = ApifyClient(os.environ['INSTAGRAM_APIFY_KEY'])
+client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
 
 run_input = {
     "directUrls": input,

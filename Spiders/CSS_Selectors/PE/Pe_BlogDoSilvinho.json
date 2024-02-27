@@ -1,0 +1,8 @@
+// {
+//   "article": "div.blog-post",
+//   "link": "h2.post-title a::attr(href)",
+//   "next_page": "div.blog-pager a.page-next::attr(href)",
+//   "updated": "div.post-meta span.post-date.published::attr(datetime)",
+//   "title": "h1.post-title::text",
+//   "content": "div.post-body"
+// }

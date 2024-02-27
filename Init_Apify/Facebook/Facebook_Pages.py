@@ -36,7 +36,7 @@ facebook_names = [item["facebook"] for item in input]
 
 facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
+client = ApifyClient(os.environ['TIKTOK_APIFY_KEY'])
 
 run_input = { "startUrls": [
         { "url": f"https://www.facebook.com/{facebook_name}/" } for facebook_name in facebook_names

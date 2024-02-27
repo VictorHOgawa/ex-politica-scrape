@@ -33,7 +33,7 @@ with open("Init_Apify/Results/Facebook/Facebook_Posts_Urls.json", "r") as f:
 
 input = [{"url": url} for url in input]
 
-client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
+client = ApifyClient(os.environ['TIKTOK_APIFY_KEY'])
 
 run_input = {
     "includeNestedComments": False,

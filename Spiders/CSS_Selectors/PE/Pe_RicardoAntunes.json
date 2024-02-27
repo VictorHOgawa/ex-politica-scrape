@@ -1,0 +1,8 @@
+{
+  "article": "article.jeg_post",
+  "link": "h3.jeg_post_title a::attr(href)",
+  "next_page": "div.jeg_navigation a.page_nav.next::attr(href)",
+  "updated": "div.jeg_meta_date a::text",
+  "title": "h1.jeg_post_title::text",
+  "content": "div.content-inner p::text"
+}

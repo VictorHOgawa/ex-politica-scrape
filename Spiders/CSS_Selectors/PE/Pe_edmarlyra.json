@@ -1,0 +1,8 @@
+{
+  "article": "article.post",
+  "link": "h2.entry-title a::attr(href)",
+  "next_page": "li.pagination-next a::attr(href)",
+  "updated": "p.entry-meta time.entry-time::text",
+  "title": "h1.entry-title",
+  "content": "div.entry-content p::text"
+}

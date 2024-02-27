@@ -1,0 +1,8 @@
+{
+  "article": "article.horizontal-news-lg",
+  "link": "a::attr(href)",
+  "next_page": "",
+  "updated": "div.author-text small.publishinfo::text",
+  "title": "h1.article-title::text",
+  "content": "div.content-news"
+}

@@ -1,0 +1,8 @@
+{
+  "article": "article.obfx-grid-col",
+  "link": "div.obfx-grid-col-content h2.entry-title a::attr(href)",
+  "next_page": "nav.pagination a.next::attr(href)",
+  "updated": "time.entry-date::text",
+  "title": "h1.title::text",
+  "content": "div.entry-content p::text"
+}

@@ -1,0 +1,8 @@
+{
+  "article": "div.post-outer",
+  "link": "h3.post-title a::attr(href)",
+  "next_page": "div.blog-pager span.blog-pager-older-link a::attr(href)",
+  "updated": "h2.date-header span::text",
+  "title": "h3.post-title::text",
+  "content": "div.post-body"
+}

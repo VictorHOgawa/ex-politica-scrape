@@ -1,0 +1,8 @@
+{
+  "article": "div.noticia-menor",
+  "link": "div.imagem a::attr(href)",
+  "next_page": "",
+  "updated": "span.data",
+  "title": "div.noticia-container-title h1::text",
+  "content": "div.noticia-texto p::text"
+}

@@ -1,0 +1,8 @@
+{
+  "article": "li.infinite-post",
+  "link": "div.mvp-main-blog-out a::attr(href)",
+  "next_page": "",
+  "updated": "time.post-date.updated::text",
+  "title": "h1.entry-title::text",
+  "content": "section.type-post p::text"
+}
