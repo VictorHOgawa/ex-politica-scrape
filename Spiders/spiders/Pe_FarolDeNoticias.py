@@ -51,7 +51,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/713735ec-967f-4367-8fbf-690be95209a1")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_FarolDeNoticias.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FarolDeNoticias.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://faroldenoticias.com.br/categoria/pernambuco/"

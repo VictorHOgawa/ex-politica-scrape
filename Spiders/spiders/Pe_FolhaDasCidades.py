@@ -50,7 +50,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/12d7e023-794d-49e1-96a8-5a2bbb7f57e6")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_FolhaDasCidades.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FolhaDasCidades.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.afolhadascidades.com.br/"

@@ -49,7 +49,7 @@
 # # request = requests.get(f"{os.environ['API_IP']}/scrape/news/SITE_ID")
 # # search_words = request.json()
 
-# with open("Spiders/CSS_Selectors/PE/Pe_BlogDoSilvinho.json") as f:
+# with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_BlogDoSilvinho.json") as f:
 #     search_terms = json.load(f)
 
 # main_url = "https://blogdosilvinhosilva.blogspot.com/"

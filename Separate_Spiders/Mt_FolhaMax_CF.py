@@ -129,7 +129,7 @@ while True:
 						})
 		else:
 			unique_item = list({v['link']:v for v in item}.values())
-			with open("Spiders/Results/Mt_FolhaMax.json", "w") as f:
+			with open("/home/scrapeops/ex-politica-scrape/Spiders/Results/Mt_FolhaMax.json", "w") as f:
 				json.dump(unique_item, f, indent=4, ensure_ascii=False)
 			upload_file("Spiders/Results/Mt_FolhaMax.json", "axioon", f"News/MT/Mt_FolhaMax_{timestamp}.json")
 			file_name = requests.post(f"{os.environ['API_IP']}/webhook/news", json={"records": f"News/MT/Mt_FolhaMax_{timestamp}.json"})

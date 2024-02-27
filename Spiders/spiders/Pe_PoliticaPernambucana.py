@@ -48,7 +48,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/dce5b2dd-194b-4a6b-b06a-354b217c2510")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_PoliticaPernambucana.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_PoliticaPernambucana.json") as f:
     search_terms = json.load(f)
 
 main_url = ""

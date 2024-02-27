@@ -50,7 +50,7 @@ search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/b40db2f2-e786-4a87-8145-f95578fa4ecc")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_PortalDoSertao.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_PortalDoSertao.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.jornalportaldosertao.com.br/page/1"
