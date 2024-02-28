@@ -57,7 +57,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FarolD
 main_url = "https://faroldenoticias.com.br/categoria/pernambuco/"
 
 class FarolDeNoticiasSpider(scrapy.Spider):
-    name = "Pe_FarolDeNoticias"
+    name = "Init_Pe_FarolDeNoticias"
     allowed_domains = ["faroldenoticias.com.br"]
     start_urls = ["https://faroldenoticias.com.br/categoria/pernambuco/"]
     

@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_BlogDo
 main_url = "https://blogdomagno.com.br/"
 
 class BlogDoMagnoSpider(scrapy.Spider):
-    name = "Pe_BlogDoMagno"
+    name = "Init_Pe_BlogDoMagno"
     allowed_domains = ["blogdomagno.com.br"]
     start_urls = ["https://blogdomagno.com.br/"]
     INCREMENT = 1

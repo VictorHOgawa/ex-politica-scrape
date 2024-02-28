@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_Jc.jso
 main_url = "https://jc.ne10.uol.com.br/index.php?id=/readMore.php&cd_sesit=356&p=1"
 
 class JcSpider(scrapy.Spider):
-    name = "Pe_Jc"
+    name = "Init_Pe_Jc"
     start_urls = ["https://jc.ne10.uol.com.br/index.php?id=/readMore.php&cd_sesit=356&p=1"]
     INCREMENT = 1
     

@@ -55,7 +55,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_edmarl
 main_url = ""
 
 class EdmarlyraSpider(scrapy.Spider):
-    name = "Pe_Edmarlyra"
+    name = "Init_Pe_Edmarlyra"
     allowed_domains = ["edmarlyra.com"]
     start_urls = ["https://www.edmarlyra.com/"]
     

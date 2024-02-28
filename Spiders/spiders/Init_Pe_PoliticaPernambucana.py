@@ -54,7 +54,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_Politi
 main_url = ""
 
 class PoliticaPernambucanaSpider(scrapy.Spider):
-    name = "Pe_PoliticaPernambucana"
+    name = "Init_Pe_PoliticaPernambucana"
     allowed_domains = ["blog.politicapernambucana.com.br"]
     start_urls = ["https://blog.politicapernambucana.com.br/"]
     

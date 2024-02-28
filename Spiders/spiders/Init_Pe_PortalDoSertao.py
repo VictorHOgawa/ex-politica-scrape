@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_Portal
 main_url = "https://www.jornalportaldosertao.com.br/page/1"
 
 class PortalDoSertaoSpider(scrapy.Spider):
-    name = "Pe_PortalDoSertao"
+    name = "Init_Pe_PortalDoSertao"
     allowed_domains = ["jornalportaldosertao.com.br"]
     start_urls = ["https://www.jornalportaldosertao.com.br/page/1"]
     INCREMENT = 1

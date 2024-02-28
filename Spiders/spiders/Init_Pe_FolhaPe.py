@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FolhaP
 main_url = "https://www.folhape.com.br/politica/p/1/"
 
 class FolhaPeSpider(scrapy.Spider):
-    name = "Pe_FolhaPe"
+    name = "Init_Pe_FolhaPe"
     allowed_domains = ["folhape.com.br"]
     start_urls = ["https://www.folhape.com.br/politica/p/1/"]
     INCREMENT = 1

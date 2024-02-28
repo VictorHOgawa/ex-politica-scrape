@@ -55,7 +55,7 @@
 # main_url = "https://blogdosilvinhosilva.blogspot.com/"
 
 # class BlogDoSilvinhoSpider(scrapy.Spider):
-#     name = "Pe_BlogDoSilvinho"
+#     name = "Init_Pe_BlogDoSilvinho"
 #     allowed_domains = ["blogdosilvinhosilva.blogspot.com"]
 #     start_urls = ["https://blogdosilvinhosilva.blogspot.com/"]
     

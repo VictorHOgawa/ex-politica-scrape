@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_BlogCe
 main_url = ""
 
 class BlogCenarioSpider(scrapy.Spider):
-    name = "Pe_BlogCenario"
+    name = "Init_Pe_BlogCenario"
     allowed_domains = ["blogcenario.com.br"]
     start_urls = ["https://blogcenario.com.br/page/1"]
     INCREMENT = 1

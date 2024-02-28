@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_BlogDo
 main_url = "https://www.cbnrecife.com/blogdoelielson/categoria/politica?pag=1"
 
 class BlogDoElielsonSpider(scrapy.Spider):
-    name = "Pe_BlogDoElielson"
+    name = "Init_Pe_BlogDoElielson"
     start_urls = ["https://www.cbnrecife.com/blogdoelielson/categoria/politica?pag=1"]
     INCREMENT = 1
     

@@ -57,7 +57,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_NillJu
 main_url = ""
 
 class NillJuniorSpider(scrapy.Spider):
-    name = "Pe_NillJunior"
+    name = "Init_Pe_NillJunior"
     start_urls = ["https://nilljunior.com.br/"]
     
     def parse(self, response):

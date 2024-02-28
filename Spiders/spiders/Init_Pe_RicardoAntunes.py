@@ -56,7 +56,7 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_Ricard
 main_url = ""
 
 class RicardoAntunesSpider(scrapy.Spider):
-    name = "Pe_RicardoAntunes"
+    name = "Init_Pe_RicardoAntunes"
     allowed_domains = ["ricardoantunes.com.br"]
     start_urls = ["https://ricardoantunes.com.br/politica/"]
     
