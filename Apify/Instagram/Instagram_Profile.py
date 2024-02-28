@@ -64,9 +64,9 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     
     json_str = json.dumps(json_array, indent=4, ensure_ascii=False)
 
-with open("Apify/Results/Instagram/Instagram_Profiles.json", "w") as f:
+with open("/home/scrapeops/ex-politica-scrape/Apify/Results/Instagram/Instagram_Profiles.json", "w") as f:
     f.write(json_str)
     
-upload_file("Apify/Results/Instagram/Instagram_Profiles.json", "axioon", f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json")
+upload_file("/home/scrapeops/ex-politica-scrape/Apify/Results/Instagram/Instagram_Profiles.json", "axioon", f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json")
 
 file_name = requests.post(f"{os.environ['API_IP']}/webhook/instagram/profile", json={"records": f"Apify/Instagram/Profiles/Instagram_Profiles_{timestamp}.json"})
