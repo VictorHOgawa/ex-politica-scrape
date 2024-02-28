@@ -55,8 +55,8 @@ with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FolhaD
 
 main_url = "https://www.afolhadascidades.com.br/"
 
-class BlogDoFabioCardosoSpider(scrapy.Spider):
-    name = "Init_Pe_BlogDoFabioCardoso"
+class FolhaDasCidadesSpider(scrapy.Spider):
+    name = "Init_Pe_FolhaDasCidades"
     allowed_domains = ["afolhadascidades.com.br"]
     start_urls = ["https://www.afolhadascidades.com.br/"]
     INCREMENT = 1
