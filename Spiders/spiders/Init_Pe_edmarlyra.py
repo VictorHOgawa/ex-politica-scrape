@@ -46,7 +46,9 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=60)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get(f"{os.environ['API_IP']}/scrape/news/b269ae1e-6ccc-4c3a-bfd5-584ac494156f")
+site_id = "b269ae1e-6ccc-4c3a-bfd5-584ac494156f"
+
+request = requests.get(f"{os.environ['API_IP']}/scrape/news/{site_id}")
 search_words = request.json()
 
 with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_edmarlyra.json") as f:
@@ -87,7 +89,8 @@ class EdmarlyraSpider(scrapy.Spider):
                             title=title,
                             content=content,
                             link=response.url,
-                            users=found_names
+                            users=found_names,
+                            site_id=site_id
                         )
                         yield item
                         if item is not None:
@@ -96,9 +99,10 @@ class EdmarlyraSpider(scrapy.Spider):
                                "title": item['title'],
                                "content": item['content'],
                                "link": item['link'],
-                               "users": item['users']
+                               "users": item['users'],
+                               "site_id": site_id
                             }
-                            file_path = f"Spiders/Results/{self.name}_{timestamp}.json"
+                            file_path = f"/home/scrapeops/ex-politica-scrape/Spiders/Results/{self.name}_{timestamp}.json"
                             if not os.path.isfile(file_path):
                                 with open(file_path, "w") as f:
                                     json.dump([], f)

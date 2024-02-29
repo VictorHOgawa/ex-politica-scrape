@@ -31,7 +31,7 @@ last_week = date.today() - timedelta(days=7)
 with open("/home/scrapeops/ex-politica-scrape/Apify/Results/Instagram/Instagram_Mentions_Urls.json") as f:
     input = json.load(f)
 
-client = ApifyClient(os.environ['INSTAGRAM_APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 run_input = {
     "directUrls": input,

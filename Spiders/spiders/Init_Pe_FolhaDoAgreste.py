@@ -44,7 +44,7 @@ timestamp = datetime.timestamp(now)
 today = date.today().strftime("%d/%m/%Y")
 today = datetime.strptime(today, "%d/%m/%Y")
 
-search_limit = date.today() - timedelta(days=1)
+search_limit = date.today() - timedelta(days=60)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
 site_id = "4057ffac-317b-411e-88ee-958a6582ce8e"
@@ -58,7 +58,7 @@ with open("Spiders/CSS_Selectors/PE/Pe_FolhaDoAgreste.json") as f:
 main_url = "https://www.jornalfolhadoagreste.com.br/"
 
 class FolhaDoAgresteSpider(scrapy.Spider):
-    name = "Pe_FolhaDoAgreste"
+    name = "Init_Pe_FolhaDoAgreste"
     allowed_domains = ["jornalfolhadoagreste.com.br"]
     start_urls = ["https://www.jornalfolhadoagreste.com.br/"]
     

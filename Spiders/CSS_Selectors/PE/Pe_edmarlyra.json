@@ -3,6 +3,6 @@
   "link": "h2.entry-title a::attr(href)",
   "next_page": "li.pagination-next a::attr(href)",
   "updated": "p.entry-meta time.entry-time::text",
-  "title": "h1.entry-title",
+  "title": "h1.entry-title::text",
   "content": "div.entry-content p::text"
 }

@@ -45,7 +45,9 @@ today = datetime.strptime(today, "%d/%m/%Y")
 search_limit = date.today() - timedelta(days=1)
 search_limit = datetime.strptime(search_limit.strftime("%d/%m/%Y"), "%d/%m/%Y")
 
-request = requests.get(f"{os.environ['API_IP']}/scrape/news/dce5b2dd-194b-4a6b-b06a-354b217c2510")
+site_id = "dce5b2dd-194b-4a6b-b06a-354b217c2510"
+
+request = requests.get(f"{os.environ['API_IP']}/scrape/news/{site_id}")
 search_words = request.json()
 
 with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_PoliticaPernambucana.json") as f:
@@ -86,7 +88,8 @@ class PoliticaPernambucanaSpider(scrapy.Spider):
                             title=title,
                             content=content,
                             link=response.url,
-                            users=found_names
+                            users=found_names,
+                            site_id=site_id
                         )
                         yield item
                         if item is not None:
@@ -95,9 +98,10 @@ class PoliticaPernambucanaSpider(scrapy.Spider):
                                "title": item['title'],
                                "content": item['content'],
                                "link": item['link'],
-                               "users": item['users']
+                               "users": item['users'],
+                               "site_id": item['site_id']
                             }
-                            file_path = f"Spiders/Results/{self.name}_{timestamp}.json"
+                            file_path = f"/home/scrapeops/ex-politica-scrape/Spiders/Results/{self.name}_{timestamp}.json"
                             if not os.path.isfile(file_path):
                                 with open(file_path, "w") as f:
                                     json.dump([], f)
