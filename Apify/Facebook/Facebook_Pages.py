@@ -34,7 +34,7 @@ facebook_names = [item["facebook"] for item in input]
 
 facebook_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 run_input = { 
     "startUrls": [

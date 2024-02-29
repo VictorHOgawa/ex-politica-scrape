@@ -33,7 +33,7 @@ with open("/home/scrapeops/ex-politica-scrape/Apify/Results/Facebook/Facebook_Po
 
 input = [{"url": url} for url in input]
 
-client = ApifyClient(os.environ['FACEBOOK_APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 run_input = {
     "includeNestedComments": False,

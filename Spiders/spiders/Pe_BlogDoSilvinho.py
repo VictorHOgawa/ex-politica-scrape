@@ -71,7 +71,6 @@
             
 #     def parse_article(self, response):
 #         updated = response.css(search_terms['updated']).get()
-#         print("updated: ", updated)
 #         title = response.css(search_terms['title']).get()
 #         content = response.css(search_terms['content']).getall()
 #         # if search_limit <= updated <= today:

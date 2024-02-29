@@ -31,15 +31,13 @@ input = requests.get(f"{os.environ['API_IP']}/scrape/tiktok")
 
 input = input.json()
 
-print("input: ", input)
-
 input = input["tiktok"]
 
 tiktok_names = [item["tiktok"] for item in input]
 
 tiktok_ids = [item["id"] for item in input]
 
-client = ApifyClient(os.environ['TIKTOK_APIFY_KEY'])
+client = ApifyClient(os.environ['YOUTUBE_APIFY_KEY'])
 
 for tiktok_name, tiktok_id in zip(tiktok_names, tiktok_ids):
     

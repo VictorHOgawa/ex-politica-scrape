@@ -51,7 +51,7 @@ site_id = "b269ae1e-6ccc-4c3a-bfd5-584ac494156f"
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/{site_id}")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_edmarlyra.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_edmarlyra.json") as f:
     search_terms = json.load(f)
 
 main_url = ""

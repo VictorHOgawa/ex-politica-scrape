@@ -52,7 +52,7 @@ site_id = "4057ffac-317b-411e-88ee-958a6582ce8e"
 request = requests.get(f"{os.environ['API_IP']}/scrape/news/{site_id}")
 search_words = request.json()
 
-with open("Spiders/CSS_Selectors/PE/Pe_FolhaDoAgreste.json") as f:
+with open("/home/scrapeops/ex-politica-scrape/Spiders/CSS_Selectors/PE/Pe_FolhaDoAgreste.json") as f:
     search_terms = json.load(f)
 
 main_url = "https://www.jornalfolhadoagreste.com.br/"
