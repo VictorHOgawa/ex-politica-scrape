@@ -1,0 +1,8 @@
+{
+  "article": "div.blog-post",
+  "link": "div.post-info a.read-more::attr(href)",
+  "next_page": "div.blog-pager a.page-next::attr(href)",
+  "updated": "",
+  "title": "h1.post-title::text",
+  "content": "div.post-body"
+}
